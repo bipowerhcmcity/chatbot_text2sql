@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexara AI - Intelligent Assistant</title>
+    <!-- Favicon: Lexara AI Logo -->
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"%3E%3Ccircle cx="12" cy="12" r="4" stroke="%23764ba2" stroke-width="2"/%3E%3Cpath d="M12 2v20M2 12h20" stroke="%23764ba2" stroke-width="2"/%3E%3Cpath d="M6.34 6.34l11.32 11.32M17.66 6.34L6.34 17.66" stroke="%23764ba2" stroke-width="1"/%3E%3C/svg%3E'>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6.34 6.34l11.32 11.32M17.66 6.34L6.34 17.66" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h2>Yue1608 AI</h2>
+                </div>
+                <p class="powered-by">Powered by CADS</p>
+            </div>
+            
+            <div class="new-chat-btn">
+                <button id="newChatBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    New Chat
+                </button>
+            </div>
+            
+            <div class="conversation-history" id="conversationHistory">
+                <!-- History items will be populated here -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar-small">
+                        <img src="https://banner2.cleanpng.com/cb4/uyq/zpj/a0ahqnln2.webp" alt="User Avatar" width="52" height="52" style="border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <span>Guest User</span>
+                    <button class="settings-btn" title="Settings">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-content">
+            <div class="chat-header-bar">
+                <div class="chat-title">
+                    <h1>New Chat</h1>
+                </div>
+                <div class="chat-actions">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                        <div class="theme-toggle-track">
+                            <div class="theme-toggle-thumb">
+                                <svg class="theme-icon sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <svg class="theme-icon moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                    <button class="action-btn" id="shareChatBtn" title="Share chat">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="16,6 12,2 8,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="12" y1="2" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-container">
+                <div class="welcome-section" id="welcomeSection">
+                    <div class="welcome-content">
+                        <div class="lexara-avatar">
+                            <div class="avatar-gradient">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M6.34 6.34l11.32 11.32M17.66 6.34L6.34 17.66" stroke="currentColor" stroke-width="1"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h1 id="dynamicGreeting">Hello there!</h1>
+                        <p>I'm Yue1608, your intelligent assistant. How can I help you today ?</p>
+                          
+                        <br>
+                        <br>
+                        <div class="quick-actions">
+                           <button class="quick-action-btn" data-prompt="Summarize text">
+                                <i data-feather="file-text"></i>
+                                <span>Summarize text</span>
+                            </button>
+                            <button class="quick-action-btn" data-prompt="Get advice">
+                                <i data-feather="award"></i>
+                                <span>Get advice</span>
+                            </button>
+                            <button class="quick-action-btn" data-prompt="Surprise me">
+                                <i data-feather="gift"></i>
+                                <span>Surprise me</span>
+                            </button>
+                            <button class="quick-action-btn" data-prompt="Analyze data">
+                                <i data-feather="bar-chart-2"></i>
+                                <span>Analyze data</span>
+                            </button>
+                            <button class="quick-action-btn" data-prompt="Help me write">
+                                <i data-feather="edit-3"></i>
+                                <span>Help me write</span>
+                            </button>
+                            <button class="quick-action-btn" data-prompt="More">
+                                <span>More</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be added here dynamically -->
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <div class="message assistant-message">
+                        <div class="message-avatar">
+                            <div class="avatar lexara-avatar-small">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <div class="input-field">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask me anything..." 
+                            rows="1"
+                            maxlength="4000"
+                        ></textarea>
+                        <div class="input-actions">
+                            <button id="sendButton" disabled>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M2 12l20-10-10 20-1-9-9-1z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    <p>Yue1608 AI can make mistakes. Please verify important information.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
