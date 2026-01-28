@@ -21,7 +21,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Configure OpenAI client for DeepSeek via OpenRouter
-api_key = "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"
+api_key = ""
 
 embeddings = OpenAIEmbeddings(
     model="text-embedding-3-large",
