@@ -70,7 +70,6 @@ opentelemetry-sdk==1.39.1
 opentelemetry-semantic-conventions==0.60b1
 orjson==3.11.5
 overrides==7.7.0
-packaging @ file:///opt/miniconda3/conda-bld/packaging_1761049079158/work
 pandas==2.3.3
 plotly==6.5.2
 posthog==5.4.0

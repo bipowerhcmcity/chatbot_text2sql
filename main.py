@@ -40,7 +40,7 @@ vector_store = Chroma(
     persist_directory="chroma_db",
     embedding_function=embeddings
 )
-num_results = 5
+num_results = 10
 retriever = vector_store.as_retriever(search_kwargs={'k': num_results})
 
 # Pydantic models

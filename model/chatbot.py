@@ -13,11 +13,9 @@ Aggregation rules:
   all non-aggregated columns MUST appear in GROUP BY.
 - Prefer GROUP BY over window functions for counting users.
 
-JOIN RULES:
-cdp_events.page_context = item_metadata.item_code
-Use this join ONLY when:
-- page_context indicates item code page. 
-- Query involves product attributes (brand, category, model, color, etc.)
+Join rules: 
+- If user request the information of item, join the cdp_events.ctx_page_context==item_metadata.item_code
+- Please only join if needed
 
 User identity rules:
 - cdp_id = universal user identifier, always present for all users.
@@ -44,8 +42,8 @@ Table: cdp_events
 cdp_id UUID PRIMARY KEY,
 
 user_id VARCHAR,
-user_time TIMESTAMP,
-date DATE,
+user_time TIMESTAMP,  -- user interaction time, in format YYYY-mm-dd hh:mm:ss.mmmm. eg: 2025-08-25 20:15:30.572
+date DATE, -- user interaction date, in format YYYY-mm-dd. eg: 2025-08-25. Data start from 2025 
 
 platform VARCHAR,
 referrer_url TEXT,
@@ -65,13 +63,8 @@ ctx_sessionId UUID,
 ctx_sessionIndex INT,
 ctx_previousSessionId UUID,
 
-ctx_page_context VARCHAR, eg: 00003278
+ctx_page_context VARCHAR, -- This is an itemcode of the item that people is view in eg: 00003278
 
-ctx_value NUMERIC,
-ctx_label VARCHAR,
-
-ctx_product_id VARCHAR,
-ctx_product_name VARCHAR,
 ctx_order_id VARCHAR,
 ctx_order_type VARCHAR,
 ctx_payment_type VARCHAR,
@@ -92,23 +85,26 @@ ctx_osVersion VARCHAR,
 ctx_osType VARCHAR,
 ctx_deviceModel VARCHAR,
 ctx_deviceManufacturer VARCHAR,
+
+Table: item_metadata
+
+item_code VARCHAR PRIMARY KEY, eg: 00003278
+
+ten_sp VARCHAR,             -- product name. eg: Điện thoại iPhone 6 64GB Xám MG4F2VN/A
+ten_viet_tat VARCHAR,       -- short Vietnamese name eg: iPhone 6 64GB
+ten_upc VARCHAR,            -- UPC eg: iPhone 6
+ten_nhom VARCHAR,           -- product group eg: Apple iPhone 6-128G
+ten_dong VARCHAR,           -- product line eg: iPhone 6
+ten_model VARCHAR,          -- model eg: iPhone 6-64
+ten_nhan VARCHAR,           -- brand eg: Apple
+ten_nganh VARCHAR,          -- industry eg: Apple
+ten_loai VARCHAR,           -- category eg: ĐTDĐ-Apple
+mau_sac VARCHAR,            -- color eg: ['Xám']
+
+ten_don_vi_tinh VARCHAR      -- unit name: Chiếc
+
 """
-# Table: item_metadata
 
-# item_code VARCHAR PRIMARY KEY, eg: 00003278
-
-# ten_sp VARCHAR,             -- product name. eg: Điện thoại iPhone 6 64GB Xám MG4F2VN/A
-# ten_viet_tat VARCHAR,       -- short Vietnamese name eg: iPhone 6 64GB
-# ten_upc VARCHAR,            -- UPC eg: iPhone 6
-# ten_nhom VARCHAR,           -- product group eg: Apple iPhone 6-128G
-# ten_dong VARCHAR,           -- product line eg: iPhone 6
-# ten_model VARCHAR,          -- model eg: iPhone 6-64
-# ten_nhan VARCHAR,           -- brand eg: Apple
-# ten_nganh VARCHAR,          -- industry eg: Apple
-# ten_loai VARCHAR,           -- category eg: ĐTDĐ-Apple
-# mau_sac VARCHAR,            -- color eg: ['Xám']
-
-# ten_don_vi_tinh VARCHAR      -- unit name: Chiếc
 
 def get_knowledge(retriever, message):
     docs = retriever.invoke(message)
