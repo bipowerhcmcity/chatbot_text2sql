@@ -52,6 +52,14 @@
      export OPENAI_API_KEY="{your API key}"
      ```
 
+4. **Copy the Embedding into the repo**: 
+- Download the file in this link: 
+```
+https://drive.google.com/drive/folders/1Luk6glSm5GKM1S9wMB8fuxxYWR6U8mFl?usp=share_link
+```
+- Extract the zip with the folder "chroma_db" and copy this folder into the repo. 
+![alt text](static/chroma_db.png)
+
 4. **Run the application**:
    ```bash
    python main.py
