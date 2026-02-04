@@ -81,13 +81,20 @@ async def chat_endpoint(request: ChatRequest):
         user_message = Message(role="user", content=request.message)
         conversation_history.append(user_message)
         
-        # Extract assistant response
-        knowledges = get_knowledge(retriever, request.message) 
-        assistant_content = text_to_sql(client, user_message, knowledge=knowledges)
         
-        # Add assistant response to history
-        assistant_message = Message(role="assistant", content=assistant_content)
-        conversation_history.append(assistant_message)
+        # Extract assistant response
+
+        # Step 1: Extract structure 
+        structure_content = text_to_structure(client, user_message)
+
+        # Step 2: Extract SQL 
+
+        knowledges = get_knowledge(retriever, request.message) 
+        assistant_content = text_to_sql(client, user_message,structure=structure_content,  knowledge=knowledges)
+        
+        # # Add assistant response to history
+        # assistant_message = Message(role="assistant", content=assistant_content)
+        # conversation_history.append(assistant_message)
         
         return ChatResponse(
             response=assistant_content,

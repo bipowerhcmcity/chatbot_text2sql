@@ -113,7 +113,98 @@ def get_knowledge(retriever, message):
         knowledge += doc.page_content+"\n\n"
     return knowledge
 
-def text_to_sql(client,question,knowledge, dialect="SQL"):
+def text_to_structure(client, question):
+    prompt = f"""
+    You are a semantic parser for database analytics questions.
+
+    Your task is to extract the semantic elements of the user's question.
+    Do NOT generate SQL.
+    Do NOT explain your reasoning.
+    Only return valid JSON following the schema below.
+
+    Semantic elements to extract:
+
+    1. intention:
+    Choose ONLY one of the following values:
+    - aggregate:
+        + sum: Tổng số, tổng 
+        + count: Số lượng, số 
+        + avg: Trung bình 
+        + min: nhỏ nhất 
+        + max: nhỏ nhất 
+    - trend          (metric over time)
+    - ranking        (top / bottom)
+    - filter         (subset without aggregation)
+    - comparison     (compare two or more groups)
+    - detail         (raw records)
+
+    2. metric:
+    - What is being measured: 
+        + identified user: Khách hàng định danh
+        + anonymous users: Khách hàng ẩn danh 
+        + event, url
+        + screen location: vị trí màn hình 
+    - If unclear, set value = null
+
+    3. time:
+    - When does the question refer to?
+    - Include time range and time granularity if mentioned
+    - If not mentioned, set value = null
+
+    4. dimension:
+    - A dimension is a field used to GROUP the results in an aggregated query.
+    - Dimensions determine how the metric is broken down into groups.
+    - Dimensions appear in the GROUP BY clause in SQL.
+    - Do NOT include fields that are only used for filtering.
+    - Time granularity (day, week, month) is also a dimension when grouping over time.
+
+    Examples:
+    - "Doanh thu theo ngày" → dimension = ["day"]
+    - "User theo platform" → dimension = ["platform"]
+    - "Top 10 sản phẩm" → dimension = ["product"]
+    - "Doanh thu theo ngày theo platform" → dimension = ["day", "platform"]
+
+    5. filter:
+    - Conditions applied to the data
+    - Return an array of objects with (field, operator, value)
+    - If none, return empty array []
+
+    Output JSON schema:
+
+    {{
+        "intention": string,
+        "metric": string | null,
+        "time": {{
+            "range": string | null,
+            "grain": string | null
+        }} | null,
+        "dimension": string[],
+        "filter": {{
+            "field": string,
+            "operator": string,
+            "value": string
+        }}[]
+    }}
+
+    If the user question is ambiguous, make the best reasonable assumption.
+    Never invent fields or metrics that are not explicitly or implicitly mentioned.
+
+    User question:
+    {question}
+
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": prompt}
+        ],
+        temperature=0
+    )
+
+    return response.choices[0].message.content
+
+def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
     prompt = f"""
     SQL Dialect: {dialect}
 
@@ -126,7 +217,10 @@ def text_to_sql(client,question,knowledge, dialect="SQL"):
     Knowledge:
     {knowledge}
 
-    Return only SQL.
+    Structure:
+    {structure}
+
+    Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
     """
 
     response = client.chat.completions.create(
