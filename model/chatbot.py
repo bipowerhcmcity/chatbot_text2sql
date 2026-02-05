@@ -16,6 +16,16 @@ Aggregation rules:
 Join rules: 
 - If user request the information of item, join the cdp_events.ctx_page_context==item_metadata.item_code
 - Please only join if needed
+- Subqueries in WHERE clauses are NOT ALLOWED.
+- Use JOINs to apply filters from other tables.
+
+❌ Bad:
+WHERE ctx_page_context = (SELECT item_code FROM item_metadata WHERE ten_sp LIKE '%iPhone%')
+
+✅ Good:
+JOIN item_metadata m
+  ON e.ctx_page_context = m.item_code
+WHERE m.ten_sp LIKE '%iPhone%'
 
 User identity rules:
 - cdp_id = universal user identifier, always present for all users.
