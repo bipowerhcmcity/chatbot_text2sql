@@ -113,6 +113,88 @@ mau_sac VARCHAR,            -- color eg: ['Xám']
 
 ten_don_vi_tinh VARCHAR      -- unit name: Chiếc
 
+You are generating SQL queries for an order detail table.
+
+Table: order_detail
+
+Grain:
+- Each row represents ONE order line (one product in one order).
+- order_detail_id uniquely identifies a row.
+- order_id can appear multiple times.
+- item_code identifies the product in the order line.
+
+COLUMN SEMANTICS:
+
+Order identification:
+- order_detail_id: unique identifier of an order line.
+- order_id: identifier of the order (NOT unique per row).
+- order_code: business order code.
+
+Product information:
+- item_code: product identifier.
+- item_name: product name at order time.
+- barcode: product barcode.
+- unit_code, unit_name: unit of measurement.
+
+Quantity & pricing (LINE-LEVEL):
+- quantity: number of items sold in this order line.
+- _group_price: unit price before discount.
+- _group_total: total line amount before tax.
+- _group_tprice_after_discount: total line amount after discount.
+- _group_discount: discount amount at line level.
+- _group_discount_promotion: promotion discount amount.
+- _group_total_tax: tax amount for the order line.
+- tax_rate: tax rate applied to the order line.
+
+Promotion & flags:
+- is_promotion: whether the order line is promotional.
+- is_hot: whether the item is marked as hot.
+- discount_type: type of discount applied.
+
+Warehouse & fulfillment:
+- whs_code, whs_name: warehouse information.
+- is_inventory_management: inventory management flag.
+- is_serial, is_expired_date: product control flags.
+
+Order-line attributes:
+- line_code, line_num
+- order_detail_attribute
+- meta_data
+
+TIME & PARTITION:
+- date (yyyy-MM-dd) represents the business date of the order line.
+
+AGGREGATION RULES:
+- This table is at ORDER-LINE level.
+- Do NOT treat one row as one order.
+- When counting orders, ALWAYS use COUNT(DISTINCT order_id).
+- When calculating revenue per product:
+  → SUM(_group_tprice_after_discount) or SUM(_group_total).
+- When calculating quantity sold:
+  → SUM(quantity).
+- Do NOT sum order-level fields in this table.
+
+FILTERING RULES:
+- Product filtering should use item_code or item_name.
+- Treat item_name as non-unique by default.
+- Use LIKE for product name matching.
+- Time-based filtering should use the date column.
+
+SUBQUERY & JOIN RULES:
+- Avoid scalar subqueries.
+- If product metadata is required, JOIN with item_metadata on item_code.
+- Prefer JOIN over subqueries when enriching product information.
+
+COMMON MISTAKES TO AVOID:
+- COUNT(order_id) without DISTINCT.
+- SUM order-level values that are repeated per order.
+- Mixing order-level and order-line-level metrics.
+- Assuming item_name uniquely identifies a product.
+
+OUTPUT REQUIREMENTS:
+- Generate syntactically correct SQL.
+- Ensure business logic correctness over SQL brevity.
+
 """
 
 
