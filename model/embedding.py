@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 api_key = os.getenv("OPENAI_API_KEY")
 
-file_path = "data/item_metadata.csv"
+file_path = "data/Event Metadata(Processed v1).csv"
 loader = CSVLoader(file_path=file_path,encoding="utf-8")
 documents = loader.load() # Each row becomes a Document object
 
@@ -17,7 +17,7 @@ embeddings = OpenAIEmbeddings(
 
 # Create new embedings 
 vectorstore = Chroma.from_documents(
-    collection_name="item_metadata",
+    collection_name="event_metadata",
     documents=documents,
     embedding=embeddings,
     persist_directory="chroma_db"

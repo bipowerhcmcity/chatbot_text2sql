@@ -69,7 +69,7 @@ ctx_location_name VARCHAR,
 ctx_firstEventId UUID,
 ctx_firstEventTimestamp TIMESTAMP,
 
-ctx_sessionId UUID,
+ctx_sessionId UUID, -- Phiên truy cập, lượt truy cập
 ctx_sessionIndex INT,
 ctx_previousSessionId UUID,
 
@@ -261,6 +261,13 @@ def text_to_structure(client, question):
     - Return an array of objects with (field, operator, value)
     - If none, return empty array []
 
+    6. event_description:
+    - describe the event or action that user want to find 
+    Examples: 
+    - "Số lượt xem sản phẩm theo từng nhóm trong ngày 16/08/2025 là bao nhiêu?" -> event_description = "xem sản phẩm"
+    - "Số lượng khách hàng click vào đơn hàng của tôi" -> event_description = "click vào đơn hàng của tôi" 
+    - If unclear, set value = null
+
     Output JSON schema:
 
     {{
@@ -275,7 +282,8 @@ def text_to_structure(client, question):
             "field": string,
             "operator": string,
             "value": string
-        }}[]
+        }}[],
+        "event_description":string | null 
     }}
 
     If the user question is ambiguous, make the best reasonable assumption.
@@ -311,6 +319,8 @@ def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
 
     Structure:
     {structure}
+
+    In product detail page, if the user query request view, please use ctx_screen_location="product_detail" & event_name="view_page" as default. If the user request the additional action in product detail page like click the button, or click to view more, then using the different event_name.
 
     Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
     """
