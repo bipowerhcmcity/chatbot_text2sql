@@ -33,7 +33,7 @@ User identity rules:
 - An anonymous user is defined as a user who has a cdp_id but does not have a user_id (user_id IS NULL or blank)
 - An identified user is defined as a user who has both a cdp_id and a user_id (user_id IS NOT NULL or not blank)
 - When a question refers to “user” without further clarification, it should be interpreted as including both anonymous and identified users, and users must be counted using COUNT DISTINCT cdp_id.
-- When a question refers to “anonymous users”, users must be counted using COUNT DISTINCT user_id.
+- When a question refers to “identified users”, users must be counted using COUNT DISTINCT user_id.
 - Users must never be counted by user_id, unless the question explicitly requests it.
 - Do NOT mix cdp_id and user_id unless explicitly requested.
 
@@ -319,8 +319,6 @@ def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
 
     Structure:
     {structure}
-
-    In product detail page, if the user query request view, please use ctx_screen_location="product_detail" & event_name="view_page" as default. If the user request the additional action in product detail page like click the button, or click to view more, then using the different event_name.
 
     Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
     """
