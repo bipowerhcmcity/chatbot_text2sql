@@ -32,8 +32,6 @@ User identity rules:
 - user_id = identified user identifier (logged-in users).
 - An anonymous user is defined as a user who has a cdp_id but does not have a user_id (user_id IS NULL or blank)
 - An identified user is defined as a user who has both a cdp_id and a user_id (user_id IS NOT NULL or not blank)
-- When a question refers to “user” without further clarification, it should be interpreted as including both anonymous and identified users, and users must be counted using COUNT DISTINCT cdp_id.
-- When a question refers to “identified users”, users must be counted using COUNT DISTINCT user_id.
 - Users must never be counted by user_id, unless the question explicitly requests it.
 - Do NOT mix cdp_id and user_id unless explicitly requested.
 
@@ -48,10 +46,11 @@ Do not hallucinate columns.
 """
 
 TABLE_SCHEMA = """
-Table: cdp_events
-cdp_id UUID PRIMARY KEY,
+Table: cdp_events 
+* -- Each row illustrate the event of user in website. For example, if you count number of event, you can use select count(*) as view_count
+cdp_id -- anoynymous user id VARCHAR,
 
-user_id VARCHAR,
+user_id -- identified user id VARCHAR,
 user_time TIMESTAMP,  -- user interaction time, in format YYYY-mm-dd hh:mm:ss.mmmm. eg: 2025-08-25 20:15:30.572
 date DATE, -- user interaction date, in format YYYY-mm-dd. eg: 2025-08-25. Data start from 2025 
 
@@ -197,14 +196,6 @@ OUTPUT REQUIREMENTS:
 
 """
 
-
-def get_knowledge(retriever, message):
-    docs = retriever.invoke(message)
-    knowledge = ""
-    for doc in docs:
-        knowledge += doc.page_content+"\n\n"
-    return knowledge
-
 def text_to_structure(client, question):
     prompt = f"""
     You are a semantic parser for database analytics questions.
@@ -261,11 +252,30 @@ def text_to_structure(client, question):
     - Return an array of objects with (field, operator, value)
     - If none, return empty array []
 
-    6. event_description:
-    - describe the event or action that user want to find 
+    6. event_context:
+    Represents the contextual information about user behavior.
+    It may contain:
+        - screen_description: the screen / page where the action happens
+        - action_description: the action performed by the user
+    Rules:
+    - Either field may be null.
+    - Both fields may be null.
+    - If only screen is mentioned → action_description = null.
+    - If only action is mentioned → screen_description = null.
+    - Do NOT merge them into one sentence.
+    - Keep them separate and concise.
+
     Examples: 
-    - "Số lượt xem sản phẩm theo từng nhóm trong ngày 16/08/2025 là bao nhiêu?" -> event_description = "xem sản phẩm"
-    - "Số lượng khách hàng click vào đơn hàng của tôi" -> event_description = "click vào đơn hàng của tôi" 
+    - "Số lượng khách hàng xem trang chi tiết sản phẩm ngày 16/08/2025" -> 
+    {{
+        "screen_description": "màn hình chi tiết sản phẩm",
+        "action_description": "xem trang"
+    }}
+    - "Số lượng khách hàng click vào đơn hàng của tôi" ->
+    {{
+        "screen_description": null,
+        "action_description": "click vào đơn hàng của tôi"
+    }}
     - If unclear, set value = null
 
     Output JSON schema:
@@ -283,7 +293,11 @@ def text_to_structure(client, question):
             "operator": string,
             "value": string
         }}[],
-        "event_description":string | null 
+        "event_context": {{
+            "screen_description": string | null,
+            "action_description": string | null
+        }} | null
+
     }}
 
     If the user question is ambiguous, make the best reasonable assumption.
@@ -320,6 +334,9 @@ def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
     Structure:
     {structure}
 
+    If user only ask to view the product, please fitler ctx_screen_location = "product_detail", ctx_event_name = "view_page". 
+    If user ask number of view, please use select (*) as view_count as default. 
+    If user ask another question, please using the knowledges above. 
     Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
     """
 

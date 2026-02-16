@@ -13,6 +13,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from model.chatbot import *
 from openai import OpenAI
 import json 
+from model.rag import *
 
 # Load environment variables
 load_dotenv()
@@ -36,13 +37,6 @@ client = openai.OpenAI(
     api_key=api_key,
 )
 
-event_metadata_vector_store = Chroma(
-    collection_name="event_metadata",
-    persist_directory="chroma_db",
-    embedding_function=embeddings
-)
-num_results = 10
-event_retriever = event_metadata_vector_store.as_retriever(search_kwargs={'k': num_results})
 # Pydantic models
 class Message(BaseModel):
     role: str
@@ -88,17 +82,9 @@ async def chat_endpoint(request: ChatRequest):
         structure_content = text_to_structure(client, user_message)
         print(structure_content)
         structure_dict = json.loads(structure_content) 
-        # Step 2: RAG: 
-        knowledges = ""
-        #step 2.1 RAG event description 
-        if structure_dict["event_description"]!= None:
-            knowledge = get_knowledge(event_retriever, structure_dict["event_description"])
-            # result_with_scores = event_metadata_vector_store.similarity_search_with_score(request.message, k=num_results)
-            # print(result_with_scores)
-            knowledges+=f"Event description:\n {knowledge}"
-        print(knowledges)
+        event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
         # Step 2: Extract SQL 
-        assistant_content = text_to_sql(client, user_message,structure=structure_content,  knowledge=knowledges)
+        assistant_content = text_to_sql(client, user_message,structure=structure_content,  knowledge=event_screen_knowledge)
         
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
