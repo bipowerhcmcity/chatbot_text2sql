@@ -7,10 +7,17 @@ def get_retriever(embeddings,collection_name, message, embedding_dir="chroma_db"
         persist_directory=embedding_dir,
         embedding_function=embeddings
     )
-    retriever = vector_store.as_retriever(search_kwargs={'k': num_results})
+
+    results = vector_store.similarity_search_with_score(message, k=num_results)
+    knowledges = [{"doc":result[0].page_content, "score":result[1] } for result in results]
+    # knowledges = [doc.page_content for doc in docs]
+    # for doc, score in results:
+    #     print(f"* [SCORE: {score:.4f}] {doc.page_content}")
+        
+    # retriever = vector_store.as_retriever(search_kwargs={'k': num_results})
     
-    docs = retriever.invoke(message)
-    knowledges = [doc.page_content for doc in docs]
+    # docs = retriever.invoke(message)
+    # knowledges = [doc.page_content for doc in docs]
     return knowledges
 
 def event_screen_mapping(screen_knowledges, event_knowledges):
@@ -19,25 +26,28 @@ def event_screen_mapping(screen_knowledges, event_knowledges):
 
     if screen_knowledges !=None:
         screen_df = pd.DataFrame(
-            dict(line.split(": ", 1) for line in item.split("\n"))
+            dict(line.split(": ", 1) for line in item["doc"].split("\n"))
             for item in screen_knowledges
         )
+        screen_df["screen_score"] = [item["score"] for item in screen_knowledges]
     else: 
-        screen_df = screen_event_metadata.copy()
+        screen_df = screen_event_metadata.copy()[["ctx_screen_location","Screen Description"]]
+        screen_df["screen_score"] = 1
 
     if event_knowledges != None:
         event_df = pd.DataFrame(
-            dict(line.split(": ", 1) for line in item.split("\n"))
+            dict(line.split(": ", 1) for line in item["doc"].split("\n"))
             for item in event_knowledges
         )
+        event_df["event_score"] = [item["score"] for item in event_knowledges]
     else: 
-        event_df = screen_event_metadata.copy()
+        event_df = screen_event_metadata.copy()[["ctx_event_name","Event Description"]]
+        event_df["event_score"] = 1
 
-    screen_event_df = screen_df.merge(event_df, how="cross",suffixes=("", "_meta"))
-    print("Raw", screen_event_df)
+    screen_event_df = screen_df.merge(event_df, how="cross")
+    screen_event_df["total_score"] = screen_event_df["event_score"] * screen_event_df["screen_score"] 
 
-    screen_event_df = screen_event_df[["ctx_screen_location","ctx_event_name"]].merge(screen_event_metadata, on=["ctx_screen_location","ctx_event_name"], how="inner")
-    print("Combination screen-event", screen_event_df)
+    screen_event_df = screen_event_df[["ctx_screen_location","ctx_event_name","total_score"]].merge(screen_event_metadata, on=["ctx_screen_location","ctx_event_name"], how="inner").sort_values(by="total_score").drop_duplicates()
     return screen_event_df.head(10)
 
 def row_to_prompt(row):

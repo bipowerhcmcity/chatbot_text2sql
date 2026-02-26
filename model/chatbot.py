@@ -339,7 +339,7 @@ def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
     If user ask another question, please using the knowledges above. 
     Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
     """
-
+    
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
