@@ -138,7 +138,6 @@
                 <div class="chat-messages" id="chatMessages">
                     <!-- Messages will be added here dynamically -->
                 </div>
-
                 <div class="typing-indicator" id="typingIndicator" style="display: none;">
                     <div class="message assistant-message">
                         <div class="message-avatar">
@@ -185,10 +184,37 @@
         </div>
     </div>
 
-    <script src="/static/script.js"></script>
+    <!-- Cache-busting query param added to force fresh fetch during development -->
+    <script src="/static/script.js?v=20260303.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace();
     </script>
+    <!-- Modal for SQL runner results -->
+    <div id="dataframeModal" class="dataframe-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.45); align-items:center; justify-content:center; z-index:1200;">
+        <div style="background:var(--secondary-bg); width:90%; max-width:1000px; max-height:80%; overflow:auto; border-radius:12px; padding:12px; box-shadow:var(--shadow-lg);">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+                <h3 style="margin:0;">Query Result</h3>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button id="modalDownloadBtn" class="modal-btn" title="Download CSV" aria-label="Download CSV">
+                        <!-- download icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button id="modalCloseBtn" class="modal-btn" title="Close" aria-label="Close">
+                        <!-- close icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="dataframeModalContent" style="overflow:auto; max-height:70vh; border-top:1px solid var(--border-light); padding-top:8px;"></div>
+        </div>
+    </div>
 </body>
 </html>

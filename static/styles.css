@@ -465,6 +465,58 @@ body::before {
     flex-direction: column;
 }
 
+/* Dataframe panel styling: align margins and visual style with chat area */
+.dataframe-panel {
+    width: calc(100% - 48px); /* leave same horizontal margin as chat messages */
+    margin: 12px 24px; /* align with chat messages */
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+.dataframe-panel .dataframe-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+}
+.dataframe-panel .dataframe-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.dataframe-panel .dataframe-container {
+    padding: 8px 12px 12px 12px;
+}
+.dataframe-table thead th {
+    background: transparent;
+    position: sticky;
+    top: 0;
+}
+
+/* Inline Run SQL button for code blocks */
+.inline-run-sql-btn {
+    cursor: pointer;
+    opacity: 0.95;
+}
+.inline-run-sql-btn:hover {
+    opacity: 1;
+}
+
+/* When collapsed we keep only header visible - wrapper will be toggled via JS */
+.dataframe-panel.collapsed {
+    border-radius: 10px;
+}
+
+/* Hide controls other than toggle when collapsed */
+.dataframe-panel.collapsed .dataframe-controls {
+    display: none !important;
+}
+.dataframe-panel.collapsed .dataframe-footer {
+    display: none !important;
+}
+
 /* Welcome Section */
 .welcome-section {
     flex: 1;
@@ -814,6 +866,35 @@ body::before {
 }
 
 #sendButton:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: scale(1.05);
+}
+
+/* Modal action buttons (Download CSV, Close) styled like send message button */
+#modalDownloadBtn,
+#modalCloseBtn,
+.modal-btn {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+#modalDownloadBtn:disabled,
+#modalCloseBtn:disabled {
+    background: var(--border-color);
+    cursor: not-allowed;
+}
+
+#modalDownloadBtn:hover:not(:disabled),
+#modalCloseBtn:hover:not(:disabled) {
     background: var(--accent-hover);
     transform: scale(1.05);
 }

@@ -2,7 +2,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
+import re
 import openai
 import os
 from dotenv import load_dotenv
@@ -11,6 +12,7 @@ import asyncio
 from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from model.chatbot import *
+from model.database_connection import initalize_db_connection, retrieve_db_result
 from openai import OpenAI
 import json 
 from model.rag import *
@@ -83,16 +85,15 @@ async def chat_endpoint(request: ChatRequest):
         print(structure_content)
         structure_dict = json.loads(structure_content) 
         event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
-        # Step 2: Extract SQL 
+        # Step 2: Extract SQL (assistant_content is expected to be SQL text)
         assistant_content = text_to_sql(client, user_message,structure=structure_content,  knowledge=event_screen_knowledge)
-        
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
         # conversation_history.append(assistant_message)
         
         return ChatResponse(
             response=assistant_content,
-            conversation_history=conversation_history
+            conversation_history=conversation_history,
         )
         
     except Exception as e:
@@ -103,6 +104,47 @@ async def chat_endpoint(request: ChatRequest):
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
+
+@app.post("/api/run_sql")
+async def run_sql_endpoint(payload: Dict[str, Any]):
+    """Run an arbitrary SQL query (read-only) from the UI SQL runner.
+
+    Security: we only allow SELECT queries (basic heuristic). For production,
+    put stricter validation and authentication.
+    """
+    try:
+        sql = payload.get("sql") if isinstance(payload, dict) else None
+        if not sql or not isinstance(sql, str):
+            raise HTTPException(status_code=400, detail="Missing 'sql' in request body")
+
+        # Basic safety checks: only allow read-only SELECT statements
+        sqllow = sql.strip().lower()
+        # disallow dangerous keywords
+        forbidden = ["insert", "update", "delete", "drop", "alter", "create", "attach", "pragma", "truncate"]
+        for kw in forbidden:
+            if kw in sqllow:
+                raise HTTPException(status_code=400, detail=f"SQL contains forbidden keyword: {kw}")
+
+        if not sqllow.startswith("select") and " select " not in sqllow:
+            raise HTTPException(status_code=400, detail="Only SELECT queries are allowed")
+
+        conn = initalize_db_connection()
+        result = retrieve_db_result(sql, conn)
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+        if isinstance(result, dict) and result.get("error"):
+            raise HTTPException(status_code=500, detail=result.get("error"))
+
+        return {"rows": result}
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error in run_sql_endpoint: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

@@ -26,6 +26,30 @@ class LexaraAI {
         this.conversationHistoryContainer = document.getElementById('conversationHistory');
         this.sidebar = document.querySelector('.sidebar');
         this.setupMobileMenu();
+
+    // Dataframe result elements (panel + table)
+    this.dataframePanel = document.getElementById('dataframeResultPanel');
+    this.dataframeTable = document.getElementById('dataframeTable');
+    this.dataframeContainer = document.getElementById('dataframeContainer');
+    this.dataframeTableWrapper = document.getElementById('dataframeTableWrapper');
+    this.dataframeCloseBtn = document.getElementById('dataframeCloseBtn');
+    this.dataframeDownloadBtn = document.getElementById('dataframeDownloadBtn');
+    this.dataframeSearch = document.getElementById('dataframeSearch');
+    this.dataframePageSize = document.getElementById('dataframePageSize');
+    this.dataframeToggleBtn = document.getElementById('dataframeToggleBtn');
+    this.dataframePrevBtn = document.getElementById('dataframePrevBtn');
+    this.dataframeNextBtn = document.getElementById('dataframeNextBtn');
+    this.dataframePageInfo = document.getElementById('dataframePageInfo');
+
+    // Internal state for interactive table
+    this.currentTableData = [];
+    this.filteredTableData = [];
+    this.sortColumn = null;
+    this.sortDir = 'asc';
+    this.page = 1;
+    this.pageSize = parseInt(this.dataframePageSize ? this.dataframePageSize.value : 10, 10) || 10;
+    this.dataframeCollapsed = false;
+    this.searchQuery = '';
     }
 
     setupMobileMenu() {
@@ -131,8 +155,316 @@ class LexaraAI {
         
         // Initialize theme
         this.initializeTheme();
+        // Dataframe panel controls
+        if (this.dataframeCloseBtn) {
+            this.dataframeCloseBtn.addEventListener('click', () => this.hideDataframeResult());
+        }
+        if (this.dataframeDownloadBtn) {
+            this.dataframeDownloadBtn.addEventListener('click', () => this.downloadDataframeCSV());
+        }
+        if (this.dataframeSearch) {
+            this.dataframeSearch.addEventListener('input', (e) => {
+                this.searchQuery = e.target.value || '';
+                this.page = 1;
+                this.renderDataframeTable();
+            });
+        }
+        if (this.dataframePageSize) {
+            this.dataframePageSize.addEventListener('change', (e) => {
+                this.pageSize = parseInt(e.target.value, 10) || 10;
+                this.page = 1;
+                this.renderDataframeTable();
+            });
+        }
+        if (this.dataframeToggleBtn) {
+            this.dataframeToggleBtn.addEventListener('click', () => this.toggleCollapseDataframe());
+        }
+        if (this.dataframePrevBtn) {
+            this.dataframePrevBtn.addEventListener('click', () => { if (this.page > 1) { this.page--; this.renderDataframeTable(); } });
+        }
+        if (this.dataframeNextBtn) {
+            this.dataframeNextBtn.addEventListener('click', () => { this.page++; this.renderDataframeTable(); });
+        }
+
+        // SQL runner buttons (Run / Clear)
+        this.sqlRunBtn = document.getElementById('sqlRunBtn');
+        this.sqlClearBtn = document.getElementById('sqlClearBtn');
+        this.dataframeModal = document.getElementById('dataframeModal');
+        this.dataframeModalContent = document.getElementById('dataframeModalContent');
+        this.modalDownloadBtn = document.getElementById('modalDownloadBtn');
+        this.modalCloseBtn = document.getElementById('modalCloseBtn');
+
+
+        if (this.modalCloseBtn) {
+            this.modalCloseBtn.addEventListener('click', () => { if (this.dataframeModal) this.dataframeModal.style.display = 'none'; });
+        }
+        if (this.modalDownloadBtn) {
+            this.modalDownloadBtn.addEventListener('click', () => { this.downloadModalCSV(); });
+        }
     }
 
+    /**
+     * Show a dataframe-like result in the UI.
+     * Accepts an array of objects (rows) or an empty array.
+     */
+    showDataframeResult(jsonArray) {
+        if (!this.dataframePanel || !this.dataframeTable) return;
+
+        // normalize input
+        this.currentTableData = Array.isArray(jsonArray) ? jsonArray : [];
+        this.searchQuery = '';
+        if (this.dataframeSearch) this.dataframeSearch.value = '';
+        this.sortColumn = null;
+        this.sortDir = 'asc';
+        this.page = 1;
+        this.pageSize = parseInt(this.dataframePageSize ? this.dataframePageSize.value : 10, 10) || 10;
+
+        // compute filtered data and render
+        this.filteredTableData = this.currentTableData.slice();
+        this.renderDataframeTable();
+
+        // show panel
+        // show panel but keep it collapsed by default (only header / toggle visible)
+        this.dataframePanel.style.display = 'block';
+        this.dataframeCollapsed = true;
+        if (this.dataframeTableWrapper) this.dataframeTableWrapper.style.display = 'none';
+        if (this.dataframeToggleBtn) this.dataframeToggleBtn.textContent = 'Show';
+        if (this.dataframePanel.classList) this.dataframePanel.classList.add('collapsed');
+        // hide all `.dataframe-controls` containers across the page (so only toggle remains visible)
+        document.querySelectorAll('.dataframe-controls').forEach(el => {
+            try { el.style.display = 'none'; } catch (e) {}
+        });
+        // hide footers as well
+        document.querySelectorAll('.dataframe-footer').forEach(el => { try { el.style.display = 'none'; } catch (e) {} });
+        setTimeout(() => {
+            if (this.dataframePanel.scrollIntoView) this.dataframePanel.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }, 120);
+    }
+
+    hideDataframeResult() {
+        if (!this.dataframePanel) return;
+        this.dataframePanel.style.display = 'none';
+    }
+
+    renderDataframeTable() {
+        // Apply search filter
+        const q = (this.searchQuery || '').toString().toLowerCase().trim();
+        if (q === '') {
+            this.filteredTableData = this.currentTableData.slice();
+        } else {
+            this.filteredTableData = this.currentTableData.filter(row => {
+                return Object.values(row).some(val => (val === null || val === undefined ? '' : String(val)).toLowerCase().includes(q));
+            });
+        }
+
+        // Apply sorting
+        if (this.sortColumn) {
+            const col = this.sortColumn;
+            const dir = this.sortDir === 'asc' ? 1 : -1;
+            this.filteredTableData.sort((a, b) => {
+                const va = a[col];
+                const vb = b[col];
+                if (va === vb) return 0;
+                if (va === null || va === undefined) return -1 * dir;
+                if (vb === null || vb === undefined) return 1 * dir;
+                if (!isNaN(Number(va)) && !isNaN(Number(vb))) {
+                    return (Number(va) - Number(vb)) * dir;
+                }
+                return String(va).localeCompare(String(vb)) * dir;
+            });
+        }
+
+        // Pagination
+        const totalRows = this.filteredTableData.length;
+        const totalPages = Math.max(1, Math.ceil(totalRows / this.pageSize));
+        if (this.page > totalPages) this.page = totalPages;
+        const start = (this.page - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        const pageSlice = this.filteredTableData.slice(start, end);
+
+        // Build table
+        this.dataframeTable.innerHTML = '';
+        if (this.currentTableData.length === 0) {
+            this.dataframeTable.innerHTML = '<tr><td>No rows returned</td></tr>';
+            if (this.dataframePageInfo) this.dataframePageInfo.textContent = '0 / 0';
+            return;
+        }
+
+        const cols = Object.keys(this.currentTableData[0]);
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        cols.forEach(col => {
+            const th = document.createElement('th');
+            th.textContent = col;
+            th.style.textAlign = 'left';
+            th.style.padding = '6px 8px';
+            th.style.borderBottom = '1px solid rgba(0,0,0,0.08)';
+            th.style.cursor = 'pointer';
+            // sort indicator
+            const indicator = document.createElement('span');
+            indicator.style.marginLeft = '6px';
+            if (this.sortColumn === col) indicator.textContent = this.sortDir === 'asc' ? '▲' : '▼';
+            th.appendChild(indicator);
+            th.addEventListener('click', () => this.sortByColumn(col));
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        const tbody = document.createElement('tbody');
+        pageSlice.forEach(row => {
+            const tr = document.createElement('tr');
+            cols.forEach(col => {
+                const td = document.createElement('td');
+                const val = row[col] === null || row[col] === undefined ? '' : row[col];
+                td.textContent = String(val);
+                td.style.padding = '6px 8px';
+                td.style.borderBottom = '1px solid rgba(0,0,0,0.04)';
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+
+        this.dataframeTable.appendChild(thead);
+        this.dataframeTable.appendChild(tbody);
+
+        // Update page info
+        if (this.dataframePageInfo) this.dataframePageInfo.textContent = `${this.page} / ${totalPages}`;
+        // Disable/Enable pagination buttons
+        if (this.dataframePrevBtn) this.dataframePrevBtn.disabled = this.page <= 1;
+        if (this.dataframeNextBtn) this.dataframeNextBtn.disabled = this.page >= totalPages;
+    }
+
+    // --- Modal helpers ---
+    showModalWithData(rows) {
+        if (!this.dataframeModal || !this.dataframeModalContent) return;
+        // clear
+        this.dataframeModalContent.innerHTML = '';
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            this.dataframeModalContent.innerHTML = '<p>No rows returned</p>';
+        } else {
+            const cols = Object.keys(rows[0]);
+            const table = document.createElement('table');
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            const thead = document.createElement('thead');
+            const hr = document.createElement('tr');
+            cols.forEach(c => {
+                const th = document.createElement('th');
+                th.textContent = c;
+                th.style.textAlign = 'left';
+                th.style.padding = '6px 8px';
+                th.style.borderBottom = '1px solid rgba(0,0,0,0.08)';
+                hr.appendChild(th);
+            });
+            thead.appendChild(hr);
+            const tbody = document.createElement('tbody');
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                cols.forEach(c => {
+                    const td = document.createElement('td');
+                    td.textContent = r[c] === null || r[c] === undefined ? '' : String(r[c]);
+                    td.style.padding = '6px 8px';
+                    td.style.borderBottom = '1px solid rgba(0,0,0,0.04)';
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            this.dataframeModalContent.appendChild(table);
+            // save last modal rows for download
+            this._lastModalRows = rows;
+        }
+        this.dataframeModal.style.display = 'flex';
+    }
+
+    showModalError(msg) {
+        if (!this.dataframeModal || !this.dataframeModalContent) return;
+        this.dataframeModalContent.innerHTML = `<div style="color:var(--text-primary); padding:12px;">Error: ${String(msg)}</div>`;
+        this.dataframeModal.style.display = 'flex';
+    }
+
+    downloadModalCSV() {
+        const rows = this._lastModalRows || [];
+        if (!rows || rows.length === 0) return this.showTemporaryTooltip(this.modalDownloadBtn, 'No data');
+        const cols = Object.keys(rows[0]);
+        const lines = [];
+        lines.push(cols.map(c => `"${String(c).replace(/"/g,'""')}"`).join(','));
+        rows.forEach(row => {
+            const line = cols.map(c => `"${String(row[c] === null || row[c] === undefined ? '' : row[c]).replace(/"/g,'""')}"`).join(',');
+            lines.push(line);
+        });
+        const csvContent = lines.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `sql_result_${new Date().toISOString().replace(/[:.]/g,'-')}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    sortByColumn(col) {
+        if (this.sortColumn === col) {
+            this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.sortColumn = col;
+            this.sortDir = 'asc';
+        }
+        this.page = 1;
+        this.renderDataframeTable();
+    }
+
+    toggleCollapseDataframe() {
+        this.dataframeCollapsed = !this.dataframeCollapsed;
+        if (this.dataframeTableWrapper) this.dataframeTableWrapper.style.display = this.dataframeCollapsed ? 'none' : 'block';
+        if (this.dataframeToggleBtn) this.dataframeToggleBtn.textContent = this.dataframeCollapsed ? 'Show' : 'Hide';
+        // toggle visibility of all `.dataframe-controls` containers
+        document.querySelectorAll('.dataframe-controls').forEach(el => {
+            try {
+                el.style.display = this.dataframeCollapsed ? 'none' : 'flex';
+            } catch (e) {}
+        });
+        // toggle footers
+        document.querySelectorAll('.dataframe-footer').forEach(el => {
+            try { el.style.display = this.dataframeCollapsed ? 'none' : ''; } catch (e) {}
+        });
+        if (this.dataframePanel && this.dataframePanel.classList) {
+            if (this.dataframeCollapsed) {
+                this.dataframePanel.classList.add('collapsed');
+            } else {
+                this.dataframePanel.classList.remove('collapsed');
+            }
+        }
+    }
+
+    // Convert currently shown (filtered) data to CSV and trigger download
+    downloadDataframeCSV() {
+        if (!this.currentTableData || this.currentTableData.length === 0) return;
+
+        // Use filteredTableData if present, otherwise full data
+        const rows = this.filteredTableData && this.filteredTableData.length > 0 ? this.filteredTableData : this.currentTableData;
+        const cols = Object.keys(this.currentTableData[0]);
+        const lines = [];
+        lines.push(cols.map(c => `"${String(c).replace(/"/g,'""')}"`).join(','));
+        rows.forEach(row => {
+            const line = cols.map(c => `"${String(row[c] === null || row[c] === undefined ? '' : row[c]).replace(/"/g,'""')}"`).join(',');
+            lines.push(line);
+        });
+        const csvContent = lines.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `dataframe_result_${new Date().toISOString().replace(/[:.]/g,'-')}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+    }
     setupMarkdown() {
         // Configure marked for better rendering
         if (typeof marked !== 'undefined') {
@@ -212,7 +544,18 @@ class LexaraAI {
             
             // Add assistant response to UI
             this.addAssistantMessage(response.response);
-            
+
+            // If backend returned a table (array of row objects), render it
+            if (response.table) {
+                try {
+                    // If response.table contains a dict with rows key, prefer that
+                    const tableData = Array.isArray(response.table) ? response.table : (response.table.rows || []);
+                    if (Array.isArray(tableData)) this.showDataframeResult(tableData);
+                } catch (e) {
+                    console.error('Failed to render dataframe result:', e);
+                }
+            }
+
             // Update conversation history
             this.conversationHistory = response.conversation_history;
             this.saveCurrentChat();
@@ -299,9 +642,80 @@ class LexaraAI {
                 contentDiv.querySelectorAll('pre code').forEach((block) => {
                     hljs.highlightBlock(block);
                 });
+                // (run buttons are attached uniformly after markdown/plain rendering)
             } else {
                 contentDiv.innerHTML = this.parseBasicMarkdown(content);
             }
+            // Add Run button for SQL code blocks inside assistant messages (works for both marked and fallback)
+            const self = this;
+            contentDiv.querySelectorAll('pre code').forEach((codeEl) => {
+                try {
+                    const pre = codeEl.parentElement;
+                    const codeText = codeEl.textContent || '';
+                    const langClass = (codeEl.className || '').toLowerCase();
+                    const looksLikeSQL = langClass.includes('language-sql') || codeText.trim().toLowerCase().startsWith('select');
+                    if (!looksLikeSQL) return;
+
+                    // wrap pre in a relative container so we can position the button
+                    const wrapper = document.createElement('div');
+                    wrapper.style.position = 'relative';
+                    wrapper.style.display = 'block';
+                    pre.parentNode.replaceChild(wrapper, pre);
+                    wrapper.appendChild(pre);
+
+                    const runBtn = document.createElement('button');
+                    runBtn.textContent = 'Run';
+                    runBtn.title = 'Run SQL';
+                    runBtn.className = 'inline-run-sql-btn';
+                    // style the button to appear top-right of the code block
+                    runBtn.style.position = 'absolute';
+                    runBtn.style.top = '8px';
+                    runBtn.style.right = '8px';
+                    runBtn.style.zIndex = '20';
+                    runBtn.style.padding = '6px 8px';
+                    runBtn.style.fontSize = '12px';
+                    runBtn.style.borderRadius = '6px';
+                    runBtn.style.border = '1px solid rgba(0,0,0,0.1)';
+                    runBtn.style.background = 'rgba(0,0,0,0.6)';
+                    runBtn.style.color = '#fff';
+
+                    wrapper.appendChild(runBtn);
+
+                    runBtn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        // show loading state
+                        const originalText = runBtn.textContent;
+                        runBtn.textContent = 'Running...';
+                        runBtn.disabled = true;
+                        try {
+                            const sql = codeText;
+                            const res = await fetch('/api/run_sql', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ sql })
+                            });
+                            if (!res.ok) {
+                                const err = await res.json().catch(() => ({}));
+                                const msg = err.detail || `HTTP ${res.status}`;
+                                self.showModalError(msg);
+                            } else {
+                                const data = await res.json();
+                                const rows = data.rows || [];
+                                self.showModalWithData(rows);
+                            }
+                        } catch (err) {
+                            console.error('Run SQL failed', err);
+                            self.showModalError(String(err));
+                        } finally {
+                            runBtn.textContent = originalText;
+                            runBtn.disabled = false;
+                        }
+                    });
+                } catch (e) {
+                    // ignore per-block errors
+                    console.error('Error attaching run button to code block', e);
+                }
+            });
         } else {
             // Plain text for user messages
             const p = document.createElement('p');
@@ -670,5 +1084,6 @@ document.head.appendChild(style);
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new LexaraAI();
+    // Expose instance for interactive testing (e.g., showDataframeResult)
+    window.lexaraAI = new LexaraAI();
 });
