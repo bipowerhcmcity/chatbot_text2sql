@@ -72,25 +72,28 @@ async def chat_endpoint(request: ChatRequest):
     try:
         # Build conversation history
         conversation_history = request.conversation_history.copy()
-        
         # Add user message to history
-        user_message = Message(role="user", content=request.message)
-        conversation_history.append(user_message)
-        
-        
+        user_message = Message(role="user", content=request.message)        
         # Extract assistant response
 
-        # Step 1: Extract structure 
-        structure_content = text_to_structure(client, user_message)
+        # Step 1: Rewrite the user query (To understand the history messages) 
+        rewritten_user_message = rewrite_user_query(client, user_message, conversation_history[-1:])
+        print("rewritten_user_message:", rewritten_user_message)
+        rewritten_user_message = Message(role="user", content=rewritten_user_message)   
+       
+        # Step 2: Extract structure 
+        structure_content = text_to_structure(client, rewritten_user_message)
         print(structure_content)
         structure_dict = json.loads(structure_content) 
         event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
-        # Step 2: Extract SQL (assistant_content is expected to be SQL text)
-        assistant_content = text_to_sql(client, user_message,structure=structure_content,  knowledge=event_screen_knowledge)
+        
+        # Step 3: Extract SQL (assistant_content is expected to be SQL text)
+        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge)
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
         # conversation_history.append(assistant_message)
-        
+        conversation_history.append(rewritten_user_message)
+ 
         return ChatResponse(
             response=assistant_content,
             conversation_history=conversation_history,

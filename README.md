@@ -60,11 +60,16 @@ https://drive.google.com/drive/folders/1Luk6glSm5GKM1S9wMB8fuxxYWR6U8mFl?usp=sha
 - Extract the zip with the folder "chroma_db" and copy this folder into the repo. 
 ![alt text](static/chroma_db.png)
 
-4. **Run the application**:
+5. **Config Database Connection (Optional)**: 
+- Go to DBEaver, right-click to database then click Edit Connection ![alt text](image.png)
+- Select Host and copy the URL ![alt text](image-1.png) 
+- Paste the URL in file model/database_connection.py -> `conn` variable 
+
+5. **Run the application**:
    ```bash
    python main.py
    ```
 
-5. **Open your browser** and navigate to:
+6. **Open your browser** and navigate to:
    ```
    http://localhost:8000

@@ -196,6 +196,27 @@ OUTPUT REQUIREMENTS:
 
 """
 
+def rewrite_user_query(client, user_message, conversation_history):
+    prompt = f"""You are a senior data analyst. 
+    Your task is to rewrite the user's question to make it more clear and specific for SQL generation.
+    Firstly, classify the user_message is full question or follow-up question. 
+    - If it's a follow-up question, rewrite the question to be a complete question by 
+    incorporating relevant information from the conversation_history.
+    - If it's a full question, just rewrite the question to be more clear and specific without incorporating information from conversation_history.
+    
+    User question: {user_message}
+    Conversation history: {conversation_history}
+    Please return the rewritten question only. Do not explain your reasoning."""
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": prompt}
+        ],
+        temperature=0
+    )
+
+    return response.choices[0].message.content
+
 def text_to_structure(client, question):
     prompt = f"""
     You are a semantic parser for database analytics questions.
