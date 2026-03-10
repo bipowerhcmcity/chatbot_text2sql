@@ -1,5 +1,6 @@
 from langchain_chroma import Chroma
 import pandas as pd 
+import re
 
 def get_retriever(embeddings,collection_name, message, embedding_dir="chroma_db",  num_results=10):
     vector_store = Chroma(
@@ -19,6 +20,26 @@ def get_retriever(embeddings,collection_name, message, embedding_dir="chroma_db"
     # docs = retriever.invoke(message)
     # knowledges = [doc.page_content for doc in docs]
     return knowledges
+
+def get_all_table(embedding, entities):
+    res_tbs = []
+    for entity in entities:
+        res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=3)
+        res_tb = [re.search(r"Tên dữ liệu:\s*(.*)", res["doc"]).group(1) for res in res_retrieve]
+        res_tbs+=res_tb
+    return res_tbs
+
+def extract_table_prompt(table_name): 
+    table_description = pd.read_csv("data/table_description_metadata.csv")
+    schema_description = pd.read_csv("data/schema_metadata.csv")
+    table_prompt = f"""
+    Table: {table_name} 
+    {table_description[table_description["Tên dữ liệu"]==table_name]["Mô tả"].values[0]}
+
+    Schema: 
+    {schema_description[schema_description["TableName"]==table_name]}
+    """
+    return table_prompt
 
 def event_screen_mapping(screen_knowledges, event_knowledges):
     # Read event_screen_metadata 

@@ -25,5 +25,4 @@ embeddings = OpenAIEmbeddings(
     api_key=api_key
 )
 
-create_embedding_store(file_path="data/screen_location_metadata.csv", collection_name="screen_metadata", out_directory="chroma_db")
-create_embedding_store(file_path="data/event_metadata.csv", collection_name="event_metadata", out_directory="chroma_db")
+create_embedding_store(file_path="data/table_description_metadata.csv", collection_name="table_metadata", out_directory="chroma_db")

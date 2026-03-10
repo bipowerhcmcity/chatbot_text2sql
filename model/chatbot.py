@@ -196,7 +196,8 @@ OUTPUT REQUIREMENTS:
 
 """
 
-def rewrite_user_query(client, user_message, conversation_history):
+def process_user_query(client, user_message, conversation_history):
+    # This function rewrite the user query if it is ambigious and extract the entity in the rewritten query for finding the table schema 
     prompt = f"""You are a senior data analyst. 
     Your task is to rewrite the user's question to make it more clear and specific for SQL generation.
     Firstly, classify the user_message is full question or follow-up question. 
@@ -206,7 +207,18 @@ def rewrite_user_query(client, user_message, conversation_history):
     
     User question: {user_message}
     Conversation history: {conversation_history}
-    Please return the rewritten question only. Do not explain your reasoning."""
+    
+    entities: A list of business objects mentioned in the user query that corresponds to a dataset or table in the data warehouse.
+    Examples: user, transaction, merchant, order, campaign.
+    Entities help the system retrieve the correct tables before generating SQL.
+
+    Output JSON schema:
+
+    {{
+        "rewritten_query": string (Vietnamese query),
+        "entities": string[],
+    }}
+    Never invent fields or metrics that are not explicitly or implicitly mentioned."""
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -339,12 +351,12 @@ def text_to_structure(client, question):
 
     return response.choices[0].message.content
 
-def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
+def text_to_sql(client,question,knowledge,structure,table_schema, dialect="SQL"):
     prompt = f"""
     SQL Dialect: {dialect}
 
     Schema:
-    {TABLE_SCHEMA}
+    {table_schema}
 
     Question:
     {question}
@@ -355,7 +367,6 @@ def text_to_sql(client,question,knowledge,structure, dialect="SQL"):
     Structure:
     {structure}
 
-    If user only ask to view the product, please fitler ctx_screen_location = "product_detail", ctx_event_name = "view_page". 
     If user ask number of view, please use select (*) as view_count as default. 
     If user ask another question, please using the knowledges above. 
     Based on the Schema, Question, Knowledge and Structure -> Return only SQL.

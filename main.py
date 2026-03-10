@@ -16,6 +16,8 @@ from model.database_connection import initalize_db_connection, retrieve_db_resul
 from openai import OpenAI
 import json 
 from model.rag import *
+from itertools import chain
+
 
 # Load environment variables
 load_dotenv()
@@ -64,7 +66,17 @@ async def read_root():
         return HTMLResponse(content=html_content, status_code=200)
     except FileNotFoundError:
         return HTMLResponse(content="<h1>Yue1608 AI</h1><p>Frontend files not found</p>", status_code=404)
-    
+
+
+def flatten(lst):
+    result = []
+    for item in lst:
+        if isinstance(item, list):
+            result.extend(flatten(item))
+        else:
+            result.append(item)
+    return result
+
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -76,19 +88,36 @@ async def chat_endpoint(request: ChatRequest):
         user_message = Message(role="user", content=request.message)        
         # Extract assistant response
 
-        # Step 1: Rewrite the user query (To understand the history messages) 
-        rewritten_user_message = rewrite_user_query(client, user_message, conversation_history[-1:])
+        # Step 1: Process the user query (To understand the history messages) 
+        process_user_message = json.loads(process_user_query(client, user_message, conversation_history[-1:]))
+        rewritten_user_message = process_user_message["rewritten_query"]
         print("rewritten_user_message:", rewritten_user_message)
+
         rewritten_user_message = Message(role="user", content=rewritten_user_message)   
        
-        # Step 2: Extract structure 
+       
+        # Step 2.1: Extract structure 
         structure_content = text_to_structure(client, rewritten_user_message)
         print(structure_content)
         structure_dict = json.loads(structure_content) 
         event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
+
+
+        # Step 2.2: Table Finding 
+        entities = process_user_message["entities"]
+        entities+=flatten([[structure_dict["metric"]], [structure_dict["dimension"]]])
+        # Remove None 
+        entities = list(filter(lambda x: x is not None, entities))
         
+        print(entities)
+        tbs = list(set(get_all_table(embeddings, entities)))
+        print("Tables", tbs)
+        table_prompt = ""
+        for table in tbs: 
+            table_prompt+=extract_table_prompt(table)
+
         # Step 3: Extract SQL (assistant_content is expected to be SQL text)
-        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge)
+        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge, table_schema=table_prompt)
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
         # conversation_history.append(assistant_message)
