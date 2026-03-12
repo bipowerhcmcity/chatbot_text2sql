@@ -102,7 +102,6 @@ async def chat_endpoint(request: ChatRequest):
         structure_dict = json.loads(structure_content) 
         event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
 
-
         # Step 2.2: Table Finding 
         entities = process_user_message["entities"]
         entities+=flatten([[structure_dict["metric"]], [structure_dict["dimension"]]])
@@ -110,7 +109,7 @@ async def chat_endpoint(request: ChatRequest):
         entities = list(filter(lambda x: x is not None, entities))
         
         print(entities)
-        tbs = list(set(get_all_table(embeddings, entities)))
+        tbs = list(set(get_all_table(embeddings, entities, structure_dict["service"])))
         print("Tables", tbs)
         table_prompt = ""
         for table in tbs: 

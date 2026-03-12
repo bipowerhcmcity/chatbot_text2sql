@@ -16,3 +16,4 @@ data/*
 chroma_db/*
 chroma_db_backup/*
 chroma_db_backup_new/*
+chroma_db_*

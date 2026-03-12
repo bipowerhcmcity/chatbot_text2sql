@@ -2,29 +2,24 @@ from langchain_chroma import Chroma
 import pandas as pd 
 import re
 
-def get_retriever(embeddings,collection_name, message, embedding_dir="chroma_db",  num_results=10):
+def get_retriever(embeddings,collection_name, message, service=None, embedding_dir="chroma_db",  num_results=10):
     vector_store = Chroma(
         collection_name=collection_name,
         persist_directory=embedding_dir,
         embedding_function=embeddings
     )
-
-    results = vector_store.similarity_search_with_score(message, k=num_results)
+    if service == None:
+        results = vector_store.similarity_search_with_score(message, k=num_results)
+    else:
+        results = vector_store.similarity_search_with_score(message, k=num_results, filter={"service":service})
+        print(results)
     knowledges = [{"doc":result[0].page_content, "score":result[1] } for result in results]
-    # knowledges = [doc.page_content for doc in docs]
-    # for doc, score in results:
-    #     print(f"* [SCORE: {score:.4f}] {doc.page_content}")
-        
-    # retriever = vector_store.as_retriever(search_kwargs={'k': num_results})
-    
-    # docs = retriever.invoke(message)
-    # knowledges = [doc.page_content for doc in docs]
     return knowledges
 
-def get_all_table(embedding, entities):
+def get_all_table(embedding, entities, service):
     res_tbs = []
     for entity in entities:
-        res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=3)
+        res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=3, service=service)
         res_tb = [re.search(r"Tên dữ liệu:\s*(.*)", res["doc"]).group(1) for res in res_retrieve]
         res_tbs+=res_tb
     return res_tbs
@@ -32,12 +27,16 @@ def get_all_table(embedding, entities):
 def extract_table_prompt(table_name): 
     table_description = pd.read_csv("data/table_description_metadata.csv")
     schema_description = pd.read_csv("data/schema_metadata.csv")
+
+    table_desc = table_description[table_description["Tên dữ liệu"]==table_name]
+    table_schema = schema_description[schema_description["TableName"]==table_name]
     table_prompt = f"""
-    Table: {table_name} 
-    {table_description[table_description["Tên dữ liệu"]==table_name]["Mô tả"].values[0]}
+    Table: {table_name} - {table_desc["Dịch vụ"].values[0]} - {table_desc["Nhóm dữ liệu"].values[0]}
+
+    {table_desc["Mô tả"].values[0]}
 
     Schema: 
-    {schema_description[schema_description["TableName"]==table_name]}
+    {table_schema}
     """
     return table_prompt
 
@@ -89,11 +88,7 @@ def get_event_screen_knowledge(structure_dict, embeddings):
             event_knowledges = None
         else:
             event_knowledges = get_retriever(embeddings, collection_name="event_metadata", message=event_context["action_description"], num_results=10)
-        
-        print("Screen finding: ",screen_knowledges)
-        print("Event finding: ",event_knowledges)
 
         event_screen_df = event_screen_mapping(screen_knowledges, event_knowledges)
         event_screen_prompts = event_screen_df.apply(row_to_prompt, axis=1).tolist()
-        print(event_screen_prompts)
         return event_screen_prompts
