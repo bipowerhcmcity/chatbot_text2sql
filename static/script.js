@@ -718,7 +718,7 @@ class LexaraAI {
             });
         } else {
             // Plain text for user messages
-            const p = document.createElement('p');
+            const p = document.createElement('span');
             p.textContent = content;
             contentDiv.appendChild(p);
         }

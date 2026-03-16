@@ -116,7 +116,7 @@ async def chat_endpoint(request: ChatRequest):
             table_prompt+=extract_table_prompt(table)
 
         # Step 3: Extract SQL (assistant_content is expected to be SQL text)
-        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge, table_schema=table_prompt)
+        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"])
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
         # conversation_history.append(assistant_message)

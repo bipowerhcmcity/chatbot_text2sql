@@ -25,16 +25,16 @@ WHERE ctx_page_context = (SELECT item_code FROM item_metadata WHERE ten_sp LIKE 
 JOIN item_metadata m
   ON e.ctx_page_context = m.item_code
 WHERE m.ten_sp LIKE '%iPhone%'
-
-Query guidelines:
-- Generate valid Spark SQL only.
-- Return SQL only. No explanation.
-- Do NOT use CTE (WITH) in SQLite
-- Use inline subqueries or direct aggregation instead
-
-Do not explain.
-Do not hallucinate columns.
 """
+
+# Query guidelines:
+# - Generate valid Spark SQL only.
+# - Return SQL only. No explanation.
+# - Do NOT use CTE (WITH) in SQLite
+# - Use inline subqueries or direct aggregation instead
+
+# Do not explain.
+# Do not hallucinate columns.
 
 def process_user_query(client, user_message, conversation_history):
     # This function rewrite the user query if it is ambigious and extract the entity in the rewritten query for finding the table schema 
@@ -79,10 +79,12 @@ def text_to_structure(client, question):
     Only return valid JSON following the schema below.
 
     Semantic elements to extract:
-    1. Services: 
+    1. Require explanation: 
+    Based on the query then choose whether the user require explaination or not. 
+    2. Services: 
     Choose which Service Data is [Vaccine, FSHOP], only choose 1 service for one user query. 
 
-    2. intention:
+    3. intention:
     Choose ONLY one of the following values:
     - aggregate:
         + sum: Tổng số, tổng 
@@ -96,7 +98,7 @@ def text_to_structure(client, question):
     - comparison     (compare two or more groups)
     - detail         (raw records)
 
-    3. metric:
+    4. metric:
     - What is being measured: 
         + identified user: Khách hàng định danh
         + anonymous users: Khách hàng ẩn danh 
@@ -104,12 +106,12 @@ def text_to_structure(client, question):
         + screen location: vị trí màn hình 
     - If unclear, set value = null
 
-    4. time:
+    5. time:
     - When does the question refer to?
     - Include time range and time granularity if mentioned
     - If not mentioned, set value = null
 
-    5. dimension:
+    6. dimension:
     - A dimension is a field used to GROUP the results in an aggregated query.
     - Dimensions determine how the metric is broken down into groups.
     - Dimensions appear in the GROUP BY clause in SQL.
@@ -122,12 +124,12 @@ def text_to_structure(client, question):
     - "Top 10 sản phẩm" → dimension = ["product"]
     - "Doanh thu theo ngày theo platform" → dimension = ["day", "platform"]
 
-    6. filter:
+    7. filter:
     - Conditions applied to the data
     - Return an array of objects with (field, operator, value)
     - If none, return empty array []
 
-    7. event_context:
+    8. event_context:
     Represents the contextual information about user behavior.
     It may contain:
         - screen_description: the screen / page where the action happens
@@ -156,6 +158,7 @@ def text_to_structure(client, question):
     Output JSON schema:
 
     {{
+        "is_required_explanation": True | False,
         "service":string,
         "intention": string,
         "metric": string | null,
@@ -194,7 +197,7 @@ def text_to_structure(client, question):
 
     return response.choices[0].message.content
 
-def text_to_sql(client,question,knowledge,structure,table_schema, dialect="SQL"):
+def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation, dialect="SQL"):
     prompt = f"""
     SQL Dialect: {dialect}
 
@@ -212,8 +215,15 @@ def text_to_sql(client,question,knowledge,structure,table_schema, dialect="SQL")
 
     If user ask number of view, please use select (*) as view_count as default. 
     If user ask another question, please using the knowledges above. 
-    Based on the Schema, Question, Knowledge and Structure -> Return only SQL.
+    Based on the Schema, Question, Knowledge and Structure 
     """
+    if is_explanation:
+        prompt +=f"""
+        Return each step and explanation that come up the result, then the final result is SQL query.
+        All the explanation and step will be written in Vietnamese. 
+        """
+    else:
+        prompt +="""Return only SQL query, do not explain."""
     print(prompt)
     response = client.chat.completions.create(
         model="gpt-4o-mini",

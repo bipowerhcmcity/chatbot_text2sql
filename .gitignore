@@ -17,3 +17,4 @@ chroma_db/*
 chroma_db_backup/*
 chroma_db_backup_new/*
 chroma_db_*
+model/database_connection.py
