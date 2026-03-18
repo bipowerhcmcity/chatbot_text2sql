@@ -226,7 +226,7 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
         prompt +="""Return only SQL query, do not explain."""
     print(prompt)
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}
