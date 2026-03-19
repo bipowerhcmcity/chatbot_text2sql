@@ -1,0 +1,604 @@
+﻿ctx_screen_location,Screen Description,ctx_event_name,Event Description
+home,Màn hình trang chủ,view_page,User xem trang
+home,Màn hình trang chủ,view_promotion_banner,User view banner mở webview để xem landing page
+home,Màn hình trang chủ,click_prescription,User click vào Mua thuốc theo đơn/Gửi toa cho nhà thuốc
+home,Màn hình trang chủ,request_help,User click vào Tư vấn với dược sĩ
+home,Màn hình trang chủ,click_store_search,User click vào Tìm nhà thuốc
+home,Màn hình trang chủ,view_list_order_history,User click vào Đơn hàng của tôi
+home,Màn hình trang chủ,click_vaccine_service,User bấm để xem trang về Vaccine
+home,Màn hình trang chủ,click_health_check,User click vào kiểm tra sức khoẻ mở webview
+home,Màn hình trang chủ,click_brand_product,User bấm vào các thẻ thương hiệu
+home,Màn hình trang chủ,click_slide_back,User xem các item trước đó trong danh sách
+home,Màn hình trang chủ,click_slide_next,User xem các item tiếp theo trong danh sách
+home,Màn hình trang chủ,click_category,User click vào một category sản phẩm
+home,Màn hình trang chủ,click_home_section_filter,User bấm sử dụng các bộ lọc theo section trên trang chủ
+home,Màn hình trang chủ,click_view_all,User click vào xem tất cả danh sách
+home,Màn hình trang chủ,click_article_category,User bấm xem theo danh mục bài viết
+home,Màn hình trang chủ,click_article,User click vào bài viết
+home,Màn hình trang chủ,click_button_explore,User bấm vào các button khám phá/tìm hiểu các chương trình
+home,Màn hình trang chủ,click_call_help,User bấm vào nút Tư vấn ở trang chủ
+home,Màn hình trang chủ,view_activity,User bấm Xem hoạt động giao hàng trên trang home
+home,Màn hình trang chủ,click_view_more,User bấm vào xem thêm
+home,Màn hình trang chủ,click_go_to_top,User bấm nút go to top (trở về đầu trang)
+home,Màn hình trang chủ,click_qr_code,User click vào QR Code
+home,Màn hình trang chủ,view_detail_order,User click vào xem chi tiết đơn hàng
+home,Màn hình trang chủ,repurchase_order,User click vào nút mua lại đơn hàng để chọn sản phẩm mua lại
+home,Màn hình trang chủ,click_loyalty_point,User click vào điểm Loyalty
+home,Màn hình trang chủ,click_top_search,User bấm vào các thẻ tìm kiếm hàng đầu
+home,Màn hình trang chủ,scroll_depth,User cuộn trang
+home,Màn hình trang chủ,click_message,Users chọn phương thức Nhắn tin
+home,Màn hình trang chủ,view_detail_expert,User bấm xem thông tin chuyên gia
+home,Màn hình trang chủ,view_detail_flash_sale,User bấm xem trang landing của flash sale
+home,Màn hình trang chủ,view_flash_sale_policy,User bấm xem thể lệ của flash sale
+home,Màn hình trang chủ,select_tab_flash_sale,User bấm xem các tab trong flash sale
+home,Màn hình trang chủ,click_chat_now,User bấm Chat ngay
+home,Màn hình trang chủ,click_verify_auth,User bấm Tra cứu chính hãng
+home,Màn hình trang chủ,click_masterd_blindcard,User bấm floating icon campaign MasterD
+home,Màn hình trang chủ,click_banner_section,User click vào banner của section
+home,Màn hình trang chủ,click_banner_storytelling,User bấm xem banner storytelling
+home,Màn hình trang chủ,view_banner,User view banner trên màn hình của mình
+spn_menu,Màn hình left-menu,view_page,User xem trang
+spn_menu,Màn hình left-menu,click_sheet_close,User tắt sheet
+spn_menu,Màn hình left-menu,login_account,User bấm nút đăng nhập
+spn_menu,Màn hình left-menu,sign_up_account,User bấm nút đăng ký
+spn_menu,Màn hình left-menu,click_menu,User bấm vào xem một mục bất kì trên menu
+spn_menu,Màn hình left-menu,click_download_app,User bấm tải ứng dụng
+spn_menu,Màn hình left-menu,click_call_hotline,User bấm vào khu vực có số hotline
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,view_page,User xem trang
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_back_button,User bấm trở về
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,delete_all_search_history,User bấm vào nút xoá tất cả lịch sử tìm kiếm
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_search_history,User bấm vào lịch sử tìm kiếm
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,delete_search_history,User xóa lịch sử tìm kiếm
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_top_search,User bấm vào các thẻ tìm kiếm hàng đầu
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_view_all,User click vào xem tất cả danh sách
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_keyword_suggestion,User bấm chọn keyword gợi ý
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_product_suggestion,User bấm chọn sản phẩm gợi ý
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_promo_banner,User bấm xem khuyến mãi
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,view_detail_promo,User bấm xem chi tiết khuyến mãi
+product_search_default,Màn hình khi bấm vào tìm kiếm sản phẩm,click_keyword_suggestion,User bấm chọn keyword gợi ý
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,view_page,User xem trang
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_back_button,User bấm trở về
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,select_result_type,User lựa chọn loại kết quả tìm kiếm
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,select_sort_type,User lựa chọn loại sorting
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_advanced_filter,User bấm vào mở bộ lọc nâng cao
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_view_more,User bấm vào xem thêm
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,select_filter_criteria,User chọn các tiêu chí lọc
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,view_more_filter,User bấm xem thêm filter
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_filter_title,User bấm mở ra/đóng vào filter
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,type_search_filter,User điền thông tin tìm filter
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_answer_nps,User bấm trả lời khảo sát
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,click_close_nps,User bấm tắt khảo sát
+product_search_result_product,Màn hình kết quả tìm kiếm sản phẩm,scroll_depth,User cuộn trang
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,view_page,User xem trang
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,select_result_type,User lựa chọn loại kết quả tìm kiếm
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,click_view_more,User bấm vào xem thêm
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,click_article,User click vào bài viết
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,click_search_history,User bấm vào lịch sử tìm kiếm
+product_search_result_article,Màn hình kết quả tìm kiếm bài viết,scroll_depth,User cuộn trang
+product_detail,Màn hình chi tiết sản phẩm,view_page,User xem trang
+product_detail,Màn hình chi tiết sản phẩm,click_breadcrumb,User sử dụng breadcrumb
+product_detail,Màn hình chi tiết sản phẩm,click_slide_back,User xem các item trước đó trong danh sách
+product_detail,Màn hình chi tiết sản phẩm,click_slide_next,User xem các item tiếp theo trong danh sách
+product_detail,Màn hình chi tiết sản phẩm,click_brand_information,User bấm xem các sản phẩm theo thương hiệu
+product_detail,Màn hình chi tiết sản phẩm,view_rating,User bấm vào để đi nhanh đến mục đánh giá
+product_detail,Màn hình chi tiết sản phẩm,view_comment,User bấm vào để đi nhanh đến mục bình luận
+product_detail,Màn hình chi tiết sản phẩm,select_type_unit,User chọn loại đơn vị
+product_detail,Màn hình chi tiết sản phẩm,click_category,User click vào một category sản phẩm
+product_detail,Màn hình chi tiết sản phẩm,view_detail_promotion,User xem chi tiết khuyến mại
+product_detail,Màn hình chi tiết sản phẩm,view_store_direction,User bấm vào xem đường đi dến nhà thuốc
+product_detail,Màn hình chi tiết sản phẩm,view_list_store,User bấm vào xem danh sách nhà thuốc
+product_detail,Màn hình chi tiết sản phẩm,add_product_quantity,User bấm thêm số lượng sản phẩm cần mua
+product_detail,Màn hình chi tiết sản phẩm,click_store_search,User click vào Tìm nhà thuốc
+product_detail,Màn hình chi tiết sản phẩm,select_to_buy_product,User bấm nút chọn mua sản phẩm
+product_detail,Màn hình chi tiết sản phẩm,click_product_detail,User bấm xem trang thông tin chi tiết của sản phẩm
+product_detail,Màn hình chi tiết sản phẩm,select_font_size,User chọn kích thước văn bản
+product_detail,Màn hình chi tiết sản phẩm,click_view_more,User bấm vào xem thêm
+product_detail,Màn hình chi tiết sản phẩm,expand_faq,User bấm vào xem câu hỏi thường gặp
+product_detail,Màn hình chi tiết sản phẩm,send_rating,User gửi đánh giá sản phẩm
+product_detail,Màn hình chi tiết sản phẩm,select_type_rating_filter,Chọn loại bộ lọc để xem đánh giá
+product_detail,Màn hình chi tiết sản phẩm,select_type_comment_filter,Chọn loại bộ lọc để xem bình luận
+product_detail,Màn hình chi tiết sản phẩm,view_store_search,Xem danh sách nhà thuốc có hàng gần nhất
+product_detail,Màn hình chi tiết sản phẩm,request_help,User click vào Tư vấn với dược sĩ
+product_detail,Màn hình chi tiết sản phẩm,click_prescription,User click vào Mua thuốc theo đơn/Gửi toa cho nhà thuốc
+product_detail,Màn hình chi tiết sản phẩm,click_back_button,User bấm trở về
+product_detail,Màn hình chi tiết sản phẩm,click_view_all,User click vào xem tất cả danh sách
+product_detail,Màn hình chi tiết sản phẩm,change_location_permission,Cung cấp quyền truy cập vị trí
+product_detail,Màn hình chi tiết sản phẩm,scroll_depth,User cuộn trang
+product_detail,Màn hình chi tiết sản phẩm,send_question,User bấm gửi câu hỏi trong phần Hỏi đáp
+product_detail,Màn hình chi tiết sản phẩm,click_button_explore,User bấm vào các button khám phá/tìm hiểu các chương trình
+product_detail,Màn hình chi tiết sản phẩm,request_pharmacist_consultation,User bấm Yêu cầu tư vấn
+product_detail,Màn hình chi tiết sản phẩm,view_detail_flash_sale,User bấm xem trang landing của flash sale
+product_detail,Màn hình chi tiết sản phẩm,click_auth_badge,User bấm badge Chính hãng trong trang chi tiết SP
+product_detail,Màn hình chi tiết sản phẩm,click_verify_auth_link,User bấm link Tra cứu chính hãng trong trang chi tiết SP
+product_detail,Màn hình chi tiết sản phẩm,click_copy_register_number,User bấm Sao chép số đăng ký
+cart,Màn hình giỏ hàng,view_page,User xem trang
+cart,Màn hình giỏ hàng,click_back_button,User bấm trở về
+cart,Màn hình giỏ hàng,select_all_product,user bấm chọn tất cả sản phẩm
+cart,Màn hình giỏ hàng,back_to_home,User bấm vào nút trở về trang chủ (có thể là icon hoặc nút)
+cart,Màn hình giỏ hàng,click_shop_now,User click Mua sắm ngay
+cart,Màn hình giỏ hàng,click_view_all,User click vào xem tất cả danh sách
+cart,Màn hình giỏ hàng,redeem_gift_product,User đổi điểm lấy quà tặng là sản phẩm
+cart,Màn hình giỏ hàng,scroll_depth,User cuộn trang
+cart,Màn hình giỏ hàng,click_view_more,User bấm vào xem thêm
+cart,Màn hình giỏ hàng,request_help,User click vào Tư vấn với dược sĩ
+cart,Màn hình giỏ hàng,click_slide_back,User xem các item trước đó trong danh sách
+cart,Màn hình giỏ hàng,click_slide_next,User xem các item tiếp theo trong danh sách
+cart,Màn hình giỏ hàng,add_promotion,User bấm Thêm ưu đãi
+cart,Màn hình giỏ hàng,apply_loyalty_point,User gạt toggle Đổi điểm thưởng
+cart,Màn hình giỏ hàng,select_to_buy_product,User bấm nút chọn mua sản phẩm
+btm_gifts,Màn hình Chọn quà tặng của tôi,click_sheet_close,User tắt sheet
+btm_gifts,Màn hình Chọn quà tặng của tôi,click_view_more,User bấm vào xem thêm
+btm_gifts,Màn hình Chọn quà tặng của tôi,click_confirm,User bấm Xác nhận
+btm_select_unit,Bottomsheet chọn đơn vị sản phẩm,click_back_button,User bấm trở về
+btm_select_unit,Bottomsheet chọn đơn vị sản phẩm,select_type_unit,User chọn loại đơn vị
+order_confirmation,Màn hình xác nhận đơn hàng,view_page,User xem trang
+order_confirmation,Màn hình xác nhận đơn hàng,click_back_button,User bấm trở về
+order_confirmation,Màn hình xác nhận đơn hàng,change_delivery_method,User thay đổi hình thức nhận hàng
+order_confirmation,Màn hình xác nhận đơn hàng,change_delivery_location,User thay đổi địa chỉ nhận hàng
+order_confirmation,Màn hình xác nhận đơn hàng,change_delivery_time,User chọn thời gian nhận hàng
+order_confirmation,Màn hình xác nhận đơn hàng,insert_text,User nhập thông tin
+order_confirmation,Màn hình xác nhận đơn hàng,request_invoice,User bấm toggle Yêu cầu xuất hoá đơn điện tử
+order_confirmation,Màn hình xác nhận đơn hàng,add_product,User bấm Thêm sản phẩm khác vào giỏ hàng
+order_confirmation,Màn hình xác nhận đơn hàng,add_promotion,User bấm Thêm ưu đãi
+order_confirmation,Màn hình xác nhận đơn hàng,apply_loyalty_point,User gạt toggle Đổi điểm thưởng
+order_confirmation,Màn hình xác nhận đơn hàng,click_complete_order,User bấm Hoàn tất đặt hàng
+order_confirmation,Màn hình xác nhận đơn hàng,add_location,User bấm Thêm địa chỉ nhận hàng
+order_confirmation,Màn hình xác nhận đơn hàng,view_direction,User bấm Xem chỉ đường
+order_confirmation,Màn hình xác nhận đơn hàng,view_payment_offers,User bấm Xem thêm ưu đãi thanh toán
+order_confirmation,Màn hình xác nhận đơn hàng,view_all_product,User bấm Xem thêm sản phẩm
+order_confirmation,Màn hình xác nhận đơn hàng,select_payment_methods,User chọn phương thức thanh toán
+order_confirmation,Màn hình xác nhận đơn hàng,select_pharmacy,User chọn nhà thuốc
+order_confirmation,Màn hình xác nhận đơn hàng,view_detail_business_invoice,User xem hoặc sửa xuất hoá đơn cho công ty
+order_confirmation,Màn hình xác nhận đơn hàng,view_detail_personal_invoice,User xem hoặc sửa xuất hoá đơn cho cá nhân
+order_success,Màn hình mua hàng thành công,view_page,User xem trang
+order_success,Màn hình mua hàng thành công,click_back_button,User bấm trở về
+order_success,Màn hình mua hàng thành công,view_detail_order,User click vào xem chi tiết đơn hàng
+order_success,Màn hình mua hàng thành công,back_to_home,User bấm vào nút trở về trang chủ (có thể là icon hoặc nút)
+order_success,Màn hình mua hàng thành công,click_slide_back,User xem các item trước đó trong danh sách
+order_success,Màn hình mua hàng thành công,click_slide_next,User xem các item tiếp theo trong danh sách
+order_success,Màn hình mua hàng thành công,scroll_depth,User cuộn trang
+order_not_completed,Màn hình thanh toán chưa hoàn tất,view_page,User xem trang
+order_not_completed,Màn hình thanh toán chưa hoàn tất,click_back_button,User bấm trở về
+order_not_completed,Màn hình thanh toán chưa hoàn tất,click_repurchase,User bấm Thanh toán lại
+order_not_completed,Màn hình thanh toán chưa hoàn tất,view_detail_order,User click vào xem chi tiết đơn hàng
+order_not_completed,Màn hình thanh toán chưa hoàn tất,click_slide_back,User xem các item trước đó trong danh sách
+order_not_completed,Màn hình thanh toán chưa hoàn tất,click_slide_next,User xem các item tiếp theo trong danh sách
+order_not_completed,Màn hình thanh toán chưa hoàn tất,scroll_depth,User cuộn trang
+change_address,Màn hình chọn địa chỉ nhận hàng,click_sheet_close,User tắt sheet
+change_address,Màn hình chọn địa chỉ nhận hàng,select_address,Users chọn địa chỉ nhận hàng
+change_address,Màn hình chọn địa chỉ nhận hàng,edit_address,"Users click nút ""Sửa"""
+change_address,Màn hình chọn địa chỉ nhận hàng,click_confirm,User bấm Xác nhận
+change_address,Màn hình chọn địa chỉ nhận hàng,add_new_address,User bấm Thêm địa chỉ mới
+edit_address,Màn hình chỉnh sửa địa chỉ,click_back_button,User bấm trở về
+edit_address,Màn hình chỉnh sửa địa chỉ,insert_text,User nhập thông tin
+edit_address,Màn hình chỉnh sửa địa chỉ,select_type_address,User lựa chọn loại địa chỉ
+edit_address,Màn hình chỉnh sửa địa chỉ,set_default_address,User đặt địa chỉ làm địa chỉ mặc định
+edit_address,Màn hình chỉnh sửa địa chỉ,delete_address,User xoá địa chỉ
+edit_address,Màn hình chỉnh sửa địa chỉ,update_address,User cập nhật địa chỉ
+edit_address,Màn hình chỉnh sửa địa chỉ,click_sheet_close,User tắt sheet
+add_address,Màn hình Thêm địa chỉ mới,click_back_button,User bấm trở về
+add_address,Màn hình Thêm địa chỉ mới,insert_text,User nhập thông tin
+add_address,Màn hình Thêm địa chỉ mới,select_type_address,User lựa chọn loại địa chỉ
+add_address,Màn hình Thêm địa chỉ mới,set_default_address,User đặt địa chỉ làm địa chỉ mặc định
+add_address,Màn hình Thêm địa chỉ mới,click_submit_button,Users click hoàn tất
+add_address,Màn hình Thêm địa chỉ mới,click_close,User đóng trang
+new_location,Màn hình Chọn địa chỉ nhận hàng (app),change_location,User bấm Thay đổi địa điểm
+new_location,Màn hình Chọn địa chỉ nhận hàng (app),select_type_location,User chọn Tỉnh/TP Quận/huyện Phường/xã
+new_location,Màn hình Chọn địa chỉ nhận hàng (app),search_location,User nhập địa điểm cần tìm
+new_location,Màn hình Chọn địa chỉ nhận hàng (app),click_next,User chọn Tiếp tục
+new_location,Màn hình Chọn địa chỉ nhận hàng (app),click_back_button,User bấm trở về
+delivery_pickup_time,Màn hình chọn thời gian nhận hàng,click_close,User đóng trang
+delivery_pickup_time,Màn hình chọn thời gian nhận hàng,select_delivery_date,User chọn ngày nhận hàng
+delivery_pickup_time,Màn hình chọn thời gian nhận hàng,select_delivery_time,User chọn thời gian nhận hàng
+delivery_pickup_time,Màn hình chọn thời gian nhận hàng,click_confirm,User bấm Xác nhận
+delivery_pickup_time,Màn hình chọn thời gian nhận hàng,set_default_earliest_time,User chọn Thiết lập thời gian sớm nhất
+after_8pm_order,Màn hình Lưu ý đặt hàng sau 20h,click_sheet_close,User tắt sheet
+after_8pm_order,Màn hình Lưu ý đặt hàng sau 20h,click_close,User đóng trang
+after_8pm_order,Màn hình Lưu ý đặt hàng sau 20h,click_continue_purchase,User chọn Tiếp tục thanh toán
+after_8pm_order,Màn hình Lưu ý đặt hàng sau 20h,click_receive_at_pharmacy,User chọn Nhận tại nhà thuốc
+btm_delivery_method,Bottomsheet Chọn hình thức giao hàng,click_sheet_close,User tắt sheet
+btm_delivery_method,Bottomsheet Chọn hình thức giao hàng,click_delivery,User bấm chọn Giao hàng tận nơi
+btm_delivery_method,Bottomsheet Chọn hình thức giao hàng,click_receive_at_pharmacy,User chọn Nhận tại nhà thuốc
+btm_delivery_method,Bottomsheet Chọn hình thức giao hàng,change_store,User bấm vào thay đổi địa chỉ nhà thuốc nhận sản phẩm
+btm_delivery_method,Bottomsheet Chọn hình thức giao hàng,click_confirm,User bấm Xác nhận
+select_location,Màn hình chọn địa chỉ,click_back_button,User bấm trở về
+select_location,Màn hình chọn địa chỉ,search_address,Users tìm kiếm địa chỉ
+select_location,Màn hình chọn địa chỉ,search_store_location,User bấm vào search nhà thuốc theo tỉnh thành quận huyện
+select_location,Màn hình chọn địa chỉ,select_pharmacy,User chọn nhà thuốc
+select_location,Màn hình chọn địa chỉ,view_direction,User bấm Xem chỉ đường
+select_location,Màn hình chọn địa chỉ,click_confirm,User bấm Xác nhận
+search_location,Màn hình tìm địa điểm nhà thuốc,click_back_button,User bấm trở về
+search_location,Màn hình tìm địa điểm nhà thuốc,search_address,Users tìm kiếm địa chỉ
+search_location,Màn hình tìm địa điểm nhà thuốc,click_confirm,User bấm Xác nhận
+search_location,Màn hình tìm địa điểm nhà thuốc,delete_all_search_history,User bấm vào nút xoá tất cả lịch sử tìm kiếm
+search_location,Màn hình tìm địa điểm nhà thuốc,click_search_history,User bấm vào lịch sử tìm kiếm
+search_location,Màn hình tìm địa điểm nhà thuốc,delete_search_history,User xóa lịch sử tìm kiếm
+store_not_found,Màn hình không tìm thấy nhà thuốc gần địa chỉ đã chọn,click_back_button,User bấm trở về
+store_not_found,Màn hình không tìm thấy nhà thuốc gần địa chỉ đã chọn,search_address,Users tìm kiếm địa chỉ
+store_not_found,Màn hình không tìm thấy nhà thuốc gần địa chỉ đã chọn,reselect_address,User bấm Chọn lại địa chỉ
+loyalty_point_exchange,Màn hình Đổi quà,click_back_button,User bấm trở về
+loyalty_point_exchange,Màn hình Đổi quà,select_loyalty_point,User chọn số điểm đổi quà
+loyalty_point_exchange,Màn hình Đổi quà,click_next,User chọn Tiếp tục
+btm_exchange_gift,Bottomsheet Đổi quà,click_close,User đóng trang
+btm_exchange_gift,Bottomsheet Đổi quà,change_product_quantity,User thay đổi số lượng sản phẩm
+btm_exchange_gift,Bottomsheet Đổi quà,click_confirm,User bấm Xác nhận
+gift_detail,Màn hình Chi tiết quà,click_back_button,User bấm trở về
+gift_detail,Màn hình Chi tiết quà,view_cart,User xem giỏ hàng
+gift_detail,Màn hình Chi tiết quà,slide_product_image,User bấm nút slide ảnh sản phẩm
+gift_detail,Màn hình Chi tiết quà,click_exchange_gift,User bấm Đổi quà
+gift_detail,Màn hình Chi tiết quà,expand_faq,User bấm vào xem câu hỏi thường gặp
+bank_select,Màn hình chọn ngân hàng,click_back_button,User bấm trở về
+bank_select,Màn hình chọn ngân hàng,search_bank,User bấm Tìm kiếm ngân hàng
+bank_select,Màn hình chọn ngân hàng,select_bank,User bấm chọn ngân hàng
+payment_processing,Màn hình giao dịch đang được xử lý,view_detail_order,User click vào xem chi tiết đơn hàng
+payment_processing,Màn hình giao dịch đang được xử lý,click_home,Users về màn hình home
+payment_method,Màn hình Phương thức thanh toán,click_back_button,User bấm trở về
+payment_method,Màn hình Phương thức thanh toán,pay_cash,User chọn Thanh toán tiền mặt
+payment_method,Màn hình Phương thức thanh toán,pay_visa_card,User chọn thanh toán băng thẻ quốc tế
+payment_method,Màn hình Phương thức thanh toán,pay_atm_card,User chọn thanh toán bằng thẻ nội địa
+payment_method,Màn hình Phương thức thanh toán,pay_zalopay,User chọn thanh toán qua Zalopay
+payment_method,Màn hình Phương thức thanh toán,pay_momo,User chọn thanh toán qua ví Momo
+payment_method,Màn hình Phương thức thanh toán,click_save_payment_information,User bật toggle Lưu thông tin thẻ cho lần thanh toán sau
+payment_method,Màn hình Phương thức thanh toán,click_confirm,User bấm Xác nhận
+payment_method,Màn hình Phương thức thanh toán,pay_transfer,User thanh toán bằng chuyển khoản
+btm_order_tracking,Màn hình Hoạt động đơn của tôi,click_sheet_close,User tắt sheet
+btm_order_tracking,Màn hình Hoạt động đơn của tôi,view_detail_order,User click vào xem chi tiết đơn hàng
+btm_order_tracking,Màn hình Hoạt động đơn của tôi,view_detail_request,User bấm xen chi tiết đơn chờ tư vấn
+btm_order_tracking,Màn hình Hoạt động đơn của tôi,click_close,User đóng trang
+order_details,Màn hình chi tiết đơn hàng,view_page,User xem trang
+order_details,Màn hình chi tiết đơn hàng,click_back_button,User bấm trở về
+order_details,Màn hình chi tiết đơn hàng,edit_order_name,User bấm icon đổi tên đơn hàng
+order_details,Màn hình chi tiết đơn hàng,copy_order_code,User sao chép mã đặt hàng
+order_details,Màn hình chi tiết đơn hàng,click_cancel_order,User bấm Huỷ đơn hàng
+order_details,Màn hình chi tiết đơn hàng,request_support,User bấm Hỗ trợ
+order_details,Màn hình chi tiết đơn hàng,send_rating,User gửi đánh giá sản phẩm
+order_details,Màn hình chi tiết đơn hàng,repurchase_order,User click vào nút mua lại đơn hàng để chọn sản phẩm mua lại
+order_details,Màn hình chi tiết đơn hàng,click_repurchase,User bấm Thanh toán lại
+order_details,Màn hình chi tiết đơn hàng,click_breadcrumb,User sử dụng breadcrumb
+order_details,Màn hình chi tiết đơn hàng,view_direction,User bấm Xem chỉ đường
+apply_voucher,Màn hình Ưu đãi dành cho bạn,type_discount_code,User nhập mã giảm giá
+apply_voucher,Màn hình Ưu đãi dành cho bạn,login_account,User bấm nút đăng nhập
+apply_voucher,Màn hình Ưu đãi dành cho bạn,click_confirm,User bấm Xác nhận
+apply_voucher,Màn hình Ưu đãi dành cho bạn,click_close,User đóng trang
+apply_voucher,Màn hình Ưu đãi dành cho bạn,add_voucher,User bấm thêm ưu đãi
+apply_voucher,Màn hình Ưu đãi dành cho bạn,apply_voucher,User chọn áp dụng ưu đãi
+apply_voucher,Màn hình Ưu đãi dành cho bạn,click_view_more,User bấm vào xem thêm
+apply_voucher,Màn hình Ưu đãi dành cho bạn,apply_loyalty_point,User gạt toggle Đổi điểm thưởng
+apply_voucher,Màn hình Ưu đãi dành cho bạn,click_exchange_gift,User bấm Đổi quà
+discount_code,Màn hình Tiết kiệm hơn với mã giảm giá,click_close,User đóng trang
+discount_code,Màn hình Tiết kiệm hơn với mã giảm giá,type_discount_code,User nhập mã giảm giá
+discount_code,Màn hình Tiết kiệm hơn với mã giảm giá,click_confirm,User bấm Xác nhận
+discount_code,Màn hình Tiết kiệm hơn với mã giảm giá,add_voucher,User bấm thêm ưu đãi
+discount_code,Màn hình Tiết kiệm hơn với mã giảm giá,click_submit_button,Users click hoàn tất
+account,Màn hình Tài khoản,view_page,User xem trang
+account,Màn hình Tài khoản,click_order_history,User bấm vào Lịch sử đơn hàng
+account,Màn hình Tài khoản,click_section_my_order,User bấm vào các event tại khu vực Đơn hàng của tôi
+account,Màn hình Tài khoản,click_section_account,User bấm vào các event tại khu vực Tài khoản
+account,Màn hình Tài khoản,click_section_about_us,User bấm vào các event tại khu vực Về Nhà thuốc FPT Long Châu
+account,Màn hình Tài khoản,click_log_out,User đăng xuất
+account,Màn hình Tài khoản,view_point,User bấm xem điểm thưởng
+my_order,Màn hình đơn hàng của tôi,view_page,User xem trang
+my_order,Màn hình đơn hàng của tôi,click_back_button,User bấm trở về
+my_order,Màn hình đơn hàng của tôi,type_search_bar,User nhập dữ liệu vào thanh search
+my_order,Màn hình đơn hàng của tôi,select_type_order_status,User chọn loại đơn trên thanh trạng thái đơn hàng
+my_order,Màn hình đơn hàng của tôi,click_profile_menu,User bấm chọn menu bar profile cá nhân
+my_order,Màn hình đơn hàng của tôi,view_point,User bấm xem điểm thưởng
+my_order,Màn hình đơn hàng của tôi,click_breadcrumb,User sử dụng breadcrumb
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,select_product,User chọn sản phẩm muốn thanh toán
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,add_to_cart,User thêm sản phẩm vào giỏ
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,click_close,User đóng trang
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,send_request,User bấm Gửi yêu cầu tư vấn
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,uncheck_requested_product,User bấm bỏ chọn các sản phẩm cần tư vấn
+select_product_repurchase,Màn hình chọn sản phẩm mua lại,click_buy_now,User bấm nút mua ngay sản phẩm
+login,Màn hình đăng nhập,type_phone_number,Users type số điện thoại
+login,Màn hình đăng nhập,click_next,User chọn Tiếp tục
+login,Màn hình đăng nhập,login_google_account,User bấm vào biểu tượng đăng nhập với google
+login,Màn hình đăng nhập,login_facebook_account,User bấm vào biểu tượng đăng nhập với facebook
+login,Màn hình đăng nhập,login_apple_account,User bấm vào biểu tượng đăng nhập với apple
+login,Màn hình đăng nhập,login_fpt_id_account,User bấm vào biểu tượng đăng nhập với fpt id
+login,Màn hình đăng nhập,login_xid_account,User bấm đăng nhập bằng VNeID
+login,Màn hình đăng nhập,click_close,User đóng trang
+session_time_out,Phiên đăng nhập hết hạn,click_login_button,Bấm đăng nhập lại về màn nhập số điện thoại
+session_time_out,Phiên đăng nhập hết hạn,click_skip_button,User bấm Bỏ qua
+session_time_out,Phiên đăng nhập hết hạn,click_popup_close,Tắt popup
+session_time_out,Phiên đăng nhập hết hạn,back_to_home,User bấm vào nút trở về trang chủ (có thể là icon hoặc nút)
+terms_agreement,Check đồng ý điều khoản dịch vụ,click_check_box,User tích chọn ô trống
+terms_agreement,Check đồng ý điều khoản dịch vụ,click_next,User chọn Tiếp tục
+terms_agreement,Check đồng ý điều khoản dịch vụ,click_close,User đóng trang
+terms_agreement,Check đồng ý điều khoản dịch vụ,click_popup_close,Tắt popup
+onboarding,Màn hình onboarding đầu tiên,click_next,User chọn Tiếp tục
+onboarding,Màn hình onboarding đầu tiên,click_skip_button,User bấm Bỏ qua
+onboarding,Màn hình onboarding đầu tiên,click_start,User bấm Bắt đầu
+onboarding,Màn hình onboarding đầu tiên,click_experience_now,User bấm Trải nghiệm ngay
+enter_OTP,Màn hình nhập mã xác thực,type_otp,User nhập OTP
+enter_OTP,Màn hình nhập mã xác thực,change_phone_number,User bấm vào thay đổi số điện thoại
+enter_OTP,Màn hình nhập mã xác thực,resend_otp,User bấm gửi lại OTP
+enter_OTP,Màn hình nhập mã xác thực,send_otp_zalo,User bấm vào nút gửi OTP qua zalo
+enter_OTP,Màn hình nhập mã xác thực,click_back_button,User bấm trở về
+enter_OTP,Màn hình nhập mã xác thực,click_popup_close,Tắt popup
+enter_OTP,Màn hình nhập mã xác thực,send_otp_sms,User bấm vào nút gửi OTP qua SMS
+enter_OTP,Màn hình nhập mã xác thực,click_confirm,User bấm Xác nhận
+brand_page,Màn trang thương hiệu,view_page,User xem trang
+brand_page,Màn trang thương hiệu,click_back_button,User bấm trở về
+brand_page,Màn trang thương hiệu,view_about_brand,User xem thêm về Thương hiệu
+brand_page,Màn trang thương hiệu,select_category,User chọn loại sản phẩm
+brand_page,Màn trang thương hiệu,select_sort_type,User lựa chọn loại sorting
+brand_page,Màn trang thương hiệu,select_display_order,User chọn thứ tự ưu tiên hiển thị
+brand_page,Màn trang thương hiệu,click_advanced_filter,User bấm vào mở bộ lọc nâng cao
+brand_page,Màn trang thương hiệu,view_card_type,User chọn cách hiển thị card
+brand_page,Màn trang thương hiệu,click_view_more,User bấm vào xem thêm
+brand_page,Màn trang thương hiệu,click_breadcrumb,User sử dụng breadcrumb
+brand_page,Màn trang thương hiệu,click_share,User bấm chia sẻ trang bài viết
+brand_page,Màn trang thương hiệu,view_cart,User xem giỏ hàng
+brand_page,Màn trang thương hiệu,delete_all_filter_criteria,User bấm xoá tất cả bộ lọc
+brand_page,Màn trang thương hiệu,remove_filter_criteria,User xoá tiêu chí đã chọn trong bộ lọc
+brand_page,Màn trang thương hiệu,select_filter_criteria,User chọn các tiêu chí lọc
+brand_page,Màn trang thương hiệu,scroll_depth,User cuộn trang
+category,Trang danh mục sản phảm,view_page,User xem trang
+category,Trang danh mục sản phảm,back_to_home,User bấm vào nút trở về trang chủ (có thể là icon hoặc nút)
+category,Trang danh mục sản phảm,click_category,User click vào một category sản phẩm
+category,Trang danh mục sản phảm,view_cart,User xem giỏ hàng
+category,Trang danh mục sản phảm,click_product_search,User click vào Search sản phẩm
+category,Trang danh mục sản phảm,select_category,User chọn loại sản phẩm
+category,Trang danh mục sản phảm,click_view_more_category,User bấm vào xem thêm danh mục
+category,Trang danh mục sản phảm,select_sort_type,User lựa chọn loại sorting
+category,Trang danh mục sản phảm,click_advanced_filter,User bấm vào mở bộ lọc nâng cao
+category,Trang danh mục sản phảm,click_breadcrumb,User sử dụng breadcrumb
+category,Trang danh mục sản phảm,select_filter_criteria,User chọn các tiêu chí lọc
+category,Trang danh mục sản phảm,view_card_type,User chọn cách hiển thị card
+category,Trang danh mục sản phảm,click_view_more,User bấm vào xem thêm
+category,Trang danh mục sản phảm,remove_filter_criteria,User xoá tiêu chí đã chọn trong bộ lọc
+category,Trang danh mục sản phảm,view_more_filter,User bấm xem thêm filter
+category,Trang danh mục sản phảm,scroll_depth,User cuộn trang
+medicine_category,Trang Thuốc,view_page,User xem trang
+medicine_category,Trang Thuốc,click_breadcrumb,User sử dụng breadcrumb
+medicine_category,Trang Thuốc,insert_text,User nhập thông tin
+medicine_category,Trang Thuốc,click_search_button,User bấm vào nút tìm kiếm
+medicine_category,Trang Thuốc,delete_search_keyword,User bấm xóa từ khóa trên thanh tìm kiếm
+medicine_category,Trang Thuốc,click_keyword_suggestion,User bấm chọn keyword gợi ý
+medicine_category,Trang Thuốc,click_view_all,User click vào xem tất cả danh sách
+medicine_category,Trang Thuốc,select_filter_criteria,User chọn các tiêu chí lọc
+medicine_category,Trang Thuốc,click_category,User click vào một category sản phẩm
+medicine_category,Trang Thuốc,click_slide_back,User xem các item trước đó trong danh sách
+medicine_category,Trang Thuốc,click_slide_next,User xem các item tiếp theo trong danh sách
+medicine_category,Trang Thuốc,scroll_depth,User cuộn trang
+health_article_list,Trang Góc sức khoẻ,view_page,User xem trang
+health_article_list,Trang Góc sức khoẻ,click_back_button,User bấm trở về
+health_article_list,Trang Góc sức khoẻ,click_share,User bấm chia sẻ trang bài viết
+health_article_list,Trang Góc sức khoẻ,view_cart,User xem giỏ hàng
+health_article_list,Trang Góc sức khoẻ,click_view_all,User click vào xem tất cả danh sách
+health_article_list,Trang Góc sức khoẻ,view_promotion_banner,User view banner mở webview để xem landing page
+health_article_list,Trang Góc sức khoẻ,click_hashtag,User bấm vào Hashtag
+health_article_list,Trang Góc sức khoẻ,click_breadcrumb,User sử dụng breadcrumb
+health_article_list,Trang Góc sức khoẻ,click_slide_back,User xem các item trước đó trong danh sách
+health_article_list,Trang Góc sức khoẻ,click_slide_next,User xem các item tiếp theo trong danh sách
+health_article_list,Trang Góc sức khoẻ,view_detail_expert,User bấm xem thông tin chuyên gia
+health_article_cate_1,Trang Danh mục bài viết level 1,view_page,User xem trang
+health_article_cate_1,Trang Danh mục bài viết level 1,click_back_button,User bấm trở về
+health_article_cate_1,Trang Danh mục bài viết level 1,click_share,User bấm chia sẻ trang bài viết
+health_article_cate_1,Trang Danh mục bài viết level 1,view_cart,User xem giỏ hàng
+health_article_cate_1,Trang Danh mục bài viết level 1,click_breadcrumb,User sử dụng breadcrumb
+health_article_cate_1,Trang Danh mục bài viết level 1,scroll_depth,User cuộn trang
+health_article_cate_2,Trang Danh mục bài viết level 2,view_page,User xem trang
+health_article_cate_2,Trang Danh mục bài viết level 2,click_back_button,User bấm trở về
+health_article_cate_2,Trang Danh mục bài viết level 2,click_share,User bấm chia sẻ trang bài viết
+health_article_cate_2,Trang Danh mục bài viết level 2,view_cart,User xem giỏ hàng
+health_article_cate_2,Trang Danh mục bài viết level 2,click_breadcrumb,User sử dụng breadcrumb
+health_article_cate_2,Trang Danh mục bài viết level 2,click_slide_back,User xem các item trước đó trong danh sách
+health_article_cate_2,Trang Danh mục bài viết level 2,click_slide_next,User xem các item tiếp theo trong danh sách
+health_article_cate_2,Trang Danh mục bài viết level 2,scroll_depth,User cuộn trang
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_page,User xem trang
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_back_button,User bấm trở về
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_share,User bấm chia sẻ trang bài viết
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_cart,User xem giỏ hàng
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,select_font_size,User chọn kích thước văn bản
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_content_policy,User chọn Xem thêm Chính sách nội dung
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_article_category,User bấm xem theo danh mục bài viết
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_related_article,User bấm xem bài viết liên quan
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_breadcrumb,User sử dụng breadcrumb
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_linked_keyword,User bấm vào từ khoá có gắn link trên bài viết
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_slide_back,User xem các item trước đó trong danh sách
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_slide_next,User xem các item tiếp theo trong danh sách
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,rate_user_satisfaction,User đánh giá mức độ hài lòng với trang
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_detail_expert,User bấm xem thông tin chuyên gia
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_original_source,User bấm xem bài viết gốc
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,request_pharmacist_consultation,User bấm Yêu cầu tư vấn
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_button_explore,User bấm vào các button khám phá/tìm hiểu các chương trình
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_view_more,User bấm vào xem thêm
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,scroll_depth,User cuộn trang
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,view_detail_expert,User bấm xem thông tin chuyên gia
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_reference,User bấm xem Nguồn tham khảo
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,view_page,User xem trang
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_back_button,User bấm trở về
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_share,User bấm chia sẻ trang bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,view_cart,User xem giỏ hàng
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,start_audio,User bấm nghe bài viết dạng audio
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,select_content_index,User bấm xem mục lục trên bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_linked_keyword,User bấm vào từ khoá có gắn link trên bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,view_detail_expert,User bấm xem thông tin chuyên gia
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_article_category,User bấm xem theo danh mục bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_article_category,User bấm xem theo danh mục bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_article,User click vào bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_breadcrumb,User sử dụng breadcrumb
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_slide_back,User xem các item trước đó trong danh sách
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_slide_next,User xem các item tiếp theo trong danh sách
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,scroll_depth,User cuộn trang
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_reference,User bấm xem Nguồn tham khảo
+about_disease,Trang Bệnh lý,view_page,User xem trang
+about_disease,Trang Bệnh lý,click_back_button,User bấm trở về
+about_disease,Trang Bệnh lý,click_share,User bấm chia sẻ trang bài viết
+about_disease,Trang Bệnh lý,view_cart,User xem giỏ hàng
+about_disease,Trang Bệnh lý,select_category,User chọn loại sản phẩm
+about_disease,Trang Bệnh lý,click_breadcrumb,User sử dụng breadcrumb
+about_disease,Trang Bệnh lý,select_type_category,User chọn phân loại sản phẩm
+about_disease,Trang Bệnh lý,click_slide_next,User xem các item tiếp theo trong danh sách
+about_disease,Trang Bệnh lý,click_slide_back,User xem các item trước đó trong danh sách
+about_disease,Trang Bệnh lý,click_pagination,User bấm xem số trang
+about_disease,Trang Bệnh lý,scroll_depth,User cuộn trang
+filter_by_body_parts,Bottomsheet chọn xem bệnh theo bộ phận,select_category,User chọn loại sản phẩm
+filter_by_body_parts,Bottomsheet chọn xem bệnh theo bộ phận,select_type_category,User chọn phân loại sản phẩm
+filter_by_body_parts,Bottomsheet chọn xem bệnh theo bộ phận,click_close,User đóng trang
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,view_page,User xem trang
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,click_back_button,User bấm trở về
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,click_share,User bấm chia sẻ trang bài viết
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,view_cart,User xem giỏ hàng
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,click_breadcrumb,User sử dụng breadcrumb
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,click_slide_back,User xem các item trước đó trong danh sách
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,click_slide_next,User xem các item tiếp theo trong danh sách
+disease_article_category,Màn hình Danh sách bệnh theo đối tượng,scroll_depth,User cuộn trang
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,view_page,User xem trang
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_back_button,User bấm trở về
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_share,User bấm chia sẻ trang bài viết
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,view_cart,User xem giỏ hàng
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,select_font_size,User chọn kích thước văn bản
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,view_detail_expert,User bấm xem thông tin chuyên gia
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_article_category,User bấm xem theo danh mục bài viết
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_related_article,User bấm xem bài viết liên quan
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_breadcrumb,User sử dụng breadcrumb
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_linked_keyword,User bấm vào từ khoá có gắn link trên bài viết
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,select_content_index,User bấm xem mục lục trên bài viết
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_slide_back,User xem các item trước đó trong danh sách
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_slide_next,User xem các item tiếp theo trong danh sách
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,scroll_depth,User cuộn trang
+disease_article_detail_basic,Trang Chi tiết bài viết bệnh dạng cơ bản,click_reference,User bấm xem Nguồn tham khảo
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,view_page,User xem trang
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_back_button,User bấm trở về
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_share,User bấm chia sẻ trang bài viết
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,view_cart,User xem giỏ hàng
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,select_font_size,User chọn kích thước văn bản
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,view_detail_expert,User bấm xem thông tin chuyên gia
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_article_category,User bấm xem theo danh mục bài viết
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_related_article,User bấm xem bài viết liên quan
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_breadcrumb,User sử dụng breadcrumb
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_linked_keyword,User bấm vào từ khoá có gắn link trên bài viết
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,select_content_index,User bấm xem mục lục trên bài viết
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_slide_back,User xem các item trước đó trong danh sách
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_slide_next,User xem các item tiếp theo trong danh sách
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,scroll_depth,User cuộn trang
+medicine_article_detail_basic,Trang Chi tiết bài viết Dược liệu dạng cơ bản,click_reference,User bấm xem Nguồn tham khảo
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,view_page,User xem trang
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_back_button,User bấm trở về
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_share,User bấm chia sẻ trang bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,view_cart,User xem giỏ hàng
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,start_audio,User bấm nghe bài viết dạng audio
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,start_youtube_video,User bấm xem video Youtube
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,view_detail_expert,User bấm xem thông tin chuyên gia
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,view_list_article_image,User xem chuỗi ảnh trong bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_view_more,User bấm vào xem thêm
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_health_check,User click vào kiểm tra sức khoẻ mở webview
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,submit_form,User bấm submit form
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_button_explore,User bấm vào các button khám phá/tìm hiểu các chương trình
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_article_category,User bấm xem theo danh mục bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_article,User click vào bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,expand_faq,User bấm vào xem câu hỏi thường gặp
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_view_all,User click vào xem tất cả danh sách
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_linked_keyword,User bấm vào từ khoá có gắn link trên bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,start_tiktok_video,User bấm xem video Tiktok
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,send_question,User bấm gửi câu hỏi trong phần Hỏi đáp
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,select_content_index,User bấm xem mục lục trên bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_slide_back,User xem các item trước đó trong danh sách
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_slide_next,User xem các item tiếp theo trong danh sách
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_breadcrumb,User sử dụng breadcrumb
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,scroll_depth,User cuộn trang
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_reference,User bấm xem Nguồn tham khảo
+about_heath_search,Màn tìm kiếm trên Chuyên trang sức khỏe,view_page,User xem trang
+about_heath_search,Màn tìm kiếm trên Chuyên trang sức khỏe,click_back_button,User bấm trở về
+about_heath_search,Màn tìm kiếm trên Chuyên trang sức khỏe,delete_search_keyword,User bấm xóa từ khóa trên thanh tìm kiếm
+about_heath_search,Màn tìm kiếm trên Chuyên trang sức khỏe,click_article_category,User bấm xem theo danh mục bài viết
+about_heath_search,Màn tìm kiếm trên Chuyên trang sức khỏe,click_call_hotline,User bấm vào khu vực có số hotline
+about_cancer,Trang Chuyên trang Ung Thư,view_page,User xem trang
+about_cancer,Trang Chuyên trang Ung Thư,click_back_button,User bấm trở về
+about_cancer,Trang Chuyên trang Ung Thư,view_cart,User xem giỏ hàng
+about_cancer,Trang Chuyên trang Ung Thư,click_call_hotline,User bấm vào khu vực có số hotline
+about_cancer,Trang Chuyên trang Ung Thư,request_help,User click vào Tư vấn với dược sĩ
+about_cancer,Trang Chuyên trang Ung Thư,select_content_index,User bấm xem mục lục trên bài viết
+about_cancer,Trang Chuyên trang Ung Thư,click_article,User click vào bài viết
+about_cancer,Trang Chuyên trang Ung Thư,click_view_all,User click vào xem tất cả danh sách
+about_cancer,Trang Chuyên trang Ung Thư,start_youtube_video,User bấm xem video Youtube
+about_cancer,Trang Chuyên trang Ung Thư,view_more_filter,User bấm xem thêm filter
+about_cancer,Trang Chuyên trang Ung Thư,view_detail_expert,User bấm xem thông tin chuyên gia
+about_cancer,Trang Chuyên trang Ung Thư,click_view_more,User bấm vào xem thêm
+about_cancer,Trang Chuyên trang Ung Thư,insert_text,User nhập thông tin
+about_cancer,Trang Chuyên trang Ung Thư,select_filter_criteria,User chọn các tiêu chí lọc
+about_cancer,Trang Chuyên trang Ung Thư,scroll_depth,User cuộn trang
+btm_filter_expert,Bottomsheet chọn filter chuyên gia,select_filter_criteria,User chọn các tiêu chí lọc
+btm_filter_expert,Bottomsheet chọn filter chuyên gia,insert_text,User nhập thông tin
+btm_filter_expert,Bottomsheet chọn filter chuyên gia,click_close,User đóng trang
+expert_list,Trang danh sách Đội ngũ chuyên môn,view_page,User xem trang
+expert_list,Trang danh sách Đội ngũ chuyên môn,click_back_button,User bấm trở về
+expert_list,Trang danh sách Đội ngũ chuyên môn,click_share,User bấm chia sẻ trang bài viết
+expert_list,Trang danh sách Đội ngũ chuyên môn,view_cart,User xem giỏ hàng
+expert_list,Trang danh sách Đội ngũ chuyên môn,view_detail_expert,User bấm xem thông tin chuyên gia
+expert_list,Trang danh sách Đội ngũ chuyên môn,click_breadcrumb,User sử dụng breadcrumb
+expert_list,Trang danh sách Đội ngũ chuyên môn,click_view_more,User bấm vào xem thêm
+expert_list,Trang danh sách Đội ngũ chuyên môn,scroll_depth,User cuộn trang
+expert_detail,Trang chi tiết Chuyên gia,view_page,User xem trang
+expert_detail,Trang chi tiết Chuyên gia,click_back_button,User bấm trở về
+expert_detail,Trang chi tiết Chuyên gia,click_share,User bấm chia sẻ trang bài viết
+expert_detail,Trang chi tiết Chuyên gia,view_cart,User xem giỏ hàng
+expert_detail,Trang chi tiết Chuyên gia,select_filter_criteria,User chọn các tiêu chí lọc
+expert_detail,Trang chi tiết Chuyên gia,click_article,User click vào bài viết
+expert_detail,Trang chi tiết Chuyên gia,click_view_more,User bấm vào xem thêm
+expert_detail,Trang chi tiết Chuyên gia,view_detail_expert,User bấm xem thông tin chuyên gia
+expert_detail,Trang chi tiết Chuyên gia,click_view_all,User click vào xem tất cả danh sách
+expert_detail,Trang chi tiết Chuyên gia,click_breadcrumb,User sử dụng breadcrumb
+expert_detail,Trang chi tiết Chuyên gia,scroll_depth,User cuộn trang
+notification,Trang danh sách noti,view_page,User xem trang
+notification,Trang danh sách noti,click_back_button,User bấm trở về
+notification,Trang danh sách noti,select_type_notification,User chọn loại thông báo
+notification,Trang danh sách noti,click_read_all,User bấm vào xem hết thông báo
+notification,Trang danh sách noti,click_button_explore,User bấm vào các button khám phá/tìm hiểu các chương trình
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,view_page,User xem trang
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_expand_image,User bấm phóng to ảnh
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,select_product,User chọn sản phẩm muốn thanh toán
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,unselect_product,User bỏ chọn sản phẩm
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_continue_to_cart,User bấm Mua hàng để sang giỏ hàng
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_continue_to_request,User bấm Tư vấn để sang màn đơn tư vấn
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,add_new_search,User bấm Tìm kiếm thêm
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_search_image,User bấm tìm kiếm bằng hình ảnh
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_search_voice,User bấm tìm kiếm bằng giọng nói
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_answer_nps,User bấm trả lời khảo sát
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_close_nps,User bấm tắt khảo sát
+search_image_result,Màn kết quả tìm kiếm bằng hình ảnh,click_product,User click vào xem chi tiết sản phẩm
+health_article_list,Trang Góc sức khoẻ,select_type_listing,User chọn filter hiển thị nội dung
+health_article_list,Trang Góc sức khoẻ,click_video,User bấm xem chi tiết video
+health_article_list,Trang Góc sức khoẻ,click_content_detail,User bấm vào trang chi tiết nội dung phần chuyên đề
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_share,User bấm chia sẻ trang bài viết
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_health_check,User click vào kiểm tra sức khoẻ mở webview
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,click_download_file,User bấm tải file
+health_article_detail_basic,Trang Chi tiết bài viết sức khoẻ dạng cơ bản,send_rating,User gửi đánh giá sản phẩm
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_share,User bấm chia sẻ trang bài viết
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,select_font_size,User chọn kích thước văn bản
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_download_file,User bấm tải file
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,send_rating,User gửi đánh giá sản phẩm
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_podcast_detail,User bấm vào trang chi tiết podcast
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_view_all,User click vào xem tất cả danh sách
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_longform_detail,User bấm vào trang chi tiết longform
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_video,User bấm xem chi tiết video
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_video_detail,User bấm vào trang chi tiết Video
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_infographic_detail,User bấm vào trang chi tiết infographic
+disease_article_detail_journey,Trang Chi tiết bài viết bệnh dạng hành trình,click_related_article,User bấm xem bài viết liên quan
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_share,User bấm chia sẻ trang bài viết
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,select_font_size,User chọn kích thước văn bản
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_health_check,User click vào kiểm tra sức khoẻ mở webview
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_download_file,User bấm tải file
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,start_youtube_video,User bấm xem video Youtube
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_other_article_in_playlist,User bấm xem bài viết khác cùng playlist
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,send_rating,User gửi đánh giá sản phẩm
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_related_longform,User bấm bài viết liên quan
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_longform_playlist,User bấm playlist longform
+health_article_detail_longform,Trang Chi tiết bài viết sức khoẻ dạng long form,click_view_all,User click vào xem tất cả danh sách
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,view_page,User xem trang
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,select_font_size,User chọn kích thước văn bản
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_share,User bấm chia sẻ trang bài viết
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,select_content_index,User bấm xem mục lục trên bài viết
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,send_rating,User gửi đánh giá sản phẩm
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,view_content_policy,User chọn Xem thêm Chính sách nội dung
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,view_detail_expert,User bấm xem thông tin chuyên gia
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_reference,User bấm xem Nguồn tham khảo
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_related_product,User xem sản phẩm liên quan
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_view_more_product,User bấm Xem thêm danh sách sản phẩm
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_slide_back,User xem các item trước đó trong danh sách
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_slide_next,User xem các item tiếp theo trong danh sách
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_back_button,User bấm trở về
+med_article_detail_basic,Trang chi tiết bài viết về thuốc cơ bản,click_cart,User bấm Giỏ hàng

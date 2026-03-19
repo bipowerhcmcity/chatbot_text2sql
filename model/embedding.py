@@ -37,6 +37,7 @@ def table_dataframe_to_doc(file_path):
 def create_embedding_store(file_path, collection_name, out_directory, tbl_schema=True): 
     if tbl_schema:
         documents = table_dataframe_to_doc(file_path)
+        print("Documents created from dataframe: ", documents)
     else:
         loader = CSVLoader(file_path=file_path,encoding="utf-8")
         documents = loader.load() # Each row becomes a Document object

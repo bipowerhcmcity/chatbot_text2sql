@@ -100,7 +100,7 @@ async def chat_endpoint(request: ChatRequest):
         structure_content = text_to_structure(client, rewritten_user_message)
         print(structure_content)
         structure_dict = json.loads(structure_content) 
-        event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
+        # event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
 
         # Step 2.2: Table Finding 
         entities = process_user_message["entities"]
@@ -108,15 +108,17 @@ async def chat_endpoint(request: ChatRequest):
         # Remove None 
         entities = list(filter(lambda x: x is not None, entities))
         
-        print(entities)
+        print("Entities: ",entities)
+        print("Service",structure_dict["service"])
         tbs = list(set(get_all_table(embeddings, entities, structure_dict["service"])))
         print("Tables", tbs)
         table_prompt = ""
         for table in tbs: 
             table_prompt+=extract_table_prompt(table)
 
+        business_rule_prompt = get_business_rules(structure_dict["service"])
         # Step 3: Extract SQL (assistant_content is expected to be SQL text)
-        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=event_screen_knowledge, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"])
+        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=business_rule_prompt, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"])
         # # Add assistant response to history
         # assistant_message = Message(role="assistant", content=assistant_content)
         # conversation_history.append(assistant_message)

@@ -1,0 +1,11 @@
+1. Thu cũ đổi mới: 
+    1.1 Khi khách hàng vào xem chi tiết khách hàng trong trang sản phẩm chi tiết, khách hàng click vào nút đổi máy cũ, event là: 
+        - Event name: click_register_trade_in
+        - screen location: product_detail 
+    1.2 Khi khách hàng vào trang url có tên là: 
+        - url: https://fptshop.com.vn/ctkm/thu-cu-doi-moi
+
+2. Xem sản phẩm: 
+    2.1 Khi khách hàng click vào xem chi tiết một sản phẩm trên trang web, event là: 
+        - Event name: view_page
+        - screen location: product_detail 

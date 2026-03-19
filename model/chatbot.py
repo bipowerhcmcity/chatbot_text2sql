@@ -207,7 +207,7 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
     Question:
     {question}
 
-    Knowledge:
+    Business Rules:
     {knowledge}
 
     Structure:
@@ -215,6 +215,7 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
 
     If user ask number of view, please use select (*) as view_count as default. 
     If user ask another question, please using the knowledges above. 
+    Only use the tables and columns in the Schema to generate SQL query, do not hallucinate any table or column that is not in the Schema.
     Based on the Schema, Question, Knowledge and Structure 
     """
     if is_explanation:

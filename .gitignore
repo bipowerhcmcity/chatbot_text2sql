@@ -12,9 +12,5 @@ node_modules/
 Thumbs.db
 # VSCode settings
 .vscode/
-data/*
-chroma_db/*
-chroma_db_backup/*
-chroma_db_backup_new/*
-chroma_db_*
+chroma_db*
 model/database_connection.py

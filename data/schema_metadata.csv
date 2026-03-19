@@ -1,0 +1,436 @@
+﻿TableName,ColumnName,DataType,ColumnDescription,SampleValue
+dim_item,item_code,NVARCHAR(50),Mã sku,660
+dim_item,ten_sp,VARCHAR(128),Tên sản phẩm trong FPT Shop,Rối bay 1 chân ( kèm motor quạt)
+dim_item,ten_viet_tat,VARCHAR(128),Tên sản phẩm viết tắt trong FPT Shop,Rối bay 1 chân ( kèm motor quạt)
+dim_item,ten_nhom,VARCHAR(50),Tên nhóm sản phẩm trong FPT Shop,Apple iPhone 6-128G
+dim_item,ten_dong,VARCHAR(50),Tên dòng sản phẩm,iPhone 6
+dim_item,ten_model,VARCHAR(50),Tên model sản phẩm,Rối bay 1 chân ( kèm motor quạt)
+dim_item,ten_nhan,VARCHAR(50),Tên nhãn,Khác
+dim_item,ten_nganh,VARCHAR(50),Tên ngành sản phẩm,Tài sản
+dim_item,ten_loai,VARCHAR(50),Tên loại sản phẩm,Khác-Tài sản
+dim_item,mau_sac,NVARCHAR(50),Màu sản phẩm,['Xám']
+dim_item,don_vi_tinh,REAL,Mã ID đơn vị tính của sản phẩm,8
+dim_item,ten_don_vi_tinh,VARCHAR(50),Tên đơn vị tính của sản phẩm,Chiếc
+dim_family_member,lcv_id,VARCHAR(50),ID khách hàng trên hệ LC/Vaccine,LP809011752300334549
+dim_family_member,person_id,NVARCHAR(50),ID người tiêm/khách hàng,3a1b0f6a-07ef-2a53-e872-581072cfa7d8
+dim_family_member,person_name,VARCHAR(50),Tên người tiêm/khách hàng,Nguyễn Thị Ánh Hồng
+dim_family_member,customer_id,NVARCHAR(50),ID khách hàng,2ee1d8f5-1431-1737-67ef-3a1021c5568d
+dim_family_member,family_person_title,VARCHAR(50),Vai trò trong gia đình,Mẹ
+dim_family_member,family_profile_id,NVARCHAR(50),Mã hồ sơ gia đình,3a1b0f6a-0809-11c2-a94d-4d8d26df741b
+dim_family_member,family_name,VARCHAR(50),Tên gia đình,Gia đình anh/chị Nguyễn Thị Ánh Hồng
+dim_family_member,guaridan_person_id,NVARCHAR(50),Mã người giám hộ,3a1b0f6a-07ef-2a53-e872-581072cfa7d8
+dim_family_member,is_guardian,BOOLEAN,Đánh dấu là người giám hộ (TRUE/FALSE),TRUE
+dim_family_member,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,05:35.0
+dim_family_member,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,14:15.0
+dim_family_member,is_test,BOOLEAN,Flag đánh dấu dữ liệu test,FALSE
+dim_family_member,start_date,NVARCHAR(50),Ngày/giờ bắt đầu hiệu lực của mapping (SCD),05:35.2
+dim_family_member,end_date,NVARCHAR(50),Ngày/giờ kết thúc hiệu lực của mapping (SCD; thường 9999-12-31 nếu còn hiệu lực),12/31/9999 23:59
+dim_family_member,current_flag,VARCHAR(50),Flag đánh dấu bản ghi hiện hành (Y = hiện hành),Y
+dim_family_member,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),42:59.2
+dim_family_member,etl_by,NVARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),02c92e10-acde-4ab9-8c7b-047bbaf9fd8a
+dim_family_member,scd_checksum,NVARCHAR(50),Checksum phục vụ theo dõi thay đổi theo SCD (lịch sử),8195eef2bef4fc5d84a0e2d20ffb6451
+dim_family_member,primary_checksum,VARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),a6e9a797a2f19b3be276b50ab4151869
+dim_family_member,record_checksum,VARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),aadaba52458e39ec5e0c683d2759b975
+dim_family_member,is_deleted,BOOLEAN,"Flag xóa logic (FALSE = còn dùng, TRUE = đã xóa)",FALSE
+dim_person_address,Id,NVARCHAR(50),Khóa định danh bản ghi (UUID),3a1ec3cb-10fc-121f-9c15-f7b83a1dcc59
+dim_person_address,PersonId,NVARCHAR(50),Id trong bảng nguồn Person,57878d2b-c76e-42f5-8f06-b4801a58119d
+dim_person_address,LCVId,VARCHAR(50),Mã khách hàng vaccine,LP806701762747350417
+dim_person_address,ProvinceCode,INTEGER,Mã code tỉnh,1
+dim_person_address,ProvinceName,VARCHAR(50),Tên tỉnh,Hà Nội
+dim_person_address,DistrictCode,VARCHAR(50),Mã code quận,247
+dim_person_address,DistrictName,VARCHAR(50),Tên quận,Thành phố Thủ Đức
+dim_person_address,WardCode,INTEGER,Mã code phường,8995
+dim_person_address,WardName,VARCHAR(50),Tên phường,Xã Tiến Thắng
+dim_person_address,Address,VARCHAR(50),Địa chỉ đầy đủ (dạng hiển thị/ghi nhận nội bộ),thôn văn lôi
+dim_person_address,Type,INTEGER,Phân biệt loại địa chỉ,4
+dim_person_address,Status,BOOLEAN,Trạng thái hoạt động (TRUE/FALSE),TRUE
+dim_person_address,IsNew,BOOLEAN,Đánh dấu địa chỉ trước sáp nhập với sau khi sáp nhập (TRUE/FALSE),TRUE
+dim_person_address,CreatedBy,NVARCHAR(50),Người tạo,64750
+dim_person_address,ModifiedBy,VARCHAR(50),Người chỉnh sửa,None
+dim_person_address,CreationTime,NVARCHAR(50),Ngày tạo,51:35.2
+dim_person_address,ModifiedTime,NVARCHAR(50),Ngày chỉnh sửa,51:35.2
+dim_person_address,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),42:30.8
+dim_person_address,PrimaryChecksum,NVARCHAR(50),Mã băm của các khóa chính để xác định duy nhất dòng dữ liệu,1de1ef27527030ce56b9948ee96a4e65
+dim_person_address,RecordChecksum,NVARCHAR(50),Mã băm toàn bộ bản ghi để kiểm tra tính toàn vẹn,88a3345ae87707e3570deb2c50d2cca2
+dim_person,id,INTEGER,Khóa định danh bản ghi (UUID),18074995
+dim_person,lcv_id,VARCHAR(50),ID khách hàng trên hệ LC/Vaccine,LCV004411586
+dim_person,person_id,VARCHAR(50),ID người tiêm/khách hàng,a0447511-255c-42b7-9af0-9de0c5cbf766
+dim_person,customer_id,VARCHAR(50),ID khách hàng,None
+dim_person,person_name,VARCHAR(128),Tên người tiêm/khách hàng,i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,person_status,INTEGER,Trạng thái thái khách hàng,0
+dim_person,guardian_name,VARCHAR(128),Tên người giám hộ,i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,guardian_phone,VARCHAR(50),Số điện thoại người giám hộ,362253474
+dim_person,nation_immunization_id,VARCHAR(128),Mã tiêm chủng theo nguồn X,i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,nationality_code,VARCHAR(50),Mã quốc tịch,None
+dim_person,nationality_name,VARCHAR(50),Tên quốc tịch,None
+dim_person,identity_card,VARCHAR(128),CCCD,i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,year_of_birth,VARCHAR(50),Năm sinh,2023
+dim_person,month_of_birth,VARCHAR(50),Tháng sinh,5
+dim_person,day_of_birth,VARCHAR(50),Ngày sinh,17
+dim_person,date_of_birth,VARCHAR(128),"Ngày, tháng, năm sinh",i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,gender,INTEGER,Giới tính,1
+dim_person,phone_number,VARCHAR(256),Số điện thoại chính thủ,aacOFGYVisasOOlvg7xV6/0nsbitjDIwvEBa7bcsKiGR5N4LQmvjcG2O/T59bNJzif/iDslpscjfDlUdPg87K9Cw+bIV1qzhBUrqCPSAlSR0/CjhuNGicOBwvZQamTpTCcgfVTPN4t56xL5JB4FuSUbIhBZVPfD/4CCC6yTFkCgPf+MFNbM9nX0uY30yYf3tEpR6qjXG/V6emY7bPgW0Tw==
+dim_person,job_title,VARCHAR(50),Nghề nghiệp,None
+dim_person,email,VARCHAR(128),Địa chỉ mail,i2m2FnI2D2mkZ5NN+bXk2/6t71fAvteYh0JKdQlR5H22PPEzknVboMtSP1uEEjxcc8s8VsT7bnWtNpbM8lEetI5lRpoijVcm6XmWXlEGfWOgyB5tdazn+BBeI6MufOQg
+dim_person,ethnic_code,VARCHAR(50),Mã dân tộc,1
+dim_person,ethnic_name,VARCHAR(50),Tên dân tộc,Kinh
+dim_person,note,VARCHAR(128),"Ghi chú (lịch tiêm chi tiết, lưu ý,...)",None
+dim_person,last_sync_tcqg,NVARCHAR(50),Thời gian đồng bộ lần cuối với cổng,12/31/9999 23:59
+dim_person,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,20:05.0
+dim_person,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,13:51.5
+dim_person,is_test,BOOLEAN,Flag đánh dấu dữ liệu test,FALSE
+dim_person,start_date,NVARCHAR(50),Ngày/giờ bắt đầu hiệu lực của mapping (SCD),20:38.9
+dim_person,end_date,NVARCHAR(50),Ngày/giờ kết thúc hiệu lực của mapping (SCD; thường 9999-12-31 nếu còn hiệu lực),12/31/9999 23:59
+dim_person,current_flag,VARCHAR(50),Flag đánh dấu bản ghi hiện hành (Y = hiện hành),Y
+dim_person,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),02:49.2
+dim_person,etl_by,NVARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),02c92e10-acde-4ab9-8c7b-047bbaf9fd8a
+dim_person,scd_checksum,NVARCHAR(50),Checksum phục vụ theo dõi thay đổi theo SCD (lịch sử),1d68786211a5efcd4608517569012317
+dim_person,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),1efb9cee76a84fd87195dd40c4e8f699
+dim_person,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),5d910a6b041e9eacab69f7d1e62bd5b1
+dim_person,age_unit,VARCHAR(50),Tên đơn vị tuổi (ví dụ: Age),None
+dim_person,age_unit_code,INTEGER,Mã đơn vị tuổi (ví dụ: 3),0
+dim_person,age_from,INTEGER,Thuộc tuổi bắt đầu từ,0
+dim_person,age_to,INTEGER,Đến tuổi kết thúc,0
+dim_product,"product_unit_id",INTEGER,#N/A,40646
+dim_product,product_id,INTEGER,ID sản phẩm,40606
+dim_product,product_name,VARCHAR(50),Tên sản phẩm,BCG-TCDV
+dim_product,confirm_status,VARCHAR(50),Trạng thái xác nhận,Approved
+dim_product,is_active,BOOLEAN,Trạng thái hoạt động,TRUE
+dim_product,item_code,INTEGER,Mã sku,45659
+dim_product,product_upc,REAL,UPC sản phẩm,8.65916E+11
+dim_product,product_industry_code,INTEGER,Mã ngành sản phẩm,34
+dim_product,product_industry_name,VARCHAR(50),Tên ngành sản phẩm,VACCINE
+dim_product,product_group_code,INTEGER,Mã nhóm sản phẩm,3885
+dim_product,product_group_name,VARCHAR(50),Tên nhóm sản phẩm,LAO
+dim_product,pm,NVARCHAR(50),Thông tin PM,44577-Lê Thái Quyên
+dim_product,is_hot,BOOLEAN,Kiểm tra là sản phẩm hot,FALSE
+dim_product,is_po,BOOLEAN,Kiểm tra là sản phẩm thuộc PO,FALSE
+dim_product,vat_output,INTEGER,Giá trị VAT đầu ra,0
+dim_product,vat_output_name,VARCHAR(50),Tên VAT đầu ra,VAT đầu ra không chịu thuế
+dim_product,vat_output_rate,INTEGER,Tỷ lệ VAT đầu ra,0
+dim_product,vat_input,INTEGER,Giá trị VAT đầu vào,0
+dim_product,vat_input_name,VARCHAR(50),Tên giá trị VAT đầu vào,Thuế GTGT HHDV mua vào không đủ điều kiện khấu trừ
+dim_product,vat_input_rate,INTEGER,Tỷ lệ VAT đầu vào,0
+dim_product,supplier_code,VARCHAR(50),Mã nhà cung cấp,7
+dim_product,supplier_name,VARCHAR(64),Tên nhà cung cấp,Chưa xác định
+dim_product,brand_name,VARCHAR(50),Tên thương hiệu,Chưa xác định
+dim_product,unit_code_level1,INTEGER,Mã đơn vị mức 1,1
+dim_product,unit_name_level1,VARCHAR(50),Tên đơn vị mức 1,Hộp
+dim_product,ratio_level1,INTEGER,Tỷ lệ quy đổi mức 1,1
+dim_product,unit_code_level2,VARCHAR(50),Mã đơn vị mức 2,NaN
+dim_product,unit_name_level2,VARCHAR(50),Tên đơn vị mức 2,None
+dim_product,ratio_level2,VARCHAR(50),Tỷ lệ quy đổi mức 2,NaN
+dim_product,unit_code_level3,VARCHAR(50),Mã đơn vị mức 3,7
+dim_product,unit_name_level3,VARCHAR(50),Tên đơn vị mức 3,Lọ
+dim_product,ratio_level3,VARCHAR(50),Tỷ lệ quy đổi mức 3,1
+dim_product,smallest_unit_name,VARCHAR(50),Tên đơn vị nhỏ nhất,Lọ
+dim_product,smallest_unit_code,INTEGER,Mã đơn vị nhỏ nhất,7
+dim_product,created_date,NVARCHAR(50),Ngày được tạo,5/23/2024
+dim_product,updated_date,NVARCHAR(50),Ngày cập nhật,5/27/2025
+dim_product,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),3/9/2026
+dim_product,product_industry_code_pos,INTEGER,Mã ngành sản phẩm POS,34
+dim_product,product_group_code_pos,VARCHAR(50),Mã nhóm sản phẩm POS,699
+dim_product,is_inventory_item,INTEGER,Đánh dấu sản phẩm quản lí tồn,1
+dim_product,is_combo,VARCHAR(50),Đánh dấu sản phẩm combo,N
+dim_product,is_dose,VARCHAR(50),Đánh dấu sản phẩm thuốc kê đơn,N
+dim_product,is_reasonname_shop,VARCHAR(50),"Thuộc tính sản phẩm (Ngừng đặt hàng,Hết hàng,..)",Ngừng đặt hàng
+dim_product,is_chronic_disease,VARCHAR(50),Đánh dấu bệnh mãn tính,N
+dim_product,productCategory_hcm_class,VARCHAR(50),Phân loại hàng bán chạy ở HCM,None
+dim_product,productCategory_hni_class,VARCHAR(50),Phân loại hàng bán chạy ở HN,None
+dim_product,productCategory_nwc_class,VARCHAR(50),Phân loại hàng bán chạy toàn quốc,None
+dim_satellite_shop,id,VARCHAR(50),Khóa định danh bản ghi (UUID),None
+dim_satellite_shop,shop_code_vaccine,INTEGER,Mã trung tâm tiêm chủng (shop Vaccine),58002
+dim_satellite_shop,shop_name_vaccine,VARCHAR(50),Tên trung tâm tiêm chủng (shop Vaccine),VX HCM 224A Lê Văn Lương
+dim_satellite_shop,shop_code_lc,INTEGER,Mã shop vệ tinh Long Châu (shop LC),80046
+dim_satellite_shop,shop_name_lc,VARCHAR(50),Tên shop vệ tinh Long Châu1 (shop LC),LC HCM 224A Lê Văn Lương
+dim_satellite_shop,shop_type,VARCHAR(50),Nhóm/loại shop (ví dụ: VACCINE),VTTTTC
+dim_satellite_shop,status,BOOLEAN,Trạng thái hoạt động (TRUE/FALSE),TRUE
+dim_satellite_shop,effective_from_date,NVARCHAR(50),Ngày bắt đầu liên kết shop vệ tinh,6/1/2024
+dim_satellite_shop,effective_to_date,NVARCHAR(50),Ngày kết thúc liên kết shop vệ tinh,1/1/2051
+dim_satellite_shop,is_deleted,BOOLEAN,"Flag xóa logic (FALSE = còn dùng, TRUE = đã xóa)",FALSE
+dim_satellite_shop,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),5/30/2025
+dim_satellite_shop,etl_by,VARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),DataBricks
+dim_satellite_shop,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),6afde17212ab01b0686796ed221ebf0a
+dim_satellite_shop,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),4ac4307e1ce0616242ba813843928242
+dim_shop,code,INTEGER,Mã shop/cửa hàng (định danh nội bộ),80258
+dim_shop,shop_type,NVARCHAR(50),Nhóm/loại shop (ví dụ: VACCINE),"[""F""]"
+dim_shop,region_insurance,INTEGER,Mã vùng bảo hiểm,2
+dim_shop,legal_entity,INTEGER,Mã pháp nhân,90800
+dim_shop,regulated_ward,INTEGER,Mã phường/xã sau sát nhập,22945
+dim_shop,regulated_province,INTEGER,Mã tỉnh/thành sau sát nhập,68
+dim_shop,district,INTEGER,Mã quận/huyện (theo hệ thống nội bộ/master data),90
+dim_shop,ward,INTEGER,Mã phường/xã (theo hệ thống nội bộ/master data),22930
+dim_shop,region,INTEGER,Mã vùng/miền (region),523
+dim_shop,area,INTEGER,Mã khu vực/đơn vị vùng nhỏ hơn (area),694
+dim_shop,province,INTEGER,Mã tỉnh/thành (theo hệ thống nội bộ/master data),11
+dim_shop,name,VARCHAR(64),Tên đầy đủ của shop,"LC LĐG 29 Nguyễn Hội, P. Phan Thiết"
+dim_shop,pw_dqg,NVARCHAR(50),Mật khẩu/khóa truy cập DQG (nếu có),123456a
+dim_shop,acc_dqg,VARCHAR(50),Tài khoản/username DQG (nếu có),gpp_60_000721_1407
+dim_shop,status,BOOLEAN,Trạng thái hoạt động (TRUE/FALSE),TRUE
+dim_shop,address,NVARCHAR(128),Địa chỉ đầy đủ (dạng hiển thị/ghi nhận nội bộ),"29 Nguyễn Hội, P. Phú Trinh, TP. Phan Thiết, Tỉnh Bình Thuận"
+dim_shop,code_dqg,NVARCHAR(50),Mã shop trên hệ thống DQG (nếu có),60-000721
+dim_shop,ip_phone,NVARCHAR(50),IP/thiết bị điện thoại (VoIP/IP phone) của shop (nếu có),82258
+dim_shop,shop_scope,INTEGER,Phạm vi shop (mã phân loại scope vận hành),1
+dim_shop,short_name,VARCHAR(50),Tên viết tắt/mã tắt dùng nội bộ,"LC258-LĐG-29NH,PT"
+dim_shop,name_on_bill,VARCHAR(50),Tên in trên hóa đơn/chứng từ,NHATHUOCLONGCHAU
+dim_shop,cash_account,VARCHAR(50),Số tài khoản quỹ/thu tiền (cash account),11110012581
+dim_shop,shop_code_hub,VARCHAR(50),Mã shop trên hub/tích hợp (integration hub),80574
+dim_shop,ware_house_ho,INTEGER,Mã kho HO (kho tổng/cấp phát) gắn với shop,80001
+dim_shop,region_inside,INTEGER,Mã vùng nội bộ (phân vùng quản trị nội bộ),7
+dim_shop,short_address,NVARCHAR(128),Địa chỉ rút gọn,"29 Nguyễn Hội, TP. Phan Thiết, Bình Thuận"
+dim_shop,province_inside,INTEGER,Mã tỉnh nội bộ (mapping quản trị nội bộ),1662
+dim_shop,warehouse_ho_mrp,INTEGER,Mã kho HO dùng cho MRP/hoạch định (nếu tách riêng),80001
+dim_shop,cash_account_name,VARCHAR(50),Tên tài khoản quỹ/thu tiền,Tiền Việt Nam_LC258-BTN-29NH_FPT
+dim_shop,grand_opening_date,NVARCHAR(50),Ngày khai trương chính thức,2025-05-08T00:00:00
+dim_shop,opening_date,NVARCHAR(50),Ngày bắt đầu hoạt động/mở bán,6/23/2021
+dim_shop,regulated_address,NVARCHAR(128),Địa chỉ sau sát nhập,"29 Nguyễn Hội, Phường Phan Thiết, Tỉnh Lâm Đồng"
+dim_shop,regulated_short_address,NVARCHAR(64),Địa chỉ rút gọn sau sát nhập,"29 Nguyễn Hội, P. Phan Thiết, Tỉnh Lâm Đồng"
+dim_shop,closing_date,VARCHAR(50),Ngày đóng cửa/ngừng hoạt động,None
+dim_shop,ware_house_ho_vac,VARCHAR(50),Mã kho HO phục vụ vaccine (nếu tách kho),None
+dim_shop,province_name,VARCHAR(50),Tên tỉnh/thành,Tỉnh Bình Thuận
+dim_shop,area_name,VARCHAR(50),Tên khu vực (area),Miền Đông - KV6
+dim_shop,region_name,VARCHAR(50),Tên vùng/miền (region),Miền Đông
+dim_shop,ward_name,VARCHAR(50),Tên phường/xã,Phường Phú Trinh
+dim_shop,district_name,VARCHAR(50),Tên quận/huyện,Thành phố Phan Thiết
+dim_shop,longitude,REAL,Kinh độ,108.097306
+dim_shop,latitude,REAL,Vĩ độ,10.936083
+dim_shop,coordinate,NVARCHAR(50),"Tọa độ dạng chuỗi “long, lat”","108.097306, 10.936083"
+dim_shop,region_type_code,INTEGER,Mã loại vùng/chuỗi (region type),512
+dim_shop,region_type_name,VARCHAR(50),Tên loại vùng/chuỗi,Chuỗi Thuốc
+dim_shop,regulated_province_name,VARCHAR(50),Tên tỉnh/thành sau sát nhập,Tỉnh Lâm Đồng
+dim_shop,regulated_ward_name,VARCHAR(50),Tên phường/xã sau sát nhập,Phường Phan Thiết
+dim_shop,legal_entity_name,VARCHAR(50),Tên pháp nhân,CÔNG TY CỔ PHẦN DƯỢC PHẨM FPT LONG CHÂU
+dim_shop,tax_code,INTEGER,Mã số thuế của pháp nhân/shop,315275368
+dim_shop,region_insurance_name,VARCHAR(50),Tên vùng bảo hiểm,Vùng bảo hiểm 2
+dim_shop,shop_type_name,VARCHAR(50),Tên loại shop (hiển thị),Long Châu
+dim_shop,asm_code,VARCHAR(50),Mã ASM phụ trách,6838
+dim_shop,rsm_code,INTEGER,Mã RSM phụ trách,1034
+dim_shop,rsm_name,VARCHAR(64),Tên RSM phụ trách,QcStPTQAJuAg6Jf/yPntVM2XNHrisjoOP32a8PR2QQEDV4nx7rZ4TOnWeqEpm79z
+dim_shop,asm_name,VARCHAR(128),Tên ASM phụ trách,F6IuawIodURG5LKIQ9GQsToPkV3Wjktv6BowB76yIVtHqccDF808xSBJUvvk+iRLPSUOwCtjsIR5OJZZYfi6ITjx31+3/e1LVj+u9NU400He0ZH42SEUhktQs6iF7r1C
+dim_shop,asm_email,VARCHAR(64),Email ASM phụ trách,GmGlXVCtKS84czSSysxk6P9CHCkqAmFly1EfZO13whVmfFfTSZ4ghTLyMUkzxmtK
+dim_shop,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),3/10/2026
+dim_shop,tenant,VARCHAR(50),Tenant/môi trường dữ liệu,FLC
+dim_vaccine_disease_group,"id",INTEGER,#N/A,1
+dim_vaccine_disease_group,sku,INTEGER,Mã SKU/sản phẩm của vaccine,38265
+dim_vaccine_disease_group,vaccine_id,NVARCHAR(50),ID vaccine,0ce0bdfd-1bf6-41af-a8e8-2b9c817d6c46
+dim_vaccine_disease_group,vaccine_name,VARCHAR(50),Tên vaccine,MORCVAX
+dim_vaccine_disease_group,note,VARCHAR(1024),"Ghi chú (lịch tiêm chi tiết, lưu ý,...)",None
+dim_vaccine_disease_group,disease_group_id,NVARCHAR(50),Khóa định danh nhóm bệnh (disease group),0e458bfb-24ce-4410-885e-1cbb5f0894ae
+dim_vaccine_disease_group,disease_group_name,VARCHAR(50),Tên nhóm bệnh vaccine phòng/ngừa,TẢ
+dim_vaccine_disease_group,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,12/3/2023
+dim_vaccine_disease_group,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,1/3/2025
+dim_vaccine_disease_group,start_date,NVARCHAR(50),Ngày/giờ bắt đầu hiệu lực của mapping (SCD),12/3/2023
+dim_vaccine_disease_group,end_date,NVARCHAR(50),Ngày/giờ kết thúc hiệu lực của mapping (SCD; thường 9999-12-31 nếu còn hiệu lực),12/31/9999
+dim_vaccine_disease_group,current_flag,VARCHAR(50),Flag đánh dấu bản ghi hiện hành (Y = hiện hành),Y
+dim_vaccine_disease_group,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),4/2/2025
+dim_vaccine_disease_group,etl_by,VARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),Databricks
+dim_vaccine_disease_group,scd_checksum,NVARCHAR(50),Checksum phục vụ theo dõi thay đổi theo SCD (lịch sử),2b868e8fd6b040239fdb3e76c663a611
+dim_vaccine_disease_group,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),7ba4cbf66ee0f21928db8377a645926a
+dim_vaccine_disease_group,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),565675c07787b6f1a34554b11ea3820b
+dim_vaccine_regimen,regimen_detail_id,NVARCHAR(50),Khóa định danh chi tiết phác đồ (UUID),012caa80-b3ed-4641-9925-73a14db51beb
+dim_vaccine_regimen,regimen_id,NVARCHAR(50),Khóa định danh phác đồ (nhóm phác đồ),10fecf80-ec12-4177-93e0-d78125a10086
+dim_vaccine_regimen,vaccine_id,VARCHAR(50),ID vaccine,ad980c82-0ed4-4793-a7e6-3b74ab3d3db7
+dim_vaccine_regimen,from_age,NVARCHAR(50),Tuổi bắt đầu áp dụng (dạng text),50 tuổi
+dim_vaccine_regimen,to_age,NVARCHAR(50),Tuổi kết thúc áp dụng (dạng text),< 24 tháng tuổi
+dim_vaccine_regimen,age_unit_code,INTEGER,Mã đơn vị tuổi (ví dụ: 3),3
+dim_vaccine_regimen,age_unit,VARCHAR(50),Tên đơn vị tuổi (ví dụ: Age),Age
+dim_vaccine_regimen,from_age_number,INTEGER,Tuổi bắt đầu (dạng số),50
+dim_vaccine_regimen,to_age_number,INTEGER,Tuổi kết thúc (dạng số),1000
+dim_vaccine_regimen,schedule_type,VARCHAR(64),Mô tả đối tượng theo tuổi (ví dụ: từ 50 tuổi trở lên),Từ 50 tuổi trở lên
+dim_vaccine_regimen,required_injections,INTEGER,Số mũi bắt buộc theo phác đồ,2
+dim_vaccine_regimen,max_injections,VARCHAR(50),Số mũi tối đa cho phép theo phác đồ,2
+dim_vaccine_regimen,unit,VARCHAR(50),Đơn vị liều (ví dụ: ml),ml
+dim_vaccine_regimen,regimen_detail_note,VARCHAR(64),Ghi chú ngắn cho chi tiết phác đồ,None
+dim_vaccine_regimen,dosage,REAL,Liều lượng mỗi mũi (theo unit),0.5
+dim_vaccine_regimen,nearest_injection_distance,VARCHAR(50),Khoảng cách khuyến nghị gần nhất giữa các mũi (thường theo ngày/tháng tùy hệ),0
+dim_vaccine_regimen,max_distance,INTEGER,Khoảng cách tối đa giữa các mũi (ngưỡng cho phép),0
+dim_vaccine_regimen,min_distance,INTEGER,Khoảng cách tối thiểu giữa các mũi (ngưỡng an toàn/qui định),0
+dim_vaccine_regimen,is_pregnant_regimen,BOOLEAN,Flag đánh dấu phác đồ cho đối tượng mang thai (TRUE/FALSE),FALSE
+dim_vaccine_regimen,is_required,BOOLEAN,Flag đánh dấu bắt buộc áp dụng phác đồ/chi tiết này (TRUE/FAL,TRUE
+dim_vaccine_regimen,note,VARCHAR(50),"Ghi chú (lịch tiêm chi tiết, lưu ý,...)",None
+dim_vaccine_regimen,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,10/4/2024
+dim_vaccine_regimen,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,11/7/2024
+dim_vaccine_regimen,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),3/10/2026
+dim_vaccine_regimen,etl_by,NVARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),02c92e10-acde-4ab9-8c7b-047bbaf9fd8a
+dim_vaccine_regimen,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),269907bec23f2e6c2ae946e9da68610c
+dim_vaccine_regimen,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),40cba1a81e5fe0341e69e750fb6d7457
+fact_vaccine_record,attachment_code,VARCHAR(50),Mã mũi tiêm,MxqWtcfCJu8HKd3A
+fact_vaccine_record,indication_id,VARCHAR(50),ID chỉ định tiêm (indication),daea22cf-0269-4400-a172-47262852e866
+fact_vaccine_record,indication_note,VARCHAR(50),Ghi chú chỉ định,None
+fact_vaccine_record,indication_status,INTEGER,Mã trạng thái chỉ định,3
+fact_vaccine_record,sku,INTEGER,Mã SKU/sản phẩm của vaccine,43977
+fact_vaccine_record,product_item_code,NVARCHAR(50),Mã hàng/mã sản phẩm theo hệ bán hàng/ERP,057d0hefa0200100
+fact_vaccine_record,vaccine_name,VARCHAR(50),Tên vaccine,VAXNEUVANCE (PCV15)
+fact_vaccine_record,disease_name,VARCHAR(50),Tên bệnh/đối tượng phòng bệnh,BỆNH DO PHẾ CẦU
+fact_vaccine_record,disease_group_id,NVARCHAR(50),Khóa định danh nhóm bệnh (disease group),699971e5-e228-4e00-adf2-04638ee1b414
+fact_vaccine_record,disease_group_name,VARCHAR(50),Tên nhóm bệnh vaccine phòng/ngừa,BỆNH DO PHẾ CẦU
+fact_vaccine_record,regimen_id,NVARCHAR(50),Khóa định danh phác đồ (nhóm phác đồ),6bb523c9-7ce5-4ac1-805c-ab24a9eedf2f
+fact_vaccine_record,regimen_name,VARCHAR(50),Tên phác đồ tiêm,None
+fact_vaccine_record,dose_number,INTEGER,Số mũi (mũi thứ mấy trong phác đồ),1
+fact_vaccine_record,dosage,NVARCHAR(50),Liều lượng mỗi mũi (theo unit),0.5 ml
+fact_vaccine_record,uom,VARCHAR(50),Đơn vị tính (unit of measure),Lọ
+fact_vaccine_record,injection_route,VARCHAR(50),Đường dùng/đường tiêm (uống/tiêm bắp/tiêm dưới da…),Tiêm bắp
+fact_vaccine_record,position,NVARCHAR(50),Vị trí tiêm (nếu là tiêm),Đùi phải
+fact_vaccine_record,lot_date,NVARCHAR(50),Hạn dùng/lô date của vaccine (thường là expiry date),9/27/2027
+fact_vaccine_record,lot_number,VARCHAR(50),Số lô vaccine,Z004730
+fact_vaccine_record,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,20:37.4
+fact_vaccine_record,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,02:45.8
+fact_vaccine_record,lcv_id,VARCHAR(50),ID khách hàng trên hệ LC/Vaccine,LP803141768570783820
+fact_vaccine_record,person_id,NVARCHAR(50),ID người tiêm/khách hàng,2adbac53-2f9b-42b0-8062-09c4e5e8c52e
+fact_vaccine_record,person_name,NVARCHAR(64),Tên người tiêm/khách hàng,3t9ypb7ZaEqd9g+Ej+ILDTNBro5+jpryfWxMFz3Cg9A1cjfzND9BiHQm2ijZCYAU
+fact_vaccine_record,gender,INTEGER,Giới tính,0
+fact_vaccine_record,ticket_id,NVARCHAR(50),ID phiếu tiêm/phiếu dịch vụ,3a1edbf7-ddd2-e5e5-72d2-bc18cfee95fc
+fact_vaccine_record,ticket_code,VARCHAR(50),Mã phiếu tiêm,TK58040525211768616437445
+fact_vaccine_record,completed_ticket_date,NVARCHAR(50),Ngày hoàn tất phiếu tiêm,1/17/2026
+fact_vaccine_record,ticket_status,INTEGER,Mã trạng thái phiếu tiêm,8
+fact_vaccine_record,ticket_note,VARCHAR(50),Ghi chú phiếu tiêm,None
+fact_vaccine_record,ticket_created_by,INTEGER,Mã người tạo phiếu,52521
+fact_vaccine_record,ticket_created_by_name,VARCHAR(64),Tên người tạo phiếu,Yp51Z/Nces68aK2zPFDvOtqGX5zJBVwlS/pASSwPvdf5gvnyGeRDyFpmfjUfHf7+
+fact_vaccine_record,conclusion,VARCHAR(50),Kết luận trước tiêm (ví dụ: đủ điều kiện tiêm),ENOUGHT_CONDITIONS
+fact_vaccine_record,injection_time,NVARCHAR(50),Thời điểm thực hiện tiêm/uống vaccine,34:43.2
+fact_vaccine_record,completed_tracking_time,NVARCHAR(50),Thời điểm hoàn tất theo dõi sau tiêm,02:45.8
+fact_vaccine_record,is_leave_early,VARCHAR(50),Flag rời đi sớm khi chưa theo dõi đủ,TRUE
+fact_vaccine_record,monitor_detail,VARCHAR(50),Chi tiết theo dõi sau tiêm (triệu chứng/diễn biến),None
+fact_vaccine_record,health_monitor_note,VARCHAR(64),Ghi chú theo dõi sức khỏe,None
+fact_vaccine_record,shop_code,INTEGER,Mã cơ sở/shop phát sinh đơn,58040
+fact_vaccine_record,shop_name,VARCHAR(64),Tên cơ sở/shop phát sinh đơn,"VX NBH 76 Tuệ Tĩnh, P. Hoa Lư"
+fact_vaccine_record,injection_clinic_id,INTEGER,ID phòng tiêm/phòng khám trong cơ sở,43
+fact_vaccine_record,injection_clinic_name,VARCHAR(50),Tên phòng tiêm/phòng khám,Phòng Khám 1
+fact_vaccine_record,order_code_counter,REAL,Mã đơn hàng tại quầy (POS/counter order),5.80403E+22
+fact_vaccine_record,order_return_code,VARCHAR(50),Mã đơn trả/hoàn (nếu có),None
+fact_vaccine_record,doctor_code,INTEGER,Mã bác sĩ chỉ định/khám sàng lọc,58160
+fact_vaccine_record,doctor_name,VARCHAR(64),Tên bác sĩ,PLBxx2iHEiItx2pjNkuqpkZ9MUvLz0PHzJu6TM8hy4EPciRh1qoNU7OvBDxhoY4x
+fact_vaccine_record,injection_nursing_code,INTEGER,Mã điều dưỡng thực hiện tiêm,53231
+fact_vaccine_record,injection_nursing_name,VARCHAR(64),Tên điều dưỡng,IxTG6vzIbICBDQvz9xioiQ6OoZqfDj/h5j0RLgfdk9R0CtGPOVKbBZbiPhlvBcN6
+fact_vaccine_record,declaration_id,VARCHAR(50),ID tờ khai/khai báo (y tế/đồng ý tiêm…),None
+fact_vaccine_record,is_returned,BOOLEAN,Flag đã hoàn trả/hoàn đơn liên quan mũi tiêm,FALSE
+fact_vaccine_record,is_test,BOOLEAN,Flag đánh dấu dữ liệu test,FALSE
+fact_vaccine_record,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),49:41.5
+fact_vaccine_record,etl_by,VARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),Databricks
+fact_vaccine_record,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),0570cc90a49588c6420575f82a8e35f3
+fact_vaccine_record,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),9d812590e3d73da9e9b5c2dfc137467d
+fact_vaccine_returned_order_detail,attachment_code,VARCHAR(50),Mã mũi tiêm,nPEtrI3jLIhqI88A
+fact_vaccine_returned_order_detail,return_order_detail_id,VARCHAR(50),ID chi tiết đơn trả/hoàn,cd49c8ee-b5d3-43aa-9553-3261e4953e14
+fact_vaccine_returned_order_detail,return_order_code,REAL,Mã đơn trả/hoàn,5.80282E+22
+fact_vaccine_returned_order_detail,return_date,NVARCHAR(50),Thời điểm thực hiện trả/hoàn,3/10/2026
+fact_vaccine_returned_order_detail,order_code,NVARCHAR(50),Mã đơn hàng (khóa liên kết header),58028191591773051400922
+fact_vaccine_returned_order_detail,order_status,INTEGER,Trạng thái đơn (mã),5
+fact_vaccine_returned_order_detail,package_type,VARCHAR(50),Loại đơn lẻ hay gói,GOI
+fact_vaccine_returned_order_detail,order_code_refer,VARCHAR(50),Mã đơn tham chiếu (nếu có),None
+fact_vaccine_returned_order_detail,order_attribute,INTEGER,Thuộc tính đơn (mã phân loại bổ sung),0
+fact_vaccine_returned_order_detail,order_channel,INTEGER,Kênh đặt/mua hàng,2
+fact_vaccine_returned_order_detail,is_partial_payment,BOOLEAN,Flag đánh dấu thanh toán một phần,FALSE
+fact_vaccine_returned_order_detail,shop_code,INTEGER,Mã cơ sở/shop phát sinh đơn,58028
+fact_vaccine_returned_order_detail,shop_name,VARCHAR(64),Tên cơ sở/shop phát sinh đơn,"VX DLK 255 Phạm Văn Đồng, P. Sông Cầu"
+fact_vaccine_returned_order_detail,shop_order_code,INTEGER,Mã cơ sở/shop phát sinh đơn bán,58028
+fact_vaccine_returned_order_detail,lcv_id,VARCHAR(50),ID khách hàng trên hệ LC/Vaccine,LP580281714271346274
+fact_vaccine_returned_order_detail,customer_id,VARCHAR(50),ID khách hàng,e3a1add1-7323-5798-2c64-3a1234967b72
+fact_vaccine_returned_order_detail,customer_name,VARCHAR(50),Tên khách hàng,Võ Thiên Phúc
+fact_vaccine_returned_order_detail,customer_phone,INTEGER,SĐT khách hàng,336175900
+fact_vaccine_returned_order_detail,shop_employee_id,INTEGER,Mã nhân viên xử lý bán,51464
+fact_vaccine_returned_order_detail,shop_employee_name,VARCHAR(50),Tên nhân viên xử lý bán,Trần Diễm Huyền
+fact_vaccine_returned_order_detail,shop_order_employee_id,INTEGER,Mã nhân viên của đơn gốc (người bán/ghi nhận đơn),52036
+fact_vaccine_returned_order_detail,warehouse_code,INTEGER,Mã kho xuất hàng,58028010
+fact_vaccine_returned_order_detail,warehouse_name,VARCHAR(50),Tên kho xuất hàng,VX028 - Kho hàng thường
+fact_vaccine_returned_order_detail,service_code,INTEGER,Mã dịch vụ (nếu dòng là dịch vụ),40035
+fact_vaccine_returned_order_detail,service_name,VARCHAR(50),Tên dịch vụ,Dịch vụ tiêm chủng Vắc-xin
+fact_vaccine_returned_order_detail,sku,INTEGER,Mã SKU/sản phẩm của vaccine,38251
+fact_vaccine_returned_order_detail,return_line_item_name,VARCHAR(50),Tên dòng hàng/dịch vụ trả,TYPHIM VI 25MCG
+fact_vaccine_returned_order_detail,return_line_item_quantity,INTEGER,Số lượng trả,1
+fact_vaccine_returned_order_detail,return_line_item_price,INTEGER,Đơn giá trả,380000
+fact_vaccine_returned_order_detail,return_line_item_servicefee_percent,INTEGER,% phí dịch vụ của dòng trả,10
+fact_vaccine_returned_order_detail,return_line_item_servicefee,INTEGER,Phí dịch vụ của dòng trả,38000
+fact_vaccine_returned_order_detail,return_line_item_amount,INTEGER,Thành tiền dòng trả trước giảm,418000
+fact_vaccine_returned_order_detail,return_line_item_discount_promotion,INTEGER,Giảm giá CTKM phân bổ cho dòng trả (tiền),11400
+fact_vaccine_returned_order_detail,return_line_item_discount,INTEGER,Giảm giá khác/chiết khấu bổ sung (tiền),0
+fact_vaccine_returned_order_detail,return_line_item_amount_after_discount,INTEGER,Thành tiền dòng trả sau giảm,406600
+fact_vaccine_returned_order_detail,attachment_code_base,VARCHAR(50),Mã mũi tiêm của đơn gốc (dùng để tham chiếu),None
+fact_vaccine_returned_order_detail,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,3/10/2026
+fact_vaccine_returned_order_detail,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,3/10/2026
+fact_vaccine_returned_order_detail,is_test,BOOLEAN,Flag đánh dấu dữ liệu test,FALSE
+fact_vaccine_returned_order_detail,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),3/10/2026
+fact_vaccine_returned_order_detail,etl_by,VARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),Databricks
+fact_vaccine_returned_order_detail,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),12e56629aaa5c1d681b72cbf359584e9
+fact_vaccine_returned_order_detail,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),7b09ec5572b1ad0ade4d0e023141d601
+fact_vaccine_returned_order_detail,order_injection,INTEGER,Số thứ tự mũi tiêm (nếu vaccine có nhiều mũi),1
+fact_vaccine_sales_order_detail,attachment_code,VARCHAR(50),Mã mũi tiêm,None
+fact_vaccine_sales_order_detail,order_detail_id,NVARCHAR(50),ID chi tiết đơn hàng,3782a9cc-8dc8-4f42-a451-befe7e0fe8ad
+fact_vaccine_sales_order_detail,order_code,REAL,Mã đơn hàng (khóa liên kết header),5.80273E+22
+fact_vaccine_sales_order_detail,order_status,INTEGER,Trạng thái đơn (mã),4
+fact_vaccine_sales_order_detail,order_creation_date,NVARCHAR(50),Thời điểm KH khởi tạo đơn,3/7/2026
+fact_vaccine_sales_order_detail,order_completion_date,NVARCHAR(50),Thời điểm nhân viên/hệ thống hoàn tất đơn,3/7/2026
+fact_vaccine_sales_order_detail,order_completed_by,INTEGER,Mã nhân viên/hệ thống hoàn tất đơn,52287
+fact_vaccine_sales_order_detail,order_type,INTEGER,Loại đơn (mã phân loại nghiệp vụ),8
+fact_vaccine_sales_order_detail,package_type,VARCHAR(50),Loại đơn lẻ hay gói,GOI
+fact_vaccine_sales_order_detail,order_code_refer,VARCHAR(50),Mã đơn tham chiếu (nếu có),5.80282E+22
+fact_vaccine_sales_order_detail,order_attribute,INTEGER,Thuộc tính đơn (mã phân loại bổ sung),5
+fact_vaccine_sales_order_detail,order_channel,INTEGER,Kênh đặt/mua hàng,15
+fact_vaccine_sales_order_detail,payment_method,VARCHAR(50),Phương thức thanh toán (mã),NaN
+fact_vaccine_sales_order_detail,shop_code,INTEGER,Mã cơ sở/shop phát sinh đơn,58027
+fact_vaccine_sales_order_detail,shop_name,VARCHAR(64),Tên cơ sở/shop phát sinh đơn,"VX DLK 64 Duy Tân, P. Tuy Hòa"
+fact_vaccine_sales_order_detail,customer_id,NVARCHAR(50),ID khách hàng,2f5354fa-a5b9-ba99-79ad-3a1fd8df516f
+fact_vaccine_sales_order_detail,customer_phone,NVARCHAR(50),SĐT khách hàng,1ALSNFvXUbmxHY5J9QTCCSN5pj644s1iolso8I+/Hzo=
+fact_vaccine_sales_order_detail,lcv_id,VARCHAR(50),ID khách hàng trên hệ LC/Vaccine,LP800951772860111061
+fact_vaccine_sales_order_detail,customer_name,VARCHAR(64),Tên khách hàng,mCIBYbWnqgRY4uu0W04j65gemzKwtg/ggF2dgUzxHN+sGZVRSu3wyVSxihtUZc43
+fact_vaccine_sales_order_detail,shop_employee_id,INTEGER,Mã nhân viên xử lý bán,52287
+fact_vaccine_sales_order_detail,shop_employee_name,VARCHAR(64),Tên nhân viên xử lý bán,X8UsmJ7rRdQ9xR+1penEov+P1iIDBXmaxFcr6rPBhpWmxTST8q/wXJUeEQIq4bYN
+fact_vaccine_sales_order_detail,warehouse_code,INTEGER,Mã kho xuất hàng,58027010
+fact_vaccine_sales_order_detail,warehouse_name,VARCHAR(50),Tên kho xuất hàng,Kho hàng thường
+fact_vaccine_sales_order_detail,service_code,INTEGER,Mã dịch vụ (nếu dòng là dịch vụ),46378
+fact_vaccine_sales_order_detail,service_name,VARCHAR(50),Tên dịch vụ,Phí lưu trữ vacxin
+fact_vaccine_sales_order_detail,sku,INTEGER,Mã SKU/sản phẩm của vaccine,46378
+fact_vaccine_sales_order_detail,line_item_name,VARCHAR(50),Tên dòng hàng/dịch vụ,Phí lưu trữ vacxin
+fact_vaccine_sales_order_detail,line_item_quantity,INTEGER,Số lượng,1
+fact_vaccine_sales_order_detail,line_item_price,INTEGER,Đơn giá,593000
+fact_vaccine_sales_order_detail,line_item_servicefee,VARCHAR(50),Phí dịch vụ của dòng (nếu tách riêng),None
+fact_vaccine_sales_order_detail,line_item_amount,INTEGER,Thành tiền trước giảm (thường = qty * price + service fee),593000
+fact_vaccine_sales_order_detail,line_item_servicefee_percent,VARCHAR(50),% phí dịch vụ (nếu tính theo %),None
+fact_vaccine_sales_order_detail,line_item_discount_promotion,INTEGER,Giảm giá từ CTKM/promotion (tiền),0
+fact_vaccine_sales_order_detail,line_item_discount,INTEGER,Giảm giá khác/chiết khấu bổ sung (tiền),0
+fact_vaccine_sales_order_detail,line_item_amount_after_discount,INTEGER,Thành tiền sau giảm,593000
+fact_vaccine_sales_order_detail,line_item_unit_code,INTEGER,Mã đơn vị tính,1005
+fact_vaccine_sales_order_detail,line_item_unit_name,VARCHAR(50),Tên đơn vị tính,DVT
+fact_vaccine_sales_order_detail,line_item_discount_reason_code,VARCHAR(50),Mã lý do giảm giá,None
+fact_vaccine_sales_order_detail,line_item_discount_reason_name,VARCHAR(50),Tên lý do giảm giá,None
+fact_vaccine_sales_order_detail,is_partial_payment,BOOLEAN,Flag đánh dấu thanh toán một phần,TRUE
+fact_vaccine_sales_order_detail,attachment_code_base,VARCHAR(50),Mã mũi tiêm của đơn gốc (dùng để tham chiếu),None
+fact_vaccine_sales_order_detail,created_at,NVARCHAR(50),Thời điểm tạo bản ghi,3/7/2026
+fact_vaccine_sales_order_detail,modified_at,NVARCHAR(50),Thời điểm cập nhật bản ghi,3/7/2026
+fact_vaccine_sales_order_detail,is_test,BOOLEAN,Flag đánh dấu dữ liệu test,FALSE
+fact_vaccine_sales_order_detail,etl_date,NVARCHAR(50),Thời điểm ETL/load dữ liệu (dấu thời gian),3/8/2026
+fact_vaccine_sales_order_detail,etl_by,VARCHAR(50),Hệ thống/tiến trình thực hiện ETL (ví dụ: DataBricks),Databricks
+fact_vaccine_sales_order_detail,primary_checksum,NVARCHAR(50),Checksum theo khóa chính (phục vụ kiểm tra thay đổi/đối soát),04d689e832f74ba71e73cc526c5e4fc8
+fact_vaccine_sales_order_detail,record_checksum,NVARCHAR(50),Checksum toàn bản ghi (phục vụ phát hiện thay đổi nội dung),1b8c2eb640bfb1a25e634ab30da56366
+fact_vaccine_sales_order_detail,order_injection,VARCHAR(50),Số thứ tự mũi tiêm (nếu vaccine có nhiều mũi),NaN
+dim_device,device_id,VARCHAR(50),"Định danh của thiết bị sử dụng trong phiên truy cập, liên kết với bảng dim_device.",Apple|iOS-Device|iOS||FPT%20Shop|1170x2532
+dim_device,device_brand,VARCHAR(50),Hãng sản xuất thiết bị.,Apple
+dim_device,device_model,VARCHAR(50),Model của thiết bị.,iOS-Device
+dim_device,device_os,VARCHAR(50),Hệ điều hành của thiết bị.,iOS
+dim_device,device_os_version,NVARCHAR(50),Phiên bản hệ điều hành.,16.7.11
+dim_device,device_browser,VARCHAR(50),Trình duyệt được sử dụng.,FPT%20Shop
+dim_device,viewport_size,NVARCHAR(50),Kích thước màn hình hiển thị của thiết bị.,1170x2532
+dim_event,event_id,VARCHAR(50),"ID của sự kiện, liên kết với bảng dim_event.",category|view_page
+dim_event,location_type,VARCHAR(50),"Loại vị trí của event trong hệ thống (page, modal, component...).",screen
+dim_event,location_name,VARCHAR(50),Tên cụ thể của vị trí nơi event xảy ra.,Page
+dim_event,screen_location,VARCHAR(50),Màn hình hoặc trang nơi event xảy ra.,category
+dim_event,event_name,VARCHAR(50),"Tên hành động của event (view, click, search...).",view_page
+fact_session,anoynymous_user_id,NVARCHAR(256),Mã user id ẩn danh,322002b5-5faa-4387-9aa8-e62ad90f7d2e
+fact_session,identified_user_id,VARCHAR(50),Mã user id định danh - khách hàng có đăng nhập,1b82732a-e737-a992-571f-3a0cc688797d
+fact_session,session_id,NVARCHAR(50),Định danh duy nhất của một phiên truy cập của người dùng.,0002ceed-9039-4b0e-95cc-b7cc1977ac5d
+fact_session,start_session_time,VARCHAR(512),Thời điểm bắt đầu của phiên truy cập.,"2025-08-25 20:14:11.967"
+fact_session,end_session_time,VARCHAR(512),Thời điểm kết thúc của phiên truy cập.,"2025-08-25 20:14:11.967"
+fact_session,device_id,VARCHAR(512),"Định danh của thiết bị sử dụng trong phiên truy cập, liên kết với bảng dim_device.",Apple|iPhone|iOS|18.5|Mobile Safari|430x739
+fact_session,platform,VARCHAR(50),"Nền tảng truy cập của người dùng (web, mobile, app...).",web
+fact_session,session_index,INTEGER,Số thứ tự của phiên truy cập của người dùng.,2
+fact_session,previous_session_id,NVARCHAR(50),ID của phiên truy cập trước đó của người dùng.,74c235d1-142b-4239-a6c1-f96b76516627
+fact_session_detail,session_detail_id,VARCHAR(512),Định danh duy nhất của mỗi sự kiện trong session.,4cfd88ee-147c-49a0-98e9-3b5eaf3d0107|1
+fact_session_detail,event_time,NVARCHAR(50),Thời điểm xảy ra sự kiện.,"2025-08-25 20:14:11.967"
+fact_session_detail,session_id,NVARCHAR(50),Định danh duy nhất của một phiên truy cập của người dùng.,4cfd88ee-147c-49a0-98e9-3b5eaf3d0107
+fact_session_detail,event_index,INTEGER,Thứ tự của sự kiện trong một session.,1
+fact_session_detail,event_id,VARCHAR(512),"ID của sự kiện, liên kết với bảng dim_event.",category|view_page
+fact_session_detail,referrer_url,VARCHAR(512),URL nguồn dẫn người dùng đến trang hiện tại.,https://fptshop.com.vn/may-tinh-xach-tay
+fact_session_detail,url,VARCHAR(512),URL của trang mà người dùng đang truy cập.,https://fptshop.com.vn/may-tinh-xach-tay/sinh-vien-van-phong
+fact_session_detail,item_code,VARCHAR(50),Mã sku,004001
+fact_event_params,session_detail_id,VARCHAR(512),Định danh duy nhất của mỗi sự kiện trong session.,ab3cec28-83e7-48b7-90cd-68b0a5883c34|11
+fact_event_params,param_name,VARCHAR(50),Tên của tham số của event.,order_id
+fact_event_params,param_value,VARCHAR(50),Giá trị của tham số của event.,3.04032E+22

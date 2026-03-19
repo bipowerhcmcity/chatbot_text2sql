@@ -1,4 +1,4 @@
-# Yue1608 AI - Modern AI Chatbot
+# CADS Insight - Modern AI Chatbot
 ## Setup Instructions
 
 ### Prerequisites
