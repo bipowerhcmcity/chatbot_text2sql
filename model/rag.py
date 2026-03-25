@@ -23,6 +23,7 @@ def get_all_table(embedding, entities, service):
     res_tbs = []
     for entity in entities:
         res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=5, service=service)
+        print("Finding tables for entity:", entity, "Results:", res_retrieve)
         res_tb = [re.search(r"Tên dữ liệu:\s*(.*)", res["doc"]).group(1) for res in res_retrieve]
         res_tbs+=res_tb
     return res_tbs

@@ -77,6 +77,19 @@ def flatten(lst):
             result.append(item)
     return result
 
+async def validator_sql_query(assistant_content, conversation_history, validator_content):
+    sql_match = re.search(r"```sql\s+(.*?)\s+```", assistant_content, re.DOTALL)
+    if sql_match:
+        sql_query = sql_match.group(1).strip()
+        sql_validation_payload = {"sql": sql_query}
+        try:
+            validation_result = await run_sql_endpoint(sql_validation_payload)
+            return validation_result, None
+        except HTTPException as e:
+            return "", e.detail
+    else:
+        print("No SQL code block found in assistant content.")
+        return None, "No SQL code block found in assistant content."
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -119,15 +132,28 @@ async def chat_endpoint(request: ChatRequest):
         business_rule_prompt = get_business_rules(structure_dict["service"])
         # Step 3: Extract SQL (assistant_content is expected to be SQL text)
         assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=business_rule_prompt, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"])
-        # # Add assistant response to history
-        # assistant_message = Message(role="assistant", content=assistant_content)
-        # conversation_history.append(assistant_message)
         conversation_history.append(rewritten_user_message)
- 
-        return ChatResponse(
-            response=assistant_content,
-            conversation_history=conversation_history,
-        )
+        # 4. Recommended the next action for user
+        sql_query, error_message = await validator_sql_query(assistant_content, conversation_history, table_prompt)
+        if sql_query is None:
+            return ChatResponse(
+                response="Người dùng không hỏi về SQL query hoặc kết quả không đúng",
+                conversation_history=conversation_history,
+            )
+        else:
+            # 5. Recommended the next action for user
+            recommend_content = recommend_next_action(client, rewritten_user_message, sql_query, table_prompt, error_message)
+            print(recommend_content)
+            if error_message:
+                    return ChatResponse(
+                    response= "Không thể sinh SQL query, "+ "các gợi ý để khắc phục lỗi: \n"  + recommend_content,
+                    conversation_history=conversation_history,
+                )
+            return ChatResponse(
+                response= assistant_content + "\nCác gợi ý thêm: \n" + recommend_content,
+                conversation_history=conversation_history,
+            )
+        
         
     except Exception as e:
         print(f"Error in chat endpoint: {str(e)}")

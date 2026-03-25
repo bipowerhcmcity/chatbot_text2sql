@@ -216,7 +216,8 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
     If user ask number of view, please use select (*) as view_count as default. 
     If user ask another question, please using the knowledges above. 
     Only use the tables and columns in the Schema to generate SQL query, do not hallucinate any table or column that is not in the Schema.
-    Based on the Schema, Question, Knowledge and Structure 
+    Based on the Schema, Question, Business Rules and Structure 
+
     """
     if is_explanation:
         prompt +=f"""
@@ -234,5 +235,76 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
         ],
         temperature=0
     )
+
+    return response.choices[0].message.content
+
+def recommend_next_action(client, question, sql_query, schema, error_message=None):
+    print(sql_query, error_message)
+    if error_message is None:
+        prompt = f"""
+        You are a advisor after reviewing the SQL query.
+        The SQL query is valid. Based on the user's question, suggest additional approaches or insights the user can explore.
+
+        Rules:
+        - Only provide suggestions that are relevant to the user's question
+        - Use the user's question and the SQL query to provide meaningful suggestions.
+        - Do NOT invent columns or tables that are not in the schema.
+        - Suggestions should be actionable and relevant to the user's question.
+        - Suggest the next steps for user can explore the data.
+        - Do NOT provide any SQL code. 
+
+        User Question:
+        {question}
+
+        Output:
+        Provide 2-3 actionable suggestions in Vietnamese.
+        """
+        print("recommend prompt:", prompt)
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+            {"role": "system", "content": prompt}
+        ],
+            temperature=0
+        )
+    else: 
+        prompt = f"""
+        You are a SQL validator and error explainer.
+
+        Your task is to analyze the given SQL query, identify why it is invalid, and provide a clear explanation to the user.
+        Use the provided database schema to validate the query.
+
+        Rules:
+        - Do NOT invent columns or tables that are not in the schema.
+        - If the query references a non-existent table or column, explain which table or column is invalid.
+        - If the query has a syntax error, explain the issue clearly.
+        - If the query violates any database constraints, explain the violation.
+        - Provide suggestions to fix the query if possible.
+
+        Database Schema:
+        {schema}
+
+        User Question:
+        {question}
+
+        SQL Query:
+        {sql_query}
+
+        Error Message:
+        {error_message}
+
+        Output:
+        Only output the suggestion the customer can do to fix the SQL query.
+        Output in Vietnamese.
+        
+        """
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0
+        )
 
     return response.choices[0].message.content

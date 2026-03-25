@@ -432,5 +432,5 @@ fact_session_detail,referrer_url,VARCHAR(512),URL nguồn dẫn người dùng �
 fact_session_detail,url,VARCHAR(512),URL của trang mà người dùng đang truy cập.,https://fptshop.com.vn/may-tinh-xach-tay/sinh-vien-van-phong
 fact_session_detail,item_code,VARCHAR(50),Mã sku,004001
 fact_event_params,session_detail_id,VARCHAR(512),Định danh duy nhất của mỗi sự kiện trong session.,ab3cec28-83e7-48b7-90cd-68b0a5883c34|11
-fact_event_params,param_name,VARCHAR(50),Tên của tham số của event.,order_id
+fact_event_params,param_name,VARCHAR(50),Tên của tham số của event và chỉ bao gồm các thuộc tính sau: [discounted_value; order_id; order_type; payment_type; shipping_fee],order_id
 fact_event_params,param_value,VARCHAR(50),Giá trị của tham số của event.,3.04032E+22
