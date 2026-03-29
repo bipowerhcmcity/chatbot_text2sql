@@ -1,0 +1,21 @@
+1. Thông tin người dùng: 
+    1.1 Giới tính người dùng nằm trong cột gender trong bảng dim_person. Giá trị 0 là (female/nữ), 1 là (male/nam) 
+    1.2. Người dẫn người thân đi tiêm (caregiver) và người tự đi tiêm(direct):
+        Để xác định 2 loại khách hàng này, ta xác định bằng cột customer_id: 
+        1.2.1 Người đi tiêm: customer_id khác None/Null/rỗng. Khách hàng tự đi tiêm thường là những khách hàng có tuổi lớn hơn 18 tuổi, về tuổi khách hàng, xác định bằng năm hiện tại (2026) - cột year_of_birth. 
+        1.2.2 Người dẫn người thân đi tiêm: customer_id là None/ Null/ rỗng. 
+    1.3. Chỉ join với bảng dim_person khi cần những thông tin trên về khách hàng, không cần join bừa bãi để tránh bị mất dữ liệu. 
+3. Mã sản phẩm Vaccine (bảng dim_product): 
+    3.1 product_id: là mã sản phẩm vaccine, có thể có tên (product_name) là BCG-TCDV, Vắc xin thương hàn vi Polysaccharide (Lọ 0.5ml)
+    3.2 product_unit_id: Là mã sản phẩm + đơn vị nhỏ nhất của vaccine, một sản phẩm vaccine có thể có nhiều đơn vị (smallest_unit_name), ví dụ là: Vắc xin thương hàn vi Polysaccharide (ống), Vắc xin thương hàn vi Polysaccharide (lọ) 
+    3.3 product_name: Là tên của product_unit_id, sản phẩm vaccine gồm tên vaccine và đơn vị tính (nếu có). Ví dụ: Fluarix 0.25ml, QUIVAXEM,...
+    3.4 product_group_name: Là nhóm sản phẩm vaccine, có thể là nhóm bệnh vaccine cùng chữa hoặc nhóm gói vaccine. Khi truy xuất, nên truy xuất dạng từ khoá (có alias) thay vì full filter (=) để tránh bỏ xót. Ví dụ về các nhóm sản phẩm vaccine: CÁC BỆNH DO PHẾ CẦU, VIÊM GAN A, 5 TRONG 1.
+    3.5 unit_name_level1: Gồm 2 loại sản phẩm vaccine: hộp và gói. Hộp là một vaccine độc lập được tiêm và mua bởi khách hàng, Gói là tổ hợp các vaccine được mua 1 lần. Nếu là loại gói thì product_name có thể là các nhóm như: GÓI COMBO 12 THÁNG, GÓI NGƯỜI CÓ BỆNH MÃN TÍNH
+4. Shop Vaccine (bảng dim_shop):
+    4.1 shop_type_name: Là loại shop trong hệ thống chuỗi nhà thuốc Long Châu, sẽ bao gồm các loại shop sau: Vaccine (Vaccine), Pharmacy (Long Châu), Hub (Hub Long Châu), Kho nhập thuốc (Dự án nhập thuốc), Hi vọng (Dược hi vọng)
+    4.2 địa chỉ: Thông tin về địa chỉ cũ, và địa chỉ mới (sau sáp nhập) được trình bày trong các cột sau: 
+        4.2.1 Địa chỉ cũ (còn giữ 63 tỉnh thành, tên gọi trước năm 2025): province_name (tên tỉnh, thành phố cũ), ward_name (tên phường, xã, thị trấn cũ), district_name (tên quận, huyện, thị xã cũ), short_address (tên full địa chỉ cũ) 
+        4.2.2 Địa chỉ mới (sau sáp nhập, tên gọi sau năm 2025): regulated_province_name (tên tỉnh, thành phố mới), regulated_ward_name (tên phường, xã mới), regulated_short_address (tên full địa chỉ mới)
+    4.3 Ngày khai trương, ngày đóng của shop vĩnh viễn: 
+        4.3.1 opening_date (ngày khai trương): Được viết theo dạng MM/DD/YYYY (ví dụ: 7/16/2019)
+        4.3.2 closing_date (ngày đóng cửa): Được viết theo dạng YYYY-MM-DD:HH:MM:SS (ví dụ: 2025-01-01T00:00:00), nếu shop chưa đóng cửa, thì giá trị là None. 

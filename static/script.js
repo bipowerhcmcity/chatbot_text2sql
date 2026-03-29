@@ -1,6 +1,6 @@
 class LexaraAI {
     constructor() {
-        this.conversationHistory = [];
+        this.conversationHistory = []; // Initialize as an empty array
         this.isTyping = false;
         this.currentChatId = null;
         
@@ -9,6 +9,9 @@ class LexaraAI {
         this.setupMarkdown();
         this.setDynamicGreeting();
         this.loadChatHistoryFromStorage();
+
+        // Clear any saved chat history to start fresh
+        localStorage.removeItem('conversationHistory');
     }
 
     initializeElements() {

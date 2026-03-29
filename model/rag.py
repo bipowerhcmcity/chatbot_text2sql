@@ -19,10 +19,10 @@ def get_retriever(embeddings,collection_name, message, service=None, embedding_d
     knowledges = [{"doc":result[0].page_content, "score":result[1] } for result in results]
     return knowledges
 
-def get_all_table(embedding, entities, service):
+def get_all_table(embedding, entities, service, num_result=5):
     res_tbs = []
     for entity in entities:
-        res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=5, service=service)
+        res_retrieve = get_retriever(embedding, collection_name="table_metadata",message=entity, num_results=num_result, service=service)
         print("Finding tables for entity:", entity, "Results:", res_retrieve)
         res_tb = [re.search(r"Tên dữ liệu:\s*(.*)", res["doc"]).group(1) for res in res_retrieve]
         res_tbs+=res_tb

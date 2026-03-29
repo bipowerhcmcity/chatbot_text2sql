@@ -48,11 +48,10 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str
-    conversation_history: List[Message] = []
+    # conversation_history: List[Message] = []
 
 class ChatResponse(BaseModel):
     response: str
-    conversation_history: List[Message]
 
 # In-memory storage for conversation (in production, use a database)
 conversations: Dict[str, List[Message]] = {}
@@ -91,67 +90,79 @@ async def validator_sql_query(assistant_content, conversation_history, validator
         print("No SQL code block found in assistant content.")
         return None, "No SQL code block found in assistant content."
 
+HISTORY = [] 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
+    global HISTORY 
     """Handle chat requests and interact with DeepSeek API"""
     try:
-        # Build conversation history
-        conversation_history = request.conversation_history.copy()
+        print("History", HISTORY)
         # Add user message to history
         user_message = Message(role="user", content=request.message)        
         # Extract assistant response
 
         # Step 1: Process the user query (To understand the history messages) 
-        process_user_message = json.loads(process_user_query(client, user_message, conversation_history[-1:]))
+        process_user_message = json.loads(process_user_query(client, user_message))
+        print(process_user_message)
         rewritten_user_message = process_user_message["rewritten_query"]
+        conversation_history = "\n".join(
+            [f"{i + 1}. {entry}" for i, entry in enumerate(HISTORY)]
+        ) if process_user_message["is_required_history"] else ""
         print("rewritten_user_message:", rewritten_user_message)
 
-        rewritten_user_message = Message(role="user", content=rewritten_user_message)   
-       
-       
         # Step 2.1: Extract structure 
         structure_content = text_to_structure(client, rewritten_user_message)
         print(structure_content)
         structure_dict = json.loads(structure_content) 
+        structure_dict["is_required_explanation"] = True if structure_dict["is_required_explanation"] == "True" else False
         # event_screen_knowledge = get_event_screen_knowledge(structure_dict, embeddings)
+        # rewritten_user_message = Message(role="user", content=rewritten_user_message)   
 
         # Step 2.2: Table Finding 
         entities = process_user_message["entities"]
-        entities+=flatten([[structure_dict["metric"]], [structure_dict["dimension"]]])
+        entities+=flatten([[structure_dict["metric"]], [structure_dict["dimension"]], [structure_dict["intention"]]])
         # Remove None 
         entities = list(filter(lambda x: x is not None, entities))
         
         print("Entities: ",entities)
         print("Service",structure_dict["service"])
-        tbs = list(set(get_all_table(embeddings, entities, structure_dict["service"])))
+        num_result = 9999 if process_user_message["user_intention"]=="exploration_data" else 5
+        tbs = list(set(get_all_table(embeddings, entities, structure_dict["service"],num_result)))
         print("Tables", tbs)
         table_prompt = ""
         for table in tbs: 
             table_prompt+=extract_table_prompt(table)
 
         business_rule_prompt = get_business_rules(structure_dict["service"])
-        # Step 3: Extract SQL (assistant_content is expected to be SQL text)
-        assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=business_rule_prompt, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"])
-        conversation_history.append(rewritten_user_message)
-        # 4. Recommended the next action for user
-        sql_query, error_message = await validator_sql_query(assistant_content, conversation_history, table_prompt)
-        if sql_query is None:
-            return ChatResponse(
-                response="Người dùng không hỏi về SQL query hoặc kết quả không đúng",
-                conversation_history=conversation_history,
-            )
-        else:
-            # 5. Recommended the next action for user
-            recommend_content = recommend_next_action(client, rewritten_user_message, sql_query, table_prompt, error_message)
-            print(recommend_content)
-            if error_message:
-                    return ChatResponse(
-                    response= "Không thể sinh SQL query, "+ "các gợi ý để khắc phục lỗi: \n"  + recommend_content,
-                    conversation_history=conversation_history,
+        if process_user_message["user_intention"] in ["exploration_data", "q_a"]:
+            # Step 3.1: Data Exploration 
+            assistant_content = text_to_explore(client, rewritten_user_message,structure=structure_content,  knowledge=business_rule_prompt, table_schema=table_prompt, history=conversation_history)
+            summary = "User query question: " + rewritten_user_message+"\n Result:"+assistant_content
+            HISTORY.append(summary)
+        else: 
+            # Step 3.2: Extract SQL (assistant_content is expected to be SQL text)
+            assistant_content = text_to_sql(client, rewritten_user_message,structure=structure_content,  knowledge=business_rule_prompt, table_schema=table_prompt, is_explanation=structure_dict["is_required_explanation"], history=conversation_history)
+            # 4. Recommended the next action for user
+            sql_query, error_message = await validator_sql_query(assistant_content, conversation_history, table_prompt)
+            if sql_query is None:
+                return ChatResponse(
+                    response="Người dùng không hỏi về SQL query hoặc kết quả không đúng",
                 )
-            return ChatResponse(
-                response= assistant_content + "\nCác gợi ý thêm: \n" + recommend_content,
-                conversation_history=conversation_history,
+            else:
+                # 5. Recommended the next action for user
+                recommend_content = recommend_next_action(client, rewritten_user_message, sql_query, table_prompt, error_message)
+                summary = "User query question: " + rewritten_user_message+"\n Result:"+assistant_content
+                HISTORY.append(summary)
+
+                if error_message:
+                        return ChatResponse(
+                        response= recommend_content,
+                    )
+                return ChatResponse(
+                    response= assistant_content + "\nCác gợi ý thêm: \n" + recommend_content,
+                )
+        return ChatResponse(
+                response= assistant_content,
             )
         
         
@@ -180,7 +191,7 @@ async def run_sql_endpoint(payload: Dict[str, Any]):
         # Basic safety checks: only allow read-only SELECT statements
         sqllow = sql.strip().lower()
         # disallow dangerous keywords
-        forbidden = ["insert", "update", "delete", "drop", "alter", "create", "attach", "pragma", "truncate"]
+        forbidden = ["insert", "update", "delete", "drop", "alter", "create", "pragma", "truncate"]
         for kw in forbidden:
             if kw in sqllow:
                 raise HTTPException(status_code=400, detail=f"SQL contains forbidden keyword: {kw}")

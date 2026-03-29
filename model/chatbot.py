@@ -36,18 +36,16 @@ WHERE m.ten_sp LIKE '%iPhone%'
 # Do not explain.
 # Do not hallucinate columns.
 
-def process_user_query(client, user_message, conversation_history):
+def process_user_query(client, user_message):
     # This function rewrite the user query if it is ambigious and extract the entity in the rewritten query for finding the table schema 
     prompt = f"""You are a senior data analyst. 
-    Your task is to rewrite the user's question to make it more clear and specific for SQL generation.
-    Firstly, classify the user_message is full question or follow-up question. 
-    - If it's a follow-up question, rewrite the question to be a complete question by 
-    incorporating relevant information from the conversation_history.
-    - If it's a full question, just rewrite the question to be more clear and specific without incorporating information from conversation_history.
-    
+    Your task is to rewrite the user's question to make it more clear and classify the user intention as generate_sql_query, explanation_sql_query, q_a.
+    - If the user intention is generate_sql_query, rewrite the question to be more specific and clear for generating SQL query.
+    - If the user intention are q_a or explanation_sql_query, rewrite the question to be more specific and clear.
+
     User question: {user_message}
-    Conversation history: {conversation_history}
     
+    is_required_history: Based on the user question and the conversation history, determine whether the user question requires the context of the conversation history to be answered. If yes, set value = True, otherwise set value = False.
     entities: A list of business objects mentioned in the user query that corresponds to a dataset or table in the data warehouse.
     Examples: user, transaction, merchant, order, campaign.
     Entities help the system retrieve the correct tables before generating SQL.
@@ -55,8 +53,10 @@ def process_user_query(client, user_message, conversation_history):
     Output JSON schema:
 
     {{
+        "user_intention": string (generate_sql_query, explanation_sql_query, q_a),
         "rewritten_query": string (Vietnamese query),
         "entities": string[],
+        "is_required_history": boolean
     }}
     Never invent fields or metrics that are not explicitly or implicitly mentioned."""
     response = client.chat.completions.create(
@@ -158,7 +158,7 @@ def text_to_structure(client, question):
     Output JSON schema:
 
     {{
-        "is_required_explanation": True | False,
+        "is_required_explanation": "True" | "False",
         "service":string,
         "intention": string,
         "metric": string | null,
@@ -197,7 +197,7 @@ def text_to_structure(client, question):
 
     return response.choices[0].message.content
 
-def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation, dialect="SQL"):
+def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation, history=None, dialect="SQL"):
     prompt = f"""
     SQL Dialect: {dialect}
 
@@ -212,6 +212,9 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
 
     Structure:
     {structure}
+
+    Conversation History: 
+    {history}
 
     If user ask number of view, please use select (*) as view_count as default. 
     If user ask another question, please using the knowledges above. 
@@ -237,6 +240,43 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
     )
 
     return response.choices[0].message.content
+
+def text_to_explore(client,question,knowledge,structure,table_schema, history=None):
+    prompt = f"""
+    Finding related schema table:
+    {table_schema}
+
+    Question:
+    {question}
+
+    Business Rules:
+    {knowledge}
+
+    Structure:
+    {structure}
+
+    Conversation History: 
+    {history}
+
+    Only based on the tables and columns in the Schema, do not hallucinate any table or column that is not in the Schema.
+    Based on the Schema, Question, Business Rules, Structure, Conversation History
+    Return the previous user question if they require to lookback. 
+    Return the answer for user question to explore the data or Q/A, the answer in Vietnamese. 
+
+    Output:
+        Only output the Vietnamese answer.        
+    """
+    print(prompt)
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0
+    )
+
+    return response.choices[0].message.content
+
 
 def recommend_next_action(client, question, sql_query, schema, error_message=None):
     print(sql_query, error_message)
@@ -294,9 +334,7 @@ def recommend_next_action(client, question, sql_query, schema, error_message=Non
         {error_message}
 
         Output:
-        Only output the suggestion the customer can do to fix the SQL query.
-        Output in Vietnamese.
-        
+        Only output the fixed SQL query.        
         """
         response = client.chat.completions.create(
             model="gpt-4o",
