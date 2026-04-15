@@ -238,6 +238,13 @@ def text_to_sql(client,question,knowledge,structure,table_schema, is_explanation
         ],
         temperature=0
     )
+    token_response = client.responses.input_tokens.count(
+        model="gpt-4o",
+        input=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    print("Token is: ",token_response.input_tokens)
 
     return response.choices[0].message.content
 
