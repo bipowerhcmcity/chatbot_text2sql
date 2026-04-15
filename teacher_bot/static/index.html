@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Bot - Chatbot Evaluation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.3"/>
+                        <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h1>Teacher Bot</h1>
+                <span class="subtitle">Chatbot Evaluation Framework</span>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="chatbotStatus">
+                    <span class="status-dot offline"></span>
+                    <span class="status-text">Chatbot: Checking...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel: Configuration -->
+            <aside class="config-panel">
+                <div class="panel-section">
+                    <h3>⚙️ Configuration</h3>
+                    <div class="form-group">
+                        <label for="chatbotUrl">Chatbot API URL</label>
+                        <input type="text" id="chatbotUrl" value="http://localhost:8000" placeholder="http://localhost:8000">
+                        <button class="btn btn-sm" onclick="checkChatbot()">Check Connection</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📄 Upload Files</h3>
+                    <div class="form-group">
+                        <label for="questionFile">Question List CSV</label>
+                        <div class="file-upload" id="questionUploadArea">
+                            <input type="file" id="questionFile" accept=".csv" onchange="uploadQuestions()">
+                            <div class="file-upload-label">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>Drop CSV or Click</span>
+                            </div>
+                        </div>
+                        <div id="questionFileInfo" class="file-info" style="display:none;"></div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🎯 Options</h3>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="executeCompare" checked>
+                            Execute & Compare SQL Results
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="useLlmScoring" checked>
+                            Use LLM for B-Score
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="useLlmErrors" checked>
+                            Use LLM for Error Analysis
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="generatePdf">
+                            Generate PDF Report
+                        </label>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <button class="btn btn-primary btn-full" id="startEvalBtn" onclick="startEvaluation()" disabled>
+                        🚀 Start Evaluation
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🧪 Quick Test</h3>
+                    <div class="form-group">
+                        <label for="singleQuestion">Question</label>
+                        <textarea id="singleQuestion" rows="3" placeholder="Enter a question to test..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="singleExpectedSql">Expected SQL (optional)</label>
+                        <textarea id="singleExpectedSql" rows="3" placeholder="Expected SQL query..."></textarea>
+                    </div>
+                    <button class="btn btn-secondary btn-full" onclick="evaluateSingle()">
+                        Test Single Question
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Right Panel: Results -->
+            <section class="results-panel">
+                <!-- Progress Bar -->
+                <div class="progress-section" id="progressSection" style="display:none;">
+                    <div class="progress-header">
+                        <span id="progressLabel">Evaluating...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-detail" id="progressDetail"></div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards" id="summaryCards" style="display:none;">
+                    <div class="card card-total">
+                        <div class="card-value" id="totalQuestions">0</div>
+                        <div class="card-label">Total Questions</div>
+                    </div>
+                    <div class="card card-pass">
+                        <div class="card-value" id="passCount">0</div>
+                        <div class="card-label">Passed ✅</div>
+                    </div>
+                    <div class="card card-fail">
+                        <div class="card-value" id="failCount">0</div>
+                        <div class="card-label">Failed ❌</div>
+                    </div>
+                    <div class="card card-rate">
+                        <div class="card-value" id="passRate">0%</div>
+                        <div class="card-label">Pass Rate</div>
+                    </div>
+                    <div class="card card-time">
+                        <div class="card-value" id="avgTime">0s</div>
+                        <div class="card-label">Avg Time</div>
+                    </div>
+                </div>
+
+                <!-- Download Buttons -->
+                <div class="download-section" id="downloadSection" style="display:none;">
+                    <h3>📥 Download Reports</h3>
+                    <div class="download-buttons">
+                        <button class="btn btn-sm" onclick="downloadReport('text')">📄 Text Report</button>
+                        <button class="btn btn-sm" onclick="downloadReport('csv')">📊 CSV Report</button>
+                        <button class="btn btn-sm" onclick="downloadReport('json')">🔧 JSON Report</button>
+                        <button class="btn btn-sm" id="pdfDownloadBtn" onclick="downloadReport('pdf')" style="display:none;">📑 PDF Report</button>
+                    </div>
+                </div>
+
+                <!-- Level Performance -->
+                <div class="level-performance" id="levelPerformance" style="display:none;">
+                    <h3>📈 Performance by Level</h3>
+                    <div class="level-bars" id="levelBars"></div>
+                </div>
+
+                <!-- Error Distribution -->
+                <div class="error-distribution" id="errorDistribution" style="display:none;">
+                    <h3>🔍 Error Distribution</h3>
+                    <div class="error-grid" id="errorGrid"></div>
+                </div>
+
+                <!-- Results Table -->
+                <div class="results-table-section" id="resultsTableSection" style="display:none;">
+                    <h3>📋 Detailed Results</h3>
+                    <div class="table-filters">
+                        <select id="filterLevel" onchange="filterResults()">
+                            <option value="all">All Levels</option>
+                            <option value="Dễ">Dễ</option>
+                            <option value="Trung bình">Trung bình</option>
+                            <option value="Khó">Khó</option>
+                        </select>
+                        <select id="filterResult" onchange="filterResults()">
+                            <option value="all">All Results</option>
+                            <option value="pass">Pass Only</option>
+                            <option value="fail">Fail Only</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="results-table" id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Question</th>
+                                    <th>Level</th>
+                                    <th>Result</th>
+                                    <th>Score</th>
+                                    <th>Error</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Detail Modal -->
+                <div class="modal-overlay" id="detailModal" style="display:none;" onclick="closeModal(event)">
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <div class="modal-header">
+                            <h3 id="modalTitle">Question Detail</h3>
+                            <button class="modal-close" onclick="closeModal()">&times;</button>
+                        </div>
+                        <div class="modal-body" id="modalBody">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Question Result -->
+                <div class="single-result" id="singleResult" style="display:none;">
+                    <h3>🧪 Single Question Result</h3>
+                    <div id="singleResultContent"></div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.1"/>
+                        <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                        <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                    </svg>
+                    <h3>Welcome to Teacher Bot</h3>
+                    <p>Upload a Question List CSV and start evaluating your chatbot's performance.</p>
+                    <ol>
+                        <li>Enter the Chatbot API URL and check the connection</li>
+                        <li>Upload the Question List CSV file</li>
+                        <li>Configure options and start evaluation</li>
+                        <li>View results and download reports</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
