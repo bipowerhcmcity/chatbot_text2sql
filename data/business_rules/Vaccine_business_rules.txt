@@ -19,3 +19,9 @@
     4.3 Ngày khai trương, ngày đóng của shop vĩnh viễn: 
         4.3.1 opening_date (ngày khai trương): Được viết theo dạng MM/DD/YYYY (ví dụ: 7/16/2019)
         4.3.2 closing_date (ngày đóng cửa): Được viết theo dạng YYYY-MM-DD:HH:MM:SS (ví dụ: 2025-01-01T00:00:00), nếu shop chưa đóng cửa, thì giá trị là None. 
+5. Mũi tiêm thành công (bảng fact_vaccine_record) với điều kiện là: 
+    1. indication_status = 3
+    2. is_test = 0
+6. Đặt lịch tiêm (bảng fact_vaccine_sales_order_detail) với điều kiện là: 
+    1. is_test = 0 
+    2. order_status = 4 

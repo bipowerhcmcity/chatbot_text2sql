@@ -283,12 +283,10 @@ async def _run_evaluation_job(
         # Generate CSV report
         csv_path = report_gen.generate_csv_report(analyzed_results)
 
-        # Generate PDF report if requested
-        pdf_path = ""
-        if config.get("generate_pdf", False):
-            pdf_path = report_gen.generate_pdf_report(
-                analyzed_results, summary, error_dist, chatbot_url
-            )
+        # Always generate PDF report
+        pdf_path = report_gen.generate_pdf_report(
+            analyzed_results, summary, error_dist, chatbot_url
+        )
 
         # Update job with results
         evaluation_jobs[job_id]["status"] = "completed"

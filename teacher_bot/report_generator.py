@@ -267,6 +267,7 @@ class ReportGenerator:
         """Generate a PDF report. Requires fpdf2 package."""
         try:
             from fpdf import FPDF
+            from fpdf.enums import XPos, YPos
         except ImportError:
             print("Warning: fpdf2 not installed. Skipping PDF generation.")
             return ""
@@ -277,31 +278,31 @@ class ReportGenerator:
         pdf = FPDF()
         pdf.set_auto_page_break(auto=True, margin=15)
 
-        # Add Unicode font
+        # Add Unicode font (required for Vietnamese text)
         font_path = self._get_unicode_font_path()
         if font_path:
-            pdf.add_font("NotoSans", "", font_path, uni=True)
-            pdf.add_font("NotoSans", "B", font_path, uni=True)
-            font_name = "NotoSans"
+            pdf.add_font("UniFont", "", font_path)
+            pdf.add_font("UniFont", "B", font_path)
+            font_name = "UniFont"
         else:
             font_name = "Helvetica"
 
         # Title Page
         pdf.add_page()
         pdf.set_font(font_name, "B", 20)
-        pdf.cell(0, 40, "", ln=True)
-        pdf.cell(0, 15, "Teacher Bot", ln=True, align="C")
+        pdf.cell(0, 40, "", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, 15, "Teacher Bot", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
         pdf.set_font(font_name, "", 14)
-        pdf.cell(0, 10, "Chatbot Evaluation Report", ln=True, align="C")
+        pdf.cell(0, 10, "Chatbot Evaluation Report", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
         pdf.set_font(font_name, "", 10)
-        pdf.cell(0, 10, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", ln=True, align="C")
+        pdf.cell(0, 10, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
         if chatbot_url:
-            pdf.cell(0, 8, f"API: {chatbot_url}", ln=True, align="C")
+            pdf.cell(0, 8, f"API: {chatbot_url}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
 
         # Summary Page
         pdf.add_page()
         pdf.set_font(font_name, "B", 16)
-        pdf.cell(0, 10, "Executive Summary", ln=True)
+        pdf.cell(0, 10, "Executive Summary", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font(font_name, "", 11)
         pdf.ln(5)
 
@@ -317,12 +318,12 @@ class ReportGenerator:
             f"Avg Response Time: {summary.get('avg_response_time', 0)}s",
         ]
         for line in summary_lines:
-            pdf.cell(0, 7, line, ln=True)
+            pdf.cell(0, 7, line, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
         # Level stats
         pdf.ln(5)
         pdf.set_font(font_name, "B", 12)
-        pdf.cell(0, 10, "Performance by Level", ln=True)
+        pdf.cell(0, 10, "Performance by Level", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font(font_name, "", 10)
 
         level_stats = summary.get("level_stats", {})
@@ -330,23 +331,23 @@ class ReportGenerator:
             lt = stats["total"]
             lc = stats["correct"]
             lr = round(lc / lt * 100, 1) if lt > 0 else 0
-            pdf.cell(0, 7, f"  {level}: {lc}/{lt} ({lr}%)", ln=True)
+            pdf.cell(0, 7, f"  {level}: {lc}/{lt} ({lr}%)", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
         # Error Distribution
         pdf.ln(5)
         pdf.set_font(font_name, "B", 12)
-        pdf.cell(0, 10, "Error Distribution", ln=True)
+        pdf.cell(0, 10, "Error Distribution", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font(font_name, "", 10)
 
         by_group = error_distribution.get("by_group", {})
         for group, count in sorted(by_group.items()):
             if group != "None":
-                pdf.cell(0, 7, f"  {group}: {count} errors", ln=True)
+                pdf.cell(0, 7, f"  {group}: {count} errors", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
         # Detailed Results
         pdf.add_page()
         pdf.set_font(font_name, "B", 16)
-        pdf.cell(0, 10, "Detailed Results", ln=True)
+        pdf.cell(0, 10, "Detailed Results", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
         for idx, r in enumerate(results, 1):
             is_correct = r.get("is_correct")
@@ -354,20 +355,31 @@ class ReportGenerator:
 
             pdf.ln(3)
             pdf.set_font(font_name, "B", 10)
-            q_text = f"Q{idx}: {r.get('question', '')[:80]}"
-            pdf.cell(0, 7, q_text, ln=True)
+            q_text = f"Q{idx}: {str(r.get('question', ''))[:80]}"
+            pdf.multi_cell(0, 7, q_text, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             pdf.set_font(font_name, "", 9)
-            pdf.cell(0, 6, f"  Level: {r.get('level', '')} | Result: {status} | Time: {r.get('elapsed_time', 0):.2f}s", ln=True)
+            pdf.cell(0, 6, f"  Level: {r.get('level', '')} | Result: {status} | Time: {r.get('elapsed_time', 0):.2f}s", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
             score = r.get("score", {})
             if score:
-                pdf.cell(0, 6, f"  Score: D={score.get('d_score', 0)} B={score.get('b_score', 0)} P={score.get('p_score', 0)} Total={score.get('total_score', 0)}", ln=True)
+                pdf.cell(0, 6, f"  Score: D={score.get('d_score', 0)} B={score.get('b_score', 0)} P={score.get('p_score', 0)} Total={score.get('total_score', 0)}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
             ea = r.get("error_analysis", {})
             if ea and ea.get("error_group") != "None":
-                pdf.cell(0, 6, f"  Error: {ea.get('error_group', '')} - {', '.join(ea.get('error_labels', []))}", ln=True)
-                analysis_text = ea.get("analysis", "")[:100]
-                pdf.cell(0, 6, f"  Analysis: {analysis_text}", ln=True)
+                pdf.cell(0, 6, f"  Error: {ea.get('error_group', '')} - {', '.join(ea.get('error_labels', []))}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+                analysis_text = str(ea.get("analysis", ""))[:100]
+                if analysis_text:
+                    pdf.multi_cell(0, 6, f"  Analysis: {analysis_text}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+
+            # SQL (truncated for PDF readability)
+            expected_sql = str(r.get("expected_sql", ""))[:200]
+            bot_sql = str(r.get("bot_sql", ""))[:200]
+            if expected_sql:
+                pdf.set_font(font_name, "", 8)
+                pdf.multi_cell(0, 5, f"  Expected: {expected_sql}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+            if bot_sql:
+                pdf.multi_cell(0, 5, f"  Bot SQL:  {bot_sql}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+            pdf.set_font(font_name, "", 9)
 
             # Check if we need a new page
             if pdf.get_y() > 250:
@@ -376,7 +388,7 @@ class ReportGenerator:
         # Recommendations
         pdf.add_page()
         pdf.set_font(font_name, "B", 16)
-        pdf.cell(0, 10, "Recommendations", ln=True)
+        pdf.cell(0, 10, "Recommendations", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font(font_name, "", 10)
         pdf.ln(5)
 
@@ -389,17 +401,23 @@ class ReportGenerator:
         return filepath
 
     def _get_unicode_font_path(self) -> Optional[str]:
-        """Try to find a Unicode-capable font on the system."""
+        """Try to find a Unicode-capable .ttf font on the system.
+
+        Only returns .ttf files (not .ttc collections) because fpdf2
+        does not support TrueType Collection files directly.
+        """
         possible_paths = [
-            # macOS
+            # macOS – Arial Unicode is the best option (full Unicode .ttf)
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
             "/Library/Fonts/Arial Unicode.ttf",
-            "/System/Library/Fonts/Helvetica.ttc",
+            "/System/Library/Fonts/Supplemental/Arial.ttf",
             # Linux
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
             "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
             # Windows
             "C:/Windows/Fonts/arial.ttf",
+            "C:/Windows/Fonts/ArialUni.ttf",
         ]
         for p in possible_paths:
             if os.path.exists(p):

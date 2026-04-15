@@ -218,9 +218,6 @@ function displayResults(data) {
 
     // Show download section
     document.getElementById('downloadSection').style.display = 'block';
-    if (document.getElementById('generatePdf').checked) {
-        document.getElementById('pdfDownloadBtn').style.display = 'inline-flex';
-    }
 
     // Level performance
     displayLevelPerformance(summary.level_stats || {});
