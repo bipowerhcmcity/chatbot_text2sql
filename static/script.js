@@ -194,14 +194,6 @@ class CADSInsightBot {
             const response = await this.sendToBackend(message);
             this.hideTyping();
             this.addAssistantMessage(response.response);
-
-            if (response.table) {
-                try {
-                    const tableData = Array.isArray(response.table) ? response.table : (response.table.rows || []);
-                    if (Array.isArray(tableData) && tableData.length > 0) this.showModalWithData(tableData);
-                } catch (e) { console.error('Failed to render table:', e); }
-            }
-
             this.saveCurrentChat();
         } catch (error) {
             this.hideTyping();
@@ -298,40 +290,271 @@ class CADSInsightBot {
                 pre.parentNode.replaceChild(wrapper, pre);
                 wrapper.appendChild(pre);
 
-                const btn = document.createElement('button');
-                btn.textContent = '▶ Run';
-                btn.className = 'inline-run-sql-btn';
-                wrapper.appendChild(btn);
-
-                btn.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    const orig = btn.textContent;
-                    btn.textContent = 'Running...';
-                    btn.disabled = true;
-                    try {
-                        const res = await fetch('/api/run_sql', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ sql: codeText })
-                        });
-                        if (!res.ok) {
-                            const err = await res.json().catch(() => ({}));
-                            self.showModalError(err.detail || `HTTP ${res.status}`);
-                        } else {
-                            const data = await res.json();
-                            self.showModalWithData(data.rows || []);
-                        }
-                    } catch (err) {
-                        self.showModalError(String(err));
-                    } finally {
-                        btn.textContent = orig;
-                        btn.disabled = false;
-                    }
-                });
+                // Auto-run SQL and show inline results immediately
+                self._autoRunSQL(codeText, wrapper);
             } catch (e) {
-                console.error('Error attaching run button:', e);
+                console.error('Error auto-running SQL:', e);
             }
         });
+    }
+
+    async _autoRunSQL(sql, wrapperEl) {
+        // Insert a loading placeholder right after the code block
+        const placeholder = document.createElement('div');
+        placeholder.className = 'inline-result-loading';
+        placeholder.innerHTML = `
+            <div class="inline-result-spinner"></div>
+            <span>Fetching results…</span>
+        `;
+        wrapperEl.appendChild(placeholder);
+        this.scrollToBottom();
+
+        try {
+            const res = await fetch('/api/run_sql', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sql })
+            });
+            placeholder.remove();
+
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                this._renderInlineError(wrapperEl, err.detail || `HTTP ${res.status}`);
+            } else {
+                const data = await res.json();
+                this._renderInlineTable(wrapperEl, data.rows || []);
+            }
+        } catch (err) {
+            placeholder.remove();
+            this._renderInlineError(wrapperEl, String(err));
+        }
+        this.scrollToBottom();
+    }
+
+    _renderInlineError(wrapperEl, msg) {
+        const el = document.createElement('div');
+        el.className = 'inline-result-error';
+        el.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>${String(msg)}</span>
+        `;
+        wrapperEl.appendChild(el);
+    }
+
+    _renderInlineTable(wrapperEl, rows) {
+        const container = document.createElement('div');
+        container.className = 'inline-result-container';
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            container.innerHTML = `
+                <div class="inline-result-empty">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span>Query returned 0 rows</span>
+                </div>`;
+            wrapperEl.appendChild(container);
+            return;
+        }
+
+        const cols = Object.keys(rows[0]);
+        let filteredRows = [...rows];
+        let sortCol = null;
+        let sortAsc = true;
+        let searchQuery = '';
+        let currentPage = 1;
+        const pageSize = 10;
+
+        // ── Header bar ──────────────────────────────────────────
+        const headerBar = document.createElement('div');
+        headerBar.className = 'irt-header';
+
+        const metaInfo = document.createElement('div');
+        metaInfo.className = 'irt-meta';
+
+        const searchBox = document.createElement('div');
+        searchBox.className = 'irt-search';
+        searchBox.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input type="text" placeholder="Search results…" class="irt-search-input"/>
+        `;
+
+        const actions = document.createElement('div');
+        actions.className = 'irt-actions';
+        const csvBtn = document.createElement('button');
+        csvBtn.className = 'irt-btn';
+        csvBtn.innerHTML = `
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v12M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 21H4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download CSV
+        `;
+        actions.appendChild(csvBtn);
+
+        headerBar.appendChild(metaInfo);
+        headerBar.appendChild(searchBox);
+        headerBar.appendChild(actions);
+
+        // ── Table wrapper ────────────────────────────────────────
+        const tableWrap = document.createElement('div');
+        tableWrap.className = 'irt-table-wrap';
+
+        const table = document.createElement('table');
+        table.className = 'irt-table';
+
+        const thead = document.createElement('thead');
+        const theadRow = document.createElement('tr');
+        cols.forEach(col => {
+            const th = document.createElement('th');
+            th.innerHTML = `<span class="irt-th-text">${col}</span><span class="irt-sort-icon">↕</span>`;
+            th.dataset.col = col;
+            th.addEventListener('click', () => {
+                if (sortCol === col) sortAsc = !sortAsc;
+                else { sortCol = col; sortAsc = true; }
+                thead.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc', 'sorted-desc'));
+                th.classList.add(sortAsc ? 'sorted-asc' : 'sorted-desc');
+                currentPage = 1;
+                render();
+            });
+            theadRow.appendChild(th);
+        });
+        thead.appendChild(theadRow);
+
+        const tbody = document.createElement('tbody');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        tableWrap.appendChild(table);
+
+        // ── Pagination bar ───────────────────────────────────────
+        const pagination = document.createElement('div');
+        pagination.className = 'irt-pagination';
+
+        // ── Assemble ─────────────────────────────────────────────
+        container.appendChild(headerBar);
+        container.appendChild(tableWrap);
+        container.appendChild(pagination);
+        wrapperEl.appendChild(container);
+
+        // ── Render function ──────────────────────────────────────
+        const render = () => {
+            // Filter
+            filteredRows = rows.filter(r =>
+                !searchQuery ||
+                cols.some(c => String(r[c] == null ? '' : r[c]).toLowerCase().includes(searchQuery))
+            );
+            // Sort
+            if (sortCol) {
+                filteredRows.sort((a, b) => {
+                    const av = a[sortCol], bv = b[sortCol];
+                    if (av == null && bv == null) return 0;
+                    if (av == null) return 1;
+                    if (bv == null) return -1;
+                    const isNum = !isNaN(av) && !isNaN(bv);
+                    if (isNum) return sortAsc ? av - bv : bv - av;
+                    return sortAsc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+                });
+            }
+            // Paginate
+            const totalPages = Math.max(1, Math.ceil(filteredRows.length / pageSize));
+            if (currentPage > totalPages) currentPage = totalPages;
+            const start = (currentPage - 1) * pageSize;
+            const pageRows = filteredRows.slice(start, start + pageSize);
+
+            // Update meta
+            metaInfo.innerHTML = `
+                <span class="irt-count">
+                    <strong>${filteredRows.length.toLocaleString()}</strong> row${filteredRows.length !== 1 ? 's' : ''}
+                    ${filteredRows.length !== rows.length ? `<span class="irt-filtered">(filtered from ${rows.length.toLocaleString()})</span>` : ''}
+                </span>
+                <span class="irt-cols">${cols.length} col${cols.length !== 1 ? 's' : ''}</span>
+            `;
+
+            // Build rows
+            tbody.innerHTML = '';
+            pageRows.forEach((r, ri) => {
+                const tr = document.createElement('tr');
+                tr.className = ri % 2 === 0 ? 'irt-row-even' : 'irt-row-odd';
+                cols.forEach(c => {
+                    const td = document.createElement('td');
+                    const val = r[c];
+                    if (val === null || val === undefined) {
+                        td.innerHTML = '<span class="irt-null">NULL</span>';
+                    } else {
+                        const str = String(val);
+                        if (searchQuery && str.toLowerCase().includes(searchQuery)) {
+                            td.innerHTML = str.replace(
+                                new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'),
+                                '<mark class="irt-highlight">$1</mark>'
+                            );
+                        } else {
+                            td.textContent = str;
+                        }
+                    }
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            // Pagination controls
+            pagination.innerHTML = '';
+            if (totalPages > 1) {
+                const info = document.createElement('span');
+                info.className = 'irt-page-info';
+                info.textContent = `Page ${currentPage} / ${totalPages}`;
+
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'irt-page-btn';
+                prevBtn.textContent = '‹ Prev';
+                prevBtn.disabled = currentPage === 1;
+                prevBtn.addEventListener('click', () => { currentPage--; render(); });
+
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'irt-page-btn';
+                nextBtn.textContent = 'Next ›';
+                nextBtn.disabled = currentPage === totalPages;
+                nextBtn.addEventListener('click', () => { currentPage++; render(); });
+
+                pagination.appendChild(prevBtn);
+                pagination.appendChild(info);
+                pagination.appendChild(nextBtn);
+            }
+        };
+
+        // ── Search handler ───────────────────────────────────────
+        const searchInput = searchBox.querySelector('.irt-search-input');
+        searchInput.addEventListener('input', () => {
+            searchQuery = searchInput.value.trim().toLowerCase();
+            currentPage = 1;
+            render();
+        });
+
+        // ── CSV download ─────────────────────────────────────────
+        csvBtn.addEventListener('click', () => {
+            const data = filteredRows.length ? filteredRows : rows;
+            const lines = [cols.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')];
+            data.forEach(r => {
+                lines.push(cols.map(c => `"${String(r[c] == null ? '' : r[c]).replace(/"/g, '""')}"`).join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `result_${new Date().toISOString().slice(0,19).replace(/[T:]/g,'-')}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        });
+
+        render();
     }
 
     parseBasicMarkdown(text) {
