@@ -1,0 +1,101 @@
+"regimen_id","vaccine_id","age_unit","from_age_number","to_age_number","schedule_type","required_injections","max_injections","is_pregnant_regimen","_record_date"
+REG_0,ad980c82-0ed4-4793-a7e6-3b74ab3d3db7,Age,50,1000,Từ 50 tuổi trở lên,2,2,0,2026-05-15
+REG_1,b046a06e-cfc1-4327-9bfe-8efd07372dbd,Month,12,24,Từ 12 tháng - dưới 24 tháng,3,3,0,2026-05-15
+REG_10,"4912c9b0-bb38-4aea-9635-cedb8c3aec9d",Age,16,1000,Nhanh - Từ 16 tuổi,4,4,0,2026-05-15
+REG_11,"7102f3ef-eb3f-48b7-9f82-019ffe8125fe",Week,8,209,Từ tròn 02 tháng tuổi - dưới 04 tuổi - cơ bản,3,0,0,2026-05-15
+REG_12,"994195b8-647a-4107-a282-bc4f20aebb67",Month,12,84,Đã tiêm sởi đơn - Từ 1 - dưới 7 tuổi,2,2,0,2026-05-15
+REG_13,f7b6a56f-eb21-45e8-af79-ace66797ded2,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi,4,4,0,2026-05-15
+REG_14,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,10,65,Từ 10 - dưới 65 tuổi - chưa tiêm,3,0,0,2026-05-15
+REG_15,"50b8cd1b-fd31-4a24-808d-72ec6f5f8291","",0,0,Tiêm trong da 0.1ml - Sau phơi nhiễm - Đã dự phòng,2,0,0,2026-05-15
+REG_16,b046a06e-cfc1-4327-9bfe-8efd07372dbd,Month,6,12,Từ 06 tháng - dưới 12 tháng,3,3,0,2026-05-15
+REG_17,f5d7aebf-4c9a-4761-91ef-60cbdcd35638,Month,6,108,Từ 6 tháng - dưới 9 tuổi,2,0,0,2026-05-15
+REG_18,"0eabd09e-baae-46f5-93e8-a8894d3e2bfb",Age,0,1000,Từ dưới 20 tuổi trở xuống - Nhanh,4,0,0,2026-05-15
+REG_19,f44a0269-f87c-4ea8-ba37-be5e01fc012e,Age,20,1000,Từ tròn 20 tuổi trở lên - Nhanh,4,0,0,2026-05-15
+REG_2,f4b7e4be-1758-4d3c-9244-8564c6680e23,Age,3,49,Trên 3 tuổi - 49 tuổi,2,3,0,2026-05-15
+REG_20,d2185439-42f0-4734-be8c-4e0c122bc48a,Age,7,10,Từ 7 - dưới 10 tuổi - chưa tiêm,3,0,0,2026-05-15
+REG_21,d6d60800-8212-4c75-9825-953e8eb84354,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi PĐ 2+1,3,3,0,2026-05-15
+REG_22,"2aeb30fd-c7c7-4f6e-b530-747f12cf9133",Month,24,672,Từ 2 - dưới 56 tuổi,1,1,0,2026-05-15
+REG_23,d2eee2d8-8568-4a60-b1c2-0c3ffef6bbcd,Week,0,52143,Từ 0 tuổi trở lên,10,10,0,2026-05-15
+REG_24,b046a06e-cfc1-4327-9bfe-8efd07372dbd,Week,8,26,Từ 02 tháng - dưới 6 tháng - dịch bùng phát,4,4,0,2026-05-15
+REG_25,d6d60800-8212-4c75-9825-953e8eb84354,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi PĐ 2+1,3,3,0,2026-05-15
+REG_26,"0eabd09e-baae-46f5-93e8-a8894d3e2bfb",Age,0,1000,Từ dưới 20 tuổi trở xuống - Nguy cơ cao,4,0,0,2026-05-15
+REG_27,"6adcce41-9314-4491-a5bf-032e6e039664",Week,0,1000,Tiêm trong da 0.1mlx2 - Sau phơi nhiễm - Chưa dự phòng,4,0,0,2026-05-15
+REG_28,"6adcce41-9314-4491-a5bf-032e6e039664",Week,0,52143,Tiêm bắp 0.5ml - Booster,1,0,0,2026-05-15
+REG_29,f389375a-9c42-4eae-9c89-17929d656630,Age,14,46,Tiêm dở PĐ nơi khác - Từ 14 - dưới 46 tuổi.,3,3,0,2026-05-15
+REG_3,"1bd6264a-cef7-4a86-a70e-98df51204905",Week,8,52,Từ 2 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_30,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,4,65,Booster,1,0,0,2026-05-15
+REG_31,"50b8cd1b-fd31-4a24-808d-72ec6f5f8291",Week,0,52143,Tiêm bắp 0.5ml - Sau phơi nhiễm - Chưa dự phòng,5,0,0,2026-05-15
+REG_32,e428b854-cd7e-40da-b10f-58ed7ab66a67,"",0,0,Phụ nữ mang thai,2,0,1,2026-05-15
+REG_33,d6d60800-8212-4c75-9825-953e8eb84354,Month,12,72,Từ 1 - dưới 6 tuổi,2,2,0,2026-05-15
+REG_34,c07b5616-0b15-457e-b33d-2d39098fd81e,Week,0,522,Từ 10 tuổi trở xuống - Thông thường,3,0,0,2026-05-15
+REG_35,f44a0269-f87c-4ea8-ba37-be5e01fc012e,Age,20,1000,Từ tròn 20 tuổi trở lên - Nguy cơ cao,4,0,0,2026-05-15
+REG_36,"543e9685-b1fd-4efd-a670-38a788feabdb",Age,7,1000,Từ 7 tuổi,2,2,0,2026-05-15
+REG_37,ec3173d3-d38a-48ae-9b2d-297878b5cae0,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi,4,4,0,2026-05-15
+REG_38,c85f8ba6-bb27-4deb-a834-1c4466d83113,Month,6,108,Từ 6 tháng - dưới 9 tuổi,2,0,0,2026-05-15
+REG_39,"96c63595-2c56-4227-95a5-08ba019485a5",Age,15,46,Nhanh - Từ 15 - dưới 46 tuổi,3,3,0,2026-05-15
+REG_4,"6adcce41-9314-4491-a5bf-032e6e039664",Week,0,1000,Tiêm bắp 0.5ml - Sau phơi nhiễm - Chưa dự phòng,5,0,0,2026-05-15
+REG_40,ec3173d3-d38a-48ae-9b2d-297878b5cae0,Month,7,12,Từ 7 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_41,b5d2027d-9ae8-47cd-b95a-b5635d39fd8d,Age,7,10,Từ 7 đến 10 tuổi,2,2,0,2026-05-15
+REG_42,f7b6a56f-eb21-45e8-af79-ace66797ded2,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi PĐ 2+1,3,3,0,2026-05-15
+REG_43,"96c63595-2c56-4227-95a5-08ba019485a5",Age,15,46,Từ 15 - dưới 46 tuổi,3,3,0,2026-05-15
+REG_44,"785de656-bc75-4376-a9be-84e004012630",Week,8,105,Từ tròn 02 tháng tuổi - tròn 02 tuổi,4,0,0,2026-05-15
+REG_45,cd542041-0791-4943-bef1-47fc343e388b,Week,0,522,Từ 10 tuổi trở xuống - Thông thường,3,0,0,2026-05-15
+REG_46,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,10,65,Từ 10 - dưới 65 tuổi - tiêm nhắc,1,0,0,2026-05-15
+REG_47,"0ce0bdfd-1bf6-41af-a8e8-2b9c817d6c46",Month,24,12000,Từ 2 tuổi,2,0,0,2026-05-15
+REG_48,b046a06e-cfc1-4327-9bfe-8efd07372dbd,Week,8,26,Từ 02 tháng - dưới 06 tháng,3,3,0,2026-05-15
+REG_49,"96c63595-2c56-4227-95a5-08ba019485a5",Age,15,46,Từ 15 - dưới 46 tuổi,3,3,0,2026-05-15
+REG_5,"97bfc31d-d30d-4672-812a-d63ebce8fa48",Week,0,52143,Tiêm bắp 0.5ml - Tiêm dự phòng,3,0,0,2026-05-15
+REG_50,"97bfc31d-d30d-4672-812a-d63ebce8fa48",Week,0,52143,Tiêm bắp 0.5ml - Sau phơi nhiễm - Đã dự phòng,2,0,0,2026-05-15
+REG_51,f7b6a56f-eb21-45e8-af79-ace66797ded2,Month,12,24,Từ 1 - dưới 2 tuổi,2,2,0,2026-05-15
+REG_52,f389375a-9c42-4eae-9c89-17929d656630,Age,14,27,Nữ từ 14 - dưới 27 tuổi,3,3,0,2026-05-15
+REG_53,"5279d7bb-8916-46dd-91a1-53838bee091d",Week,8,52143,Từ 2 tháng - chưa tiêm UV,3,0,0,2026-05-15
+REG_54,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,10,65,Từ 10 - dưới 65 tuổi - chưa tiêm,3,0,0,2026-05-15
+REG_55,d6d60800-8212-4c75-9825-953e8eb84354,Month,7,12,Từ 7 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_56,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,7,10,Từ 7 - dưới 10 tuổi - chưa tiêm,3,0,0,2026-05-15
+REG_57,"0eabd09e-baae-46f5-93e8-a8894d3e2bfb",Age,0,1000,Từ dưới 20 tuổi trở xuống - Nguy cơ cao,4,0,0,2026-05-15
+REG_58,"6adcce41-9314-4491-a5bf-032e6e039664",Week,0,1000,Tiêm trong da 0.1ml - Sau phơi nhiễm - Đã dự phòng,2,0,0,2026-05-15
+REG_59,"7067ae7c-beac-45be-9b3f-dc7b05486620",Month,12,24,Từ 1 - dưới 2 tuổi,2,2,0,2026-05-15
+REG_6,c7c2847b-44d5-4f22-a6ca-f60eda429687,"",0,0,Phụ nữ mang thai,2,0,1,2026-05-15
+REG_60,d1b8a266-e964-4ff2-8b49-c28bb56edf9d,Week,0,52143,Tiêm bắp 0.5ml - Booster,1,0,0,2026-05-15
+REG_61,c7c2847b-44d5-4f22-a6ca-f60eda429687,Age,7,1000,Booster,1,0,0,2026-05-15
+REG_62,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,4,65,Từ 4 - Dưới 65 tuổi - chưa tiêm BH-HG-UV,4,0,0,2026-05-15
+REG_63,d1b8a266-e964-4ff2-8b49-c28bb56edf9d,Week,0,52143,Tiêm trong da 0.1mlx2 - Sau phơi nhiễm - Chưa dự phòng,4,0,0,2026-05-15
+REG_64,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,7,10,Từ 7 - dưới 10 tuổi - chưa tiêm,3,0,0,2026-05-15
+REG_65,e0471647-1229-4c4f-8252-0bdb2127064a,Month,24,12000,Từ 2 tuổi trở lên,1,1,0,2026-05-15
+REG_66,c07b5616-0b15-457e-b33d-2d39098fd81e,Week,0,522,Từ 10 tuổi trở xuống - Nguy cơ cao,4,0,0,2026-05-15
+REG_67,f812def4-8e9f-404e-9ecc-8509113ad10d,Age,4,6,Tiêm nhắc mũi thứ 5,1,1,0,2026-05-15
+REG_68,f812def4-8e9f-404e-9ecc-8509113ad10d,Week,8,365,Từ 2 tháng - dưới 7 tuổi chưa tiêm BH-HG-UV,5,0,0,2026-05-15
+REG_69,c07b5616-0b15-457e-b33d-2d39098fd81e,Week,0,522,Từ 10 tuổi trở xuống - Nguy cơ cao,4,0,0,2026-05-15
+REG_7,"4271432d-31d6-44c4-a7b2-5b335928d9af",Month,6,552,Từ 6 tháng - dưới 46 tuổi,2,2,0,2026-05-15
+REG_70,"4c85dc38-0345-48a0-b387-2bedc2f81f2f",Month,12,12000,Từ 1 tuổi - người lớn,1,1,0,2026-05-15
+REG_71,"994195b8-647a-4107-a282-bc4f20aebb67",Month,12,84,Chưa tiêm sởi đơn - Từ 1 - dưới 7 tuổi,2,2,0,2026-05-15
+REG_72,f389375a-9c42-4eae-9c89-17929d656630,Age,9,14,Nữ từ 9 - dưới 14 tuổi,2,2,0,2026-05-15
+REG_73,"50fd24cb-cae8-4c07-b3e7-d3655c62070f",Age,60,1000,Từ tròn 60 tuổi trở lên,1,1,0,2026-05-15
+REG_74,ca9b6f19-7084-4da1-baf4-3fc22ad68a58,Age,10,1000,Trên 10 tuổi - Tiêm nguy cơ cao,4,0,0,2026-05-15
+REG_75,"6095081d-1991-4abd-ad81-ae6c94b10b18",Month,12,12000,Từ tròn 01 tuổi trở lên,1,1,0,2026-05-15
+REG_76,cd542041-0791-4943-bef1-47fc343e388b,Week,0,522,Từ 10 tuổi trở xuống - Nguy cơ cao,4,0,0,2026-05-15
+REG_77,f9ddf651-e433-4e7c-8786-745cf4307d32,Week,6,105,Từ 6 tuần - tròn 2 tuổi,4,4,0,2026-05-15
+REG_78,ec3173d3-d38a-48ae-9b2d-297878b5cae0,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi,4,4,0,2026-05-15
+REG_79,f812def4-8e9f-404e-9ecc-8509113ad10d,Week,8,365,Từ 2 tháng - dưới 7 tuổi chưa tiêm BH-HG-UV,5,0,0,2026-05-15
+REG_8,dfbb61f5-306a-4a02-bba0-ca3cc234e048,Age,3,9,Từ 36 tháng tuổi - dưới 9 tuổi,2,0,0,2026-05-15
+REG_80,b5d2027d-9ae8-47cd-b95a-b5635d39fd8d,Month,12,84,Đã tiêm sởi đơn - Dưới 7 tuổi,2,2,0,2026-05-15
+REG_81,d1b8a266-e964-4ff2-8b49-c28bb56edf9d,Week,0,52143,Tiêm bắp 0.5ml - Tiêm dự phòng,3,0,0,2026-05-15
+REG_82,f9ddf651-e433-4e7c-8786-745cf4307d32,Week,6,105,Tiêm mũi 3 sau 1 tuổi,4,4,0,2026-05-15
+REG_83,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,4,65,Từ 4 - Dưới 65 tuổi - chưa tiêm BH-HG-UV,4,0,0,2026-05-15
+REG_84,ca9b6f19-7084-4da1-baf4-3fc22ad68a58,Age,10,1000,Trên 10 tuổi - Tiêm nguy cơ cao,4,0,0,2026-05-15
+REG_85,"543e9685-b1fd-4efd-a670-38a788feabdb",Month,9,12,Chưa tiêm sởi đơn - từ 9 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_86,"6cbc7463-9db7-40c2-91dc-1478d50b9773","",0,0,Phụ nữ mang thai,1,0,1,2026-05-15
+REG_87,bb920798-9cfb-415d-93c8-b48ae9d5146f,Age,16,1000,Từ 16 tuổi trở lên - Tiêm nguy cơ cao,4,0,0,2026-05-15
+REG_88,"96c63595-2c56-4227-95a5-08ba019485a5",Age,9,15,Từ 9 - dưới 15 tuổi,2,2,0,2026-05-15
+REG_89,bbec43e2-733b-43d3-943a-99f6499cd05f,Month,24,12000,Từ 2 tuổi,1,0,0,2026-05-15
+REG_9,"6cbc7463-9db7-40c2-91dc-1478d50b9773",Age,4,65,Từ 4 - Dưới 65 tuổi - chưa tiêm BH-HG-UV,4,0,0,2026-05-15
+REG_90,"50b8cd1b-fd31-4a24-808d-72ec6f5f8291",Week,0,52143,Tiêm trong da 0.1mlx2 - Sau phơi nhiễm - Chưa dự phòng,4,0,0,2026-05-15
+REG_91,b02f2037-19c2-4daa-bc58-76976a7e1790,Week,8,209,Từ tròn 02 tháng tuổi - dưới 04 tuổi - nhắc,1,0,0,2026-05-15
+REG_92,f7b6a56f-eb21-45e8-af79-ace66797ded2,Month,7,12,Từ 7 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_93,"9fc2c76a-531a-458f-9703-3fd9c5f8a15f",Age,9,1000,Từ 9 tuổi,1,0,0,2026-05-15
+REG_94,f0c13949-a5c2-42d0-8c12-8bbd1905cfbf,Month,12,12000,Từ tròn 12 tháng tuổi trở lên,2,2,0,2026-05-15
+REG_95,"4912c9b0-bb38-4aea-9635-cedb8c3aec9d",Month,12,192,Từ 1 - dưới 16 tuổi,2,2,0,2026-05-15
+REG_96,"7067ae7c-beac-45be-9b3f-dc7b05486620",Month,7,12,Từ 7 tháng - dưới 1 tuổi,3,3,0,2026-05-15
+REG_97,"678391be-ff09-4b83-8ead-f1a4e3d1562d",Age,10,1000,Trên 10 tuổi - Suy giảm miễn dịch,4,0,0,2026-05-15
+REG_98,d6d60800-8212-4c75-9825-953e8eb84354,Week,6,30,Từ 6 tuần - dưới 7 tháng tuổi PĐ 2+1,3,3,0,2026-05-15
+REG_99,b046a06e-cfc1-4327-9bfe-8efd07372dbd,Month,12,24,Từ 12 tháng - dưới 24 tháng,3,3,0,2026-05-15

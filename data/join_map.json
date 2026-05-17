@@ -1,203 +1,161 @@
-{    
+{
   "primary_keys": {
-    "dim_item": ["item_code"],
-    "dim_family_member": [
-      "person_id"
-    ],
-    "dim_person_address": [
-      "id"
-    ],
-    "dim_person": [
-      "id"
-    ],
-    "dim_product": [
-      "product_unit_id"
-      ],
-    "dim_satellite_shop": [
-      "id"
-    ],
-    "dim_shop": [],
-    "dim_vaccine_disease_group": [
-      "id"
-    ],
-    "dim_vaccine_regimen": [
-      "regimen_detail_id"
-    ],
-    "fact_vaccine_record": [
-      "indication_id"
-    ],
-    "fact_vaccine_returned_order_detail": [
-      "return_order_detail_id"
-    ],
-    "fact_vaccine_sales_order_detail": [
-      "order_detail_id"
-    ],
-    "dim_device": [
-      "device_id"
-    ],
-    "dim_event": [
-      "event_id"
-    ],
-    "fact_session": [
-      "session_id"
-    ],
-    "fact_session_detail": [
-      "session_detail_id"
-    ],
-    "fact_event_params": [
-      "session_detail_id"
-    ]
+    "dim_customer": ["customer_id"],
+    "dim_customer_group": ["group_customer_id"],
+    "dim_customer_contact": ["customer_id"],
+    "fact_order_vac": ["order_id"],
+    "fact_return_order_vac": ["return_order_id"],
+    "fact_immunization_vac": ["immunization_id"],
+    "dim_shop_vac": ["shop_code"],
+    "dim_customer_event_group": ["event_group_id"],
+    "dim_product_vac": ["item_code"],
+    "dim_regimen_vac": ["regimen_id"],
+    "dim_customer_address_history": ["address_id"],
+    "dim_province": ["province_code"],
+    "dim_ward": ["ward_code"]
   },
   "joins": {
-    "dim_item": [
+    "dim_customer": [
       {
-        "to_table": "fact_session_detail",
+        "to_table": "dim_customer_group",
+        "left_column": "group_customer_id",
+        "right_column": "group_customer_id",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between customer and customer group"
+      },
+      {
+        "to_table": "dim_customer_contact",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "ONE_TO_MANY relationship between customer and contact"
+      },
+      {
+        "to_table": "fact_order_vac",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "ONE_TO_MANY relationship between customer and order"
+      },
+      {
+        "to_table": "fact_return_order_vac",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "ONE_TO_MANY relationship between customer and return order"
+      },
+      {
+        "to_table": "fact_immunization_vac",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "ONE_TO_MANY relationship between customer and immunization"
+      },
+      {
+        "to_table": "dim_customer_event_group",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between customer and event group (as customer)"
+      },
+      {
+        "to_table": "dim_customer_event_group",
+        "left_column": "customer_id",
+        "right_column": "leader_id",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between customer and event group (as leader)"
+      },
+      {
+        "to_table": "dim_customer_address_history",
+        "left_column": "customer_id",
+        "right_column": "customer_id",
+        "score": 10,
+        "reason": "ONE_TO_MANY relationship between customer and address history"
+      },
+      {
+        "to_table": "dim_province",
+        "left_column": "customer_province_code",
+        "right_column": "province_code",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between customer and province"
+      },
+      {
+        "to_table": "dim_ward",
+        "left_column": "customer_ward_code",
+        "right_column": "ward_code",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between customer and ward"
+      }
+    ],
+    "fact_order_vac": [
+      {
+        "to_table": "dim_shop_vac",
+        "left_column": "shop_code",
+        "right_column": "shop_code",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between order and shop"
+      },
+      {
+        "to_table": "dim_product_vac",
         "left_column": "item_code",
         "right_column": "item_code",
         "score": 10,
-        "reason": "shared_column"
+        "reason": "MANY_TO_ONE relationship between order and product"
       }
     ],
-    "dim_person": [
+    "fact_return_order_vac": [
       {
-        "to_table": "dim_family_member",
-        "left_column": "person_id",
-        "right_column": "person_id",
-        "score": 10,
-        "reason": "Information of family member is related to the person, they can be joined by person_id"
-      },
-      {
-        "to_table": "dim_person_address",
-        "left_column": "person_id",
-        "right_column": "PersonId",
-        "score": 10,
-        "reason": "Information of person address is related to the person, they can be joined by person_id"
-      }
-    ],
-    "dim_shop": [
-      {
-        "to_table": "dim_satellite_shop",
-        "left_column": "code",
-        "right_column": "shop_code_lc",
-        "score": 10,
-        "reason": "Information of shop"
-      }
-    ],
-    "dim_vaccine_disease_group": [
-      {
-        "to_table": "dim_product",
-        "left_column": "sku",
-        "right_column": "product_unit_id",
-        "score": 10,
-        "reason": "Mapping vaccine with disease group"
-      }
-    ],
-    "fact_vaccine_record": [
-      {
-        "to_table": "dim_person",
-        "left_column": "person_id",
-        "right_column": "person_id",
-        "score": 10,
-        "reason": "shared_column"
-      },
-      {
-        "to_table": "dim_vaccine_disease_group",
-        "left_column": "disease_group_id",
-        "right_column": "disease_group_id",
-        "score": 10,
-        "reason": "shared_column"
-      },
-      {
-        "to_table": "dim_product",
-        "left_column": "sku",
-        "right_column": "product_unit_id",
-        "score": 10,
-        "reason": "shared_column"
-      },
-      {
-        "to_table": "dim_shop",
+        "to_table": "dim_shop_vac",
         "left_column": "shop_code",
-        "right_column": "code",
+        "right_column": "shop_code",
         "score": 10,
-        "reason": "Map the detail information of shop"
-      }
-    ],
-    "fact_vaccine_returned_order_detail": [
-      {
-        "to_table": "dim_person",
-        "left_column": "customer_id",
-        "right_column": "person_id",
-        "score": 10,
-        "reason": "shared_column"
+        "reason": "MANY_TO_ONE relationship between return order and shop"
       },
       {
-        "to_table": "dim_shop",
+        "to_table": "dim_product_vac",
+        "left_column": "item_code",
+        "right_column": "item_code",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between return order and product"
+      }
+    ],
+    "fact_immunization_vac": [
+      {
+        "to_table": "dim_shop_vac",
         "left_column": "shop_code",
-        "right_column": "code",
+        "right_column": "shop_code",
         "score": 10,
-        "reason": "Map the detail information of shop"
+        "reason": "MANY_TO_ONE relationship between immunization and shop"
       },
       {
-        "to_table": "dim_product",
-        "left_column": "sku",
-        "right_column": "product_unit_id",
+        "to_table": "dim_product_vac",
+        "left_column": "item_code",
+        "right_column": "item_code",
         "score": 10,
-        "reason": "Map the detail information of product"
+        "reason": "MANY_TO_ONE relationship between immunization and product"
+      },
+      {
+        "to_table": "dim_regimen_vac",
+        "left_column": "regimen_id",
+        "right_column": "regimen_id",
+        "score": 10,
+        "reason": "MANY_TO_ONE relationship between immunization and regimen"
       }
     ],
-    "fact_vaccine_sales_order_detail": [
+    "dim_customer_group": [
       {
-        "to_table": "dim_person",
-        "left_column": "customer_id",
-        "right_column": "person_id",
+        "to_table": "dim_province",
+        "left_column": "primary_customer_province_code",
+        "right_column": "province_code",
         "score": 10,
-        "reason": "shared_column"
+        "reason": "MANY_TO_ONE relationship between customer group and province"
       },
       {
-        "to_table": "dim_shop",
-        "left_column": "shop_code",
-        "right_column": "code",
+        "to_table": "dim_ward",
+        "left_column": "primary_customer_ward_code",
+        "right_column": "ward_code",
         "score": 10,
-        "reason": "Map the detail information of shop"
-      },
-      {
-        "to_table": "dim_product",
-        "left_column": "sku",
-        "right_column": "product_unit_id",
-        "score": 10,
-        "reason": "Map the detail information of product"
-      }
-    ],
-    "fact_session": [
-      {
-        "to_table": "dim_device",
-        "left_column": "device_id",
-        "right_column": "device_id",
-        "score": 10,
-        "reason": "shared_column"
-      },
-      {
-        "to_table": "fact_session_detail",
-        "left_column": "session_id",
-        "right_column": "session_id",
-        "score": 10,
-        "reason": "shared_column"
-      }
-    ],
-    "fact_session_detail": [
-      {
-        "to_table": "fact_event_params",
-        "left_column": "session_detail_id",
-        "right_column": "session_detail_id",
-        "score": 10,
-        "reason": "shared_column"
-      },
-      {
-        "to_table": "dim_event",
-        "left_column": "event_id",
-        "right_column": "event_id",
-        "score": 10,
-        "reason": "shared_column"
+        "reason": "MANY_TO_ONE relationship between customer group and ward"
       }
     ]
   }

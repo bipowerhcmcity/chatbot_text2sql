@@ -1,0 +1,18 @@
+﻿Dịch vụ,Nhóm dữ liệu,Tên dữ liệu,Mô tả
+Vaccine,Master Data,dim_shop,Lưu trữ thông tin các thuộc tính của cửa hàng Tiêm Chủng Long Châu
+Vaccine,Master Data,dim_satellite_shop,Lưu trữ thông tin của các cửa hàng vệ tinh Tiêm Chủng Long Châu
+Vaccine,Master Data,dim_vaccine_regimen,Lưu trữ thông tin phác đồ điều trị của từng loại vaccine
+Vaccine,Master Data,dim_vaccine_disease_group,Lưu trữ thông tin vaccine và các nhóm bệnh tương ứng
+Vaccine,Master Data,dim_product,Lưu trữ thông tin các thuộc tính của từng loại vaccine
+Vaccine,Sale Transaction,fact_vaccine_sales_order_detail,Lưu trữ thông tin đơn hàng chi tiết của vaccine (bao gồm đơn bán và đơn trả)
+Vaccine,Sale Transaction,fact_vaccine_returned_order_detail,Lưu trữ thông tin đơn hàng trả của vaccine
+Vaccine,Sale Transaction,fact_vaccine_record,Lưu trữ thông tin các mũi tiêm của khách hàng tại Tiêm Chủng Long Châu
+Vaccine,Customer Profiles,dim_person,Lưu trữ thông tin cá nhân của khách hàng
+Vaccine,Customer Profiles,dim_person_address,Lưu trữ thông tin địa chỉ cũ và mới của khách hàng
+Vaccine,Customer Profiles,dim_family_member,Lưu trữ thông tin gia đình và người giám hộ của khách hàng
+FSHOP,Event Data,fact_session,"Bảng lưu thông tin tổng hợp của mỗi phiên truy cập (session) của người dùng, bao gồm thời gian bắt đầu, kết thúc, thiết bị sử dụng và thông tin phiên trước đó."
+FSHOP,Event Data,fact_session_detail,"Bảng ghi nhận từng sự kiện (event) xảy ra trong một session, bao gồm thời gian event, trang truy cập, và event được thực hiện."
+FSHOP,Event Data,fact_event_params,"Bảng lưu các tham số động của event (event parameters) theo dạng key-value, ví dụ: order_id, payment_type, search_value."
+FSHOP,Master Data,dim_event,"Bảng dimension mô tả định nghĩa của các event, bao gồm vị trí xảy ra event và tên event."
+FSHOP,Master Data,dim_device,"Bảng dimension mô tả thông tin thiết bị của người dùng, bao gồm brand, model, hệ điều hành và trình duyệt."
+FSHOP,Master Data,dim_item,"Bảng dimension mô tả thông tin sản phẩm."
